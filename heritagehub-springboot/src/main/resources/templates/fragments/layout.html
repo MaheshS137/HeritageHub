@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${currentLang ?: 'en'}">
+<head th:fragment="head(pageTitle)">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title th:text="${pageTitle} + ' — HeritageHub'">HeritageHub — Discover Karnataka. Preserve its Heritage.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Noto+Sans+Kannada:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <link rel="stylesheet" th:href="@{/css/heritagehub.css}"/>
+</head>
+<body>
+
+<header th:fragment="navbar" class="hh-header">
+    <div class="hh-karnataka-rule"></div>
+    <div class="hh-container hh-header-inner">
+        <a th:href="@{/}" class="hh-brand">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M4 20H20M6 20V10C6 6.686 8.686 4 12 4C15.314 4 18 6.686 18 10V20" stroke="#C92332" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M12 4V20M9 11.5H15" stroke="#F8C928" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+            <span>HeritageHub</span>
+        </a>
+
+        <nav id="hh-primary-nav" class="hh-nav" aria-label="Primary navigation">
+            <a th:href="@{/}" th:text="#{nav.home}">Home</a>
+            <a th:href="@{/explore}" th:text="#{nav.explore}">Explore Karnataka</a>
+            <a th:href="@{/culture}" th:text="#{nav.culture}">Cultural Heritage</a>
+            <a th:href="@{/about}" th:text="#{nav.about}">About</a>
+        </nav>
+
+        <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
+            <div style="display:inline-flex;border:1px solid #EADEC8;border-radius:6px;overflow:hidden;background:#FFFFFF;" aria-label="Language switcher">
+                <a href="?lang=en" th:style="${currentLang == 'en' ? 'padding:6px 9px;font-size:12px;font-weight:600;background:#F8C928;color:#201C1B;border-right:1px solid #EADEC8;' : 'padding:6px 9px;font-size:12px;font-weight:600;color:#77716B;border-right:1px solid #EADEC8;'}">EN</a>
+                <a href="?lang=kn" th:style="${currentLang == 'kn' ? 'padding:6px 9px;font-size:12px;font-weight:600;background:#F8C928;color:#201C1B;border-right:1px solid #EADEC8;' : 'padding:6px 9px;font-size:12px;font-weight:600;color:#77716B;border-right:1px solid #EADEC8;'}">ಕನ್ನಡ</a>
+                <a href="?lang=hi" th:style="${currentLang == 'hi' ? 'padding:6px 9px;font-size:12px;font-weight:600;background:#F8C928;color:#201C1B;' : 'padding:6px 9px;font-size:12px;font-weight:600;color:#77716B;'}">हिन्दी</a>
+            </div>
+            <a th:href="@{${dashboardPath}}" class="hh-btn hh-btn-outline" style="min-height:38px;padding:7px 14px;"
+               th:text="${currentAccount != null} ? #{nav.dashboard} : #{nav.signIn}">Sign In</a>
+            <button id="hh-search-open" type="button" class="hh-btn hh-btn-primary" style="min-height:38px;padding:7px 14px;" th:text="#{nav.search}">Search</button>
+            <button id="hh-mobile-toggle" type="button" class="hh-mobile-toggle" aria-label="Toggle Menu">Menu</button>
+        </div>
+    </div>
+
+    <div id="hh-search-modal" class="hh-modal-backdrop" role="dialog" aria-modal="true" aria-label="Global Search">
+        <div class="hh-modal">
+            <div style="display:flex;gap:10px;align-items:center;margin-bottom:14px;">
+                <input id="hh-global-search-input" class="hh-input" style="flex:1;" type="text" placeholder="Search districts, festivals, arts, monuments, cuisine..."/>
+                <button id="hh-search-close" type="button" class="hh-btn hh-btn-outline">Close</button>
+            </div>
+            <div id="hh-global-search-results">
+                <p class="hh-meta">Type a district, festival, art, or monument name to search.</p>
+            </div>
+        </div>
+    </div>
+</header>
+
+<footer th:fragment="footer" class="hh-footer">
+    <div class="hh-container">
+        <div class="hh-footer-grid">
+            <div>
+                <h3 style="font-size:1.5rem;color:#FFFDF7;margin-bottom:12px;">HeritageHub</h3>
+                <p style="font-size:0.875rem;color:rgba(255,253,247,0.82);max-width:44ch;">
+                    Discover Karnataka. Preserve its Heritage. A source-verified digital cultural archive and interactive 31-district monument atlas.
+                </p>
+            </div>
+            <div>
+                <p class="hh-kicker" style="margin-bottom:12px;">Explore</p>
+                <div style="display:flex;flex-direction:column;gap:8px;font-size:0.875rem;">
+                    <a th:href="@{/}" th:text="#{nav.home}">Home</a>
+                    <a th:href="@{/explore}" th:text="#{nav.explore}">Explore Karnataka</a>
+                    <a th:href="@{/culture}" th:text="#{nav.culture}">Cultural Heritage</a>
+                    <a th:href="@{/about}" th:text="#{nav.about}">About</a>
+                    <a th:href="@{/auth}" th:text="#{nav.signIn}">Sign In</a>
+                </div>
+            </div>
+            <div>
+                <p class="hh-kicker" style="margin-bottom:12px;">Featured Districts</p>
+                <div style="display:flex;flex-direction:column;gap:8px;font-size:0.875rem;">
+                    <a th:href="@{/district/mysuru}">Mysuru</a>
+                    <a th:href="@{/district/vijayanagara}">Vijayanagara</a>
+                    <a th:href="@{/district/hassan}">Hassan</a>
+                    <a th:href="@{/district/bagalkot}">Bagalkot</a>
+                </div>
+            </div>
+        </div>
+        <div class="hh-footer-bottom">
+            <span>© HeritageHub Karnataka Archive. District geometry: geoBoundaries IND-ADM2 (ODbL 1.0).</span>
+            <button id="hh-back-to-top" type="button" style="background:none;border:none;color:#F8C928;cursor:pointer;font-size:0.75rem;font-weight:600;">Back to top ↑</button>
+        </div>
+    </div>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script th:src="@{/js/karnataka-map.js}"></script>
+    <script th:src="@{/js/heritagehub-app.js}"></script>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${currentLang ?: 'en'}">
+<head th:replace="~{fragments/layout :: head('Admin Console')}"></head>
+<body>
+<header th:replace="~{fragments/layout :: navbar}"></header>
+
+<main class="hh-section" style="background:var(--hh-bg);min-height:80vh;">
+    <div class="hh-container">
+        <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;padding-bottom:20px;border-bottom:1px solid var(--hh-border);margin-bottom:28px;">
+            <div>
+                <p class="hh-kicker">ADMINISTRATOR CONTROL CONSOLE</p>
+                <h1 style="font-size:2.2rem;">HeritageHub Governance &amp; Curation</h1>
+            </div>
+            <form th:action="@{/logout}" method="post">
+                <button type="submit" class="hh-btn hh-btn-outline" th:text="#{nav.logout}">Sign Out</button>
+            </form>
+        </div>
+
+        <div th:if="${dashError}" style="margin-bottom:18px;padding:12px 16px;border:1px solid var(--hh-red);background:#FFF5F5;color:var(--hh-red-dark);border-radius:8px;" th:text="${dashError}"></div>
+        <div th:if="${dashSuccess}" style="margin-bottom:18px;padding:12px 16px;border:1px solid #166534;background:#F0FDF4;color:#166534;border-radius:8px;" th:text="${dashSuccess}"></div>
+
+        <!-- Statistics -->
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-bottom:32px;">
+            <div style="background:var(--hh-white);border:1px solid var(--hh-border);border-radius:10px;padding:18px;"><p class="hh-meta">Total Users</p><p style="font-family:var(--hh-font-serif);font-size:1.8rem;color:var(--hh-red);" th:text="${totalUsers}"></p></div>
+            <div style="background:var(--hh-white);border:1px solid var(--hh-border);border-radius:10px;padding:18px;"><p class="hh-meta">Total Journalists</p><p style="font-family:var(--hh-font-serif);font-size:1.8rem;color:var(--hh-red);" th:text="${totalJournalists}"></p></div>
+            <div style="background:var(--hh-white);border:1px solid var(--hh-border);border-radius:10px;padding:18px;"><p class="hh-meta">Total Districts</p><p style="font-family:var(--hh-font-serif);font-size:1.8rem;color:var(--hh-red);" th:text="${totalDistricts}"></p></div>
+            <div style="background:var(--hh-white);border:1px solid var(--hh-border);border-radius:10px;padding:18px;"><p class="hh-meta">Total Monuments</p><p style="font-family:var(--hh-font-serif);font-size:1.8rem;color:var(--hh-red);" th:text="${totalMonuments}"></p></div>
+            <div style="background:var(--hh-white);border:1px solid var(--hh-border);border-radius:10px;padding:18px;"><p class="hh-meta">Pending Articles</p><p style="font-family:var(--hh-font-serif);font-size:1.8rem;color:var(--hh-red);" th:text="${pendingArticlesCount}"></p></div>
+            <div style="background:var(--hh-white);border:1px solid var(--hh-border);border-radius:10px;padding:18px;"><p class="hh-meta">Published Articles</p><p style="font-family:var(--hh-font-serif);font-size:1.8rem;color:var(--hh-red);" th:text="${publishedArticlesCount}"></p></div>
+        </div>
+
+        <!-- Article Review Queue -->
+        <section style="background:var(--hh-white);border:1px solid var(--hh-border);border-radius:12px;padding:24px;margin-bottom:28px;">
+            <h2 style="font-size:1.5rem;margin-bottom:16px;">Journalist Article Review &amp; Publishing</h2>
+            <p th:if="${#lists.isEmpty(articles)}" class="hh-muted">No journalist articles submitted yet.</p>
+            <div th:each="art : ${articles}" style="padding:16px 0;border-bottom:1px solid var(--hh-border);">
+                <p class="hh-kicker" style="margin-bottom:4px;" th:text="${art.status + ' · ' + art.districtName + ' · By ' + art.authorName}"></p>
+                <h3 style="font-size:1.2rem;" th:text="${art.title}"></h3>
+                <p class="hh-muted" style="font-size:0.88rem;margin:6px 0;" th:text="${art.shortDescription}"></p>
+                <form th:action="@{'/dashboard/admin/articles/' + ${art.id} + '/review'}" method="post" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px;">
+                    <input class="hh-input" style="flex:1;min-width:220px;" type="text" name="feedback" placeholder="Editorial feedback (required for rejection)"/>
+                    <button type="submit" name="status" value="APPROVED" class="hh-btn hh-btn-outline">Approve</button>
+                    <button type="submit" name="status" value="PUBLISHED" class="hh-btn hh-btn-primary">Publish</button>
+                    <button type="submit" name="status" value="REJECTED" class="hh-btn hh-btn-outline" style="color:var(--hh-red);">Reject</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Accounts & Create Subsequent Admin -->
+        <section style="background:var(--hh-white);border:1px solid var(--hh-border);border-radius:12px;padding:24px;margin-bottom:28px;">
+            <h2 style="font-size:1.5rem;margin-bottom:16px;">User &amp; Journalist Management</h2>
+            <form th:action="@{/dashboard/admin}" method="get" style="display:flex;gap:10px;margin-bottom:16px;">
+                <input class="hh-input" style="flex:1;max-width:340px;" type="search" name="q" th:value="${searchQuery}" placeholder="Search accounts by name or email..."/>
+                <button type="submit" class="hh-btn hh-btn-outline">Search</button>
+            </form>
+            <div th:each="acc : ${accounts}" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid var(--hh-border);">
+                <div>
+                    <strong th:text="${acc.fullName}"></strong>
+                    <span class="hh-meta" th:text="${' (' + acc.email + ') · ' + acc.role + ' · ' + (acc.active ? 'Active' : 'Deactivated')}"></span>
+                </div>
+                <form th:action="@{'/dashboard/admin/users/' + ${acc.id} + '/status'}" method="post">
+                    <input type="hidden" name="active" th:value="${!acc.active}"/>
+                    <button type="submit" class="hh-btn hh-btn-outline" th:text="${acc.active ? 'Deactivate' : 'Activate'}"></button>
+                </form>
+            </div>
+
+            <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--hh-border);">
+                <h3 style="font-size:1.2rem;margin-bottom:12px;">Provision New Administrator Account</h3>
+                <form th:action="@{/dashboard/admin/admins}" method="post" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;">
+                    <input class="hh-input" type="text" name="fullName" placeholder="Full Name" required/>
+                    <input class="hh-input" type="email" name="email" placeholder="Email Address" required/>
+                    <input class="hh-input" type="password" name="password" placeholder="Password" required/>
+                    <input class="hh-input" type="password" name="confirmPassword" placeholder="Confirm Password" required/>
+                    <select class="hh-select" name="securityQuestion" required>
+                        <option th:each="q : ${securityQuestions}" th:value="${q}" th:text="${q}"></option>
+                    </select>
+                    <input class="hh-input" type="text" name="securityAnswer" placeholder="Security Answer" required/>
+                    <button type="submit" class="hh-btn hh-btn-primary">Create Admin Account</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Monument CRUD -->
+        <section style="background:var(--hh-white);border:1px solid var(--hh-border);border-radius:12px;padding:24px;">
+            <h2 style="font-size:1.5rem;margin-bottom:16px;">Monument Management</h2>
+            <form th:action="@{/dashboard/admin/monuments}" method="post" enctype="multipart/form-data" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin-bottom:20px;">
+                <select class="hh-select" name="districtId" required>
+                    <option th:each="d : ${districts}" th:value="${d.id}" th:text="${d.name}"></option>
+                </select>
+                <input class="hh-input" type="text" name="name" placeholder="Monument Name" required/>
+                <input class="hh-input" type="text" name="location" placeholder="Location / Town"/>
+                <input class="hh-input" type="text" name="eraOrDynasty" placeholder="Era / Dynasty"/>
+                <input class="hh-input" type="file" name="photo" accept="image/*"/>
+                <input class="hh-input" style="grid-column:1 / -1;" type="text" name="description" placeholder="Monument Description"/>
+                <button type="submit" class="hh-btn hh-btn-primary">Save Monument</button>
+            </form>
+            <div th:each="m : ${monuments}" style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--hh-border);">
+                <div>
+                    <strong th:text="${m.name}"></strong>
+                    <span class="hh-meta" th:text="${' · ' + m.districtName + ' (' + m.location + ')'}"></span>
+                </div>
+                <form th:action="@{'/dashboard/admin/monuments/' + ${m.id} + '/delete'}" method="post">
+                    <button type="submit" class="hh-btn hh-btn-outline" style="min-height:32px;padding:4px 10px;font-size:12px;">Delete</button>
+                </form>
+            </div>
+        </section>
+    </div>
+</main>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+</body>
+</html>

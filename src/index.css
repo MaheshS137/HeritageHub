@@ -1,0 +1,338 @@
+@import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
+
+@theme {
+  --font-serif: "Playfair Display", "Noto Sans Kannada", "Noto Sans Devanagari", Georgia, "Times New Roman", serif;
+  --font-sans: "DM Sans", "Noto Sans Kannada", "Noto Sans Devanagari", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  /* Karnataka Red & Yellow Identity Palette */
+  --color-karnataka-yellow: #F8C928;
+  --color-karnataka-red: #C92332;
+  --color-karnataka-red-dark: #941D2A;
+  --color-ivory: #FFFDF7;
+  --color-warm-sand: #FBF6E8;
+  --color-warm-border: #EADEC8;
+  --color-charcoal-dark: #201C1B;
+  --color-ink: #292522;
+  --color-stone: #77716B;
+  --color-white: #FFFFFF;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    background-color: var(--color-ivory);
+    color: var(--color-ink);
+    scroll-behavior: smooth;
+  }
+
+  h1, h2, h3, h4, .font-display {
+    font-family: var(--font-serif);
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
+/* Editorial Red & Yellow underline transition for navigation and inline links */
+.editorial-link {
+  position: relative;
+  display: inline-block;
+}
+
+.editorial-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, #C92332 0%, #F8C928 100%);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.editorial-link:hover::after,
+.editorial-link:focus-visible::after,
+.editorial-link[data-active="true"]::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Karnataka dual-band hairline accent divider (Red over Yellow) */
+.hh-karnataka-rule {
+  height: 3px;
+  background: linear-gradient(90deg, #F8C928 0%, #F8C928 50%, #C92332 50%, #C92332 100%);
+}
+
+/* Smooth page entrance & scroll-triggered reveal animations (compositor-only) */
+@keyframes hhFadeUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes hhFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes hhThumbFloat {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -3px, 0);
+  }
+}
+
+@keyframes hhSelectedStrokePulse {
+  0%, 100% {
+    stroke-opacity: 1;
+  }
+  50% {
+    stroke-opacity: 0.65;
+  }
+}
+
+.hh-hero-enter {
+  animation: hhFadeUp 680ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.hh-hero-enter-delay {
+  animation: hhFadeUp 680ms cubic-bezier(0.16, 1, 0.3, 1) 140ms both;
+}
+
+.hh-panel-crossfade {
+  animation: hhFadeIn 280ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.hh-reveal {
+  opacity: 0;
+  transform: translate3d(0, 16px, 0);
+  transition: opacity 520ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 520ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.hh-reveal.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+/* Interactive Button Micro-interactions */
+.hh-btn-interactive {
+  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.hh-btn-interactive:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(148, 29, 42, 0.16);
+}
+
+.hh-btn-interactive:active {
+  transform: translateY(0);
+}
+
+/* Leaflet Cartographic Styling (Warm Ivory Canvas + Red & Yellow Karnataka Accent) */
+.hh-map-canvas.leaflet-container {
+  background-color: #FAF4E4;
+  background-image: radial-gradient(circle at 20% 25%, rgba(248, 201, 40, 0.14), transparent 55%),
+    radial-gradient(circle at 80% 75%, rgba(201, 35, 50, 0.06), transparent 50%);
+  font-family: var(--font-sans);
+  outline: none;
+}
+
+.hh-district-selected-path {
+  animation: hhSelectedStrokePulse 2.4s ease-in-out infinite;
+}
+
+.hh-district-tooltip.leaflet-tooltip {
+  background-color: #201C1B;
+  color: #FFFDF7;
+  border: 1.5px solid #F8C928;
+  border-radius: 6px;
+  padding: 6px 11px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.015em;
+  box-shadow: 0 8px 22px rgba(32, 28, 27, 0.24);
+}
+
+.hh-district-tooltip.leaflet-tooltip-top::before {
+  border-top-color: #201C1B;
+}
+
+/* Monument Photo Thumbnail Markers */
+.hh-thumb-icon-wrap {
+  background: transparent;
+  border: none;
+}
+
+.hh-thumb-marker {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 9999px;
+  border: 2.5px solid #FFFFFF;
+  outline: 1.5px solid #C92332;
+  background-color: #201C1B;
+  box-shadow: 0 5px 14px rgba(32, 28, 27, 0.28);
+  overflow: hidden;
+  transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1),
+    outline-color 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+  animation: hhThumbFloat 4.8s ease-in-out infinite;
+}
+
+.hh-thumb-marker:hover {
+  transform: scale(1.22);
+  border-color: #F8C928;
+  outline-color: #941D2A;
+  box-shadow: 0 10px 24px rgba(148, 29, 42, 0.36);
+  animation-play-state: paused;
+}
+
+.hh-thumb-marker.is-selected {
+  transform: scale(1.28);
+  border-color: #F8C928;
+  outline: 2.5px solid #C92332;
+  box-shadow: 0 0 0 4px rgba(248, 201, 40, 0.45), 0 10px 24px rgba(148, 29, 42, 0.42);
+  animation-play-state: paused;
+}
+
+.hh-thumb-marker img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.hh-thumb-fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #C92332 0%, #941D2A 100%);
+  color: #F8C928;
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 13px;
+}
+
+/* Compact secondary dot markers when zoomed out & clustered */
+.hh-dot-marker {
+  width: 100%;
+  height: 100%;
+  border-radius: 9999px;
+  background: radial-gradient(circle at 35% 35%, #F8C928 0%, #C92332 78%);
+  border: 2px solid #FFFFFF;
+  box-shadow: 0 2px 8px rgba(32, 28, 27, 0.35);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.hh-dot-marker:hover,
+.hh-dot-marker.is-selected {
+  transform: scale(1.38);
+  background: #F8C928;
+  border-color: #C92332;
+  box-shadow: 0 0 0 4px rgba(248, 201, 40, 0.45);
+}
+
+/* Tooltip mini-preview card inside Leaflet tooltip */
+.hh-tooltip-card {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 220px;
+}
+
+.hh-tooltip-card img {
+  width: 34px;
+  height: 34px;
+  border-radius: 4px;
+  object-fit: cover;
+  border: 1px solid #F8C928;
+  flex-shrink: 0;
+}
+
+.hh-tooltip-title {
+  font-weight: 600;
+  color: #F8C928;
+  font-size: 12px;
+  line-height: 1.25;
+}
+
+.hh-tooltip-sub {
+  font-size: 10.5px;
+  color: #FFFDF7;
+  opacity: 0.85;
+  line-height: 1.25;
+}
+
+/* Leaflet Zoom & Attribution Controls */
+.hh-map-canvas .leaflet-control-zoom {
+  border: 1px solid #EADEC8;
+  box-shadow: 0 4px 12px rgba(32, 28, 27, 0.08);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.hh-map-canvas .leaflet-control-zoom a {
+  background-color: #FFFFFF;
+  color: #941D2A;
+  border-bottom-color: #EADEC8;
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.hh-map-canvas .leaflet-control-zoom a:hover {
+  background-color: #F8C928;
+  color: #201C1B;
+}
+
+.hh-map-canvas .leaflet-control-attribution {
+  background-color: rgba(255, 253, 247, 0.92);
+  color: #77716B;
+  font-size: 10px;
+  padding: 2px 8px;
+}
+
+.hh-map-canvas .leaflet-control-attribution a {
+  color: #941D2A;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .hh-reveal {
+    opacity: 1;
+    transform: none;
+  }
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

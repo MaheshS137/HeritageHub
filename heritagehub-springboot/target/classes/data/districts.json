@@ -1,0 +1,994 @@
+[
+  {
+    "id": "bagalkot",
+    "name": "Bagalkot",
+    "region": "Northern Karnataka",
+    "division": "Belagavi",
+    "documented": true,
+    "monumentName": "Badami Rock-Cut Cave Temples",
+    "monumentLocation": "Badami, Malaprabha Basin",
+    "monumentLat": 15.9189,
+    "monumentLng": 75.6847,
+    "monumentImageKey": "badami-caves",
+    "monumentDescription": "Four 6th–8th century rock-cut sandstone sanctuaries excavated into red cliffs overlooking Agastya Lake, featuring Cave 3's dated 578 CE inscription.",
+    "culturalSignificance": "Crucible of Early Chalukyan temple architecture bridging Nagara and Dravida styles alongside nearby Pattadakal (UNESCO Ref. 239) and Aihole.",
+    "monumentAttribution": "Archaeological Survey of India (ASI) & UNESCO World Heritage Centre",
+    "galleryImages": ["badami-caves", "pattadakal"],
+    "description": "Home to the Malaprabha River basin sites of Badami, Aihole, and Pattadakal, representing the formative crucible of Early Chalukyan temple architecture.",
+    "history": "Badami (ancient Vatapi) served as the royal capital of the Early Chalukyas from the 6th to 8th centuries CE. Cave 3 at Badami contains an inscribed record dated to 578 CE under ruler Mangalesha.",
+    "festivals": ["Pattadakal Dance Festival (Chalukya Utsava)"],
+    "arts": ["Early Chalukyan Rock-Cut Sculpture", "Ilkal Handloom Weaving"],
+    "cuisine": ["Jolada Rotti & Ennegayi (Northern Karnataka Staple)"],
+    "traditions": ["Malaprabha River Basin Pilgrimage Traditions"],
+    "heritageSites": [
+      "Badami Rock-Cut Cave Temples",
+      "Group of Monuments at Pattadakal (UNESCO Ref. 239, 1987)",
+      "Aihole Temple Complex"
+    ],
+    "images": ["badami-caves", "pattadakal"],
+    "sources": [
+      {
+        "title": "Group of Monuments at Pattadakal (Ref. 239)",
+        "organization": "UNESCO World Heritage Centre",
+        "url": "https://whc.unesco.org/en/list/239/"
+      },
+      {
+        "title": "Badami Heritage Profile",
+        "organization": "Karnataka State Tourism Development Corporation (KSTDC)",
+        "url": "https://www.karnatakatourism.org/"
+      }
+    ]
+  },
+  {
+    "id": "ballari",
+    "name": "Ballari",
+    "region": "Kalyana Karnataka",
+    "division": "Kalaburagi",
+    "documented": true,
+    "geoBoundaryNote": "In the 2021 geoBoundaries LGD boundary layer, this polygon encompasses both Ballari and Vijayanagara (carved out in November 2021).",
+    "monumentName": "Ballari Fort (Bellary Hill Citadel)",
+    "monumentLocation": "Ballari Granite Monolith",
+    "monumentLat": 15.1436,
+    "monumentLng": 76.9175,
+    "monumentImageKey": "ballari-fort",
+    "monumentDescription": "Two-tiered granite hill fortress rising atop Bellary Gudda, constructed under Hanumappa Nayaka during the Vijayanagara era and reinforced in the 18th century.",
+    "culturalSignificance": "Marks the eastern Deccan frontier linking Vijayanagara-period hill defense architecture with later Mysore Sultanate masonry.",
+    "monumentAttribution": "Archaeological Survey of India (ASI) Protected Monument",
+    "galleryImages": ["ballari-fort"],
+    "description": "Mineral-rich Deccan plateau district historically linked with the Vijayanagara imperial frontier and Bellary Fort.",
+    "history": "Ballari district bordered the Vijayanagara heartland until November 17, 2021, when Vijayanagara district (headquartered at Hospet) was carved out as Karnataka's 31st district.",
+    "festivals": [],
+    "arts": [],
+    "cuisine": [],
+    "traditions": [],
+    "heritageSites": ["Ballari Fort"],
+    "images": ["ballari-fort"],
+    "sources": [
+      {
+        "title": "Karnataka District Gazetteer & Vijayanagara District Formation (2021)",
+        "organization": "Government of Karnataka",
+        "url": "https://karnataka.gov.in/"
+      }
+    ]
+  },
+  {
+    "id": "belagavi",
+    "name": "Belagavi",
+    "region": "Northern Karnataka",
+    "division": "Belagavi",
+    "documented": false,
+    "monumentName": "Belagavi Fort & Kamala Basadi",
+    "monumentLocation": "Belagavi City",
+    "monumentLat": 15.8528,
+    "monumentLng": 74.516,
+    "monumentImageKey": "belagavi-fort",
+    "monumentDescription": "13th-century stone fortress initiated by the Ratta dynasty of Saundatti, enclosing the carved Chalukyan-style Kamala Basadi Jain shrine and Adil Shahi bastions.",
+    "culturalSignificance": "Illustrates layered Deccan heritage where Ratta Jain temple architecture coexists with Safa Masjid and colonial-era cantonment history.",
+    "monumentAttribution": "Karnataka State Department of Archaeology, Museums and Heritage",
+    "galleryImages": ["belagavi-fort"],
+    "description": "Borderland northern Karnataka district anchored by the Ratta-era Belagavi Fort and Sahyadri hill passes; full festival and craft monographs are currently under compilation.",
+    "history": "Historically known as Venugrama, Belagavi flourished under the Ratta rulers before passing through Vijayanagara, Adil Shahi, Maratha, and British administrations.",
+    "festivals": [],
+    "arts": [],
+    "cuisine": [],
+    "traditions": [],
+    "heritageSites": ["Belagavi Fort", "Kamala Basadi", "Kittur Rani Chennamma Fort"],
+    "images": ["belagavi-fort"],
+    "sources": [
+      {
+        "title": "Belagavi Fort & Kittur Heritage Overview",
+        "organization": "Karnataka State Tourism Development Corporation (KSTDC)",
+        "url": "https://www.karnatakatourism.org/"
+      }
+    ]
+  },
+  {
+    "id": "bengaluru-rural",
+    "name": "Bengaluru Rural",
+    "region": "Southern Karnataka",
+    "division": "Bengaluru",
+    "documented": false,
+    "monumentName": "Devanahalli Fort",
+    "monumentLocation": "Devanahalli Town",
+    "monumentLat": 13.2456,
+    "monumentLng": 77.7121,
+    "monumentImageKey": "devanahalli-fort",
+    "monumentDescription": "Oval granite bastion fortress built around 1501 CE by Malla Byregowda of the Avati chieftains and later rebuilt in dressed stone under Hyder Ali.",
+    "culturalSignificance": "Preserves 16th-century mud-to-granite civic fortification techniques and houses centuries-old Venugopalaswamy and Siddheshwara temples.",
+    "monumentAttribution": "Archaeological Survey of India (ASI)",
+    "galleryImages": ["devanahalli-fort"],
+    "description": "Highland agricultural district encircling the capital, anchored by Devanahalli Fort and Avati Nadaprabhu heritage; full district cultural records are under review.",
+    "history": "Devanahalli emerged under Avati chieftain Malla Byregowda in 1501 CE before becoming an important Mysore garrison in the 18th century.",
+    "festivals": [],
+    "arts": [],
+    "cuisine": [],
+    "traditions": [],
+    "heritageSites": ["Devanahalli Fort", "Venugopalaswamy Temple"],
+    "images": ["devanahalli-fort"],
+    "sources": [
+      {
+        "title": "Devanahalli Fort Protected Monument Record",
+        "organization": "Archaeological Survey of India (ASI)",
+        "url": "https://asi.nic.in/"
+      }
+    ]
+  },
+  {
+    "id": "bengaluru-urban",
+    "name": "Bengaluru Urban",
+    "region": "Southern Karnataka",
+    "division": "Bengaluru",
+    "documented": true,
+    "monumentName": "Tipu Sultan's Summer Palace",
+    "monumentLocation": "Chamarajpet, Bengaluru",
+    "monumentLat": 12.9592,
+    "monumentLng": 77.5737,
+    "monumentImageKey": "tipu-palace",
+    "monumentDescription": "Two-storey Indo-Islamic pavilion completed in 1791 CE using carved teak pillars, cusped arches, and floral frescoes adjacent to Bangalore Fort.",
+    "culturalSignificance": "Rare surviving 18th-century timber-framed court residence of the Mysore Sultanate beside the 1537 CE Kempegowda urban core.",
+    "monumentAttribution": "Archaeological Survey of India (ASI)",
+    "galleryImages": ["tipu-palace"],
+    "description": "Capital district of Karnataka blending Kempegowda-era urban tanks and pete markets with 18th-century court architecture and civic botanical gardens.",
+    "history": "Founded in 1537 CE by Kempe Gowda I with fortified enclosures and interconnected temple tanks; later served as an administrative and botanical hub in southern India.",
+    "festivals": ["Bengaluru Karaga"],
+    "arts": ["Classical Carnatic & Hindustani Concert Sabhas"],
+    "cuisine": ["Bengaluru Darshini & Filter Coffee Culture"],
+    "traditions": ["Annual Karaga Procession Traditions"],
+    "heritageSites": ["Tipu Sultan's Summer Palace", "Bangalore Fort", "Lalbagh Botanical Garden"],
+    "images": ["tipu-palace"],
+    "sources": [
+      {
+        "title": "Bengaluru Heritage & Monuments",
+        "organization": "Karnataka State Tourism Development Corporation (KSTDC)",
+        "url": "https://www.karnatakatourism.org/"
+      }
+    ]
+  },
+  {
+    "id": "bidar",
+    "name": "Bidar",
+    "region": "Kalyana Karnataka",
+    "division": "Kalaburagi",
+    "documented": true,
+    "monumentName": "Bidar Fort & Rangeen Mahal",
+    "monumentLocation": "Bidar Laterite Plateau",
+    "monumentLat": 17.917,
+    "monumentLng": 77.5181,
+    "monumentImageKey": "bidar-fort",
+    "monumentDescription": "15th-century Bahmani Sultanate citadel built along the edge of a red laterite plateau, featuring triple moats, glazed Persian tilework, and karez water channels.",
+    "culturalSignificance": "Center of Deccan Indo-Persian architecture, historic karez subterranean aqueducts, and GI-certified Bidriware silver-inlay metalcraft (GI No. 21).",
+    "monumentAttribution": "Archaeological Survey of India (ASI) & World Monuments Fund",
+    "galleryImages": ["bidar-fort", "karnataka-crafts"],
+    "description": "Northernmost plateau district famed for Bahmani fort architecture, karez subterranean water engineering, and GI-certified Bidriware silver-inlay metalcraft.",
+    "history": "Served as the capital of the Bahmani Sultanate from the 15th century CE and later the Barid Shahi kingdom, nurturing Persian-Deccan architecture and metallurgy.",
+    "festivals": [],
+    "arts": ["Bidriware Metalcraft (GI App. No. 21, 2006)"],
+    "cuisine": [],
+    "traditions": ["Tarkashi Silver Inlay & Bidar Fort Soil Oxidation"],
+    "heritageSites": ["Bidar Fort", "Mahmud Gawan Madrasa", "Bahmani Tombs at Ashtoor"],
+    "images": ["bidar-fort", "karnataka-crafts"],
+    "sources": [
+      {
+        "title": "Geographical Indications Registry — Application No. 21 (Bidriware)",
+        "organization": "IP India, Government of India",
+        "url": "https://ipindia.gov.in/gi.htm"
+      }
+    ]
+  },
+  {
+    "id": "chamarajanagar",
+    "name": "Chamarajanagar",
+    "region": "Southern Karnataka",
+    "division": "Mysuru",
+    "documented": false,
+    "monumentName": "Biligirirangana Swamy Temple",
+    "monumentLocation": "Biligirirangana Hills (BRT)",
+    "monumentLat": 11.9997,
+    "monumentLng": 77.135,
+    "monumentImageKey": "br-hills-temple",
+    "monumentDescription": "Cliff-top Dravidian shrine perched at 1,550 meters elevation where the Western and Eastern Ghats converge, revered across Soliga and regional communities.",
+    "culturalSignificance": "Embodies biocultural coexistence within the BRT forested landscape alongside Male Mahadeshwara Hills and Chamarajeshwara Temple.",
+    "monumentAttribution": "Karnataka State Endowments & Forest Heritage Documentation",
+    "galleryImages": ["br-hills-temple"],
+    "description": "Southernmost ecological corridor linking the Nilgiris and Eastern Ghats; detailed district festival and craft archives are currently being verified.",
+    "history": "Named after Chamaraja Wadiyar IX, the region preserves Soliga forest traditions and hill sanctuaries supported by regional dynasties.",
+    "festivals": [],
+    "arts": [],
+    "cuisine": [],
+    "traditions": [],
+    "heritageSites": ["Biligirirangana Swamy Temple", "Male Mahadeshwara Hills"],
+    "images": ["br-hills-temple"],
+    "sources": [
+      {
+        "title": "Chamarajanagar Regional Heritage Profile",
+        "organization": "Karnataka State Tourism Development Corporation (KSTDC)",
+        "url": "https://www.karnatakatourism.org/"
+      }
+    ]
+  },
+  {
+    "id": "chikkaballapura",
+    "name": "Chikkaballapura",
+    "region": "Southern Karnataka",
+    "division": "Bengaluru",
+    "documented": false,
+    "monumentName": "Bhoga Nandeeshwara Temple",
+    "monumentLocation": "Nandi Village, Foothills of Nandi Hills",
+    "monumentLat": 13.3727,
+    "monumentLng": 77.6833,
+    "monumentImageKey": "bhoga-nandeeshwara",
+    "monumentDescription": "Ancient granite temple complex founded under Bana and Nolamba patronage in the 9th century CE and expanded by Chola, Hoysala, and Vijayanagara dynasties.",
+    "culturalSignificance": "Remarkable palimpsest of five southern Indian dynasties visible in its carved kalyani stepped tank, lattice screens, and pillared mandapas.",
+    "monumentAttribution": "Archaeological Survey of India (ASI)",
+    "galleryImages": ["bhoga-nandeeshwara"],
+    "description": "Granite hill district at the source of the Arkavathi and Palar rivers; full intangible heritage records are currently under compilation.",
+    "history": "Situated beneath Nandi Durga hill fort, the Nandi temple complex records continuous inscriptions spanning Bana, Nolamba, Chola, and Vijayanagara rule.",
+    "festivals": [],
+    "arts": [],
+    "cuisine": [],
+    "traditions": [],
+    "heritageSites": ["Bhoga Nandeeshwara Temple", "Nandi Hills (Nandidurga Fort)"],
+    "images": ["bhoga-nandeeshwara"],
+    "sources": [
+      {
+        "title": "Bhoga Nandeeshwara Temple Complex Record",
+        "organization": "Archaeological Survey of India (ASI)",
+        "url": "https://asi.nic.in/"
+      }
+    ]
+  },
+  {
+    "id": "chikkamagaluru",
+    "name": "Chikkamagaluru",
+    "region": "Malnad & Western Ghats",
+    "division": "Mysuru",
+    "documented": false,
+    "monumentName": "Amruteshwara Temple, Amruthapura",
+    "monumentLocation": "Amruthapura, Tarikere Taluk",
+    "monumentLat": 13.6784,
+    "monumentLng": 75.5601,
+    "monumentImageKey": "amruteshwara-temple",
+    "monumentDescription": "1196 CE Hoysala soapstone shrine commissioned by general Amriteshwara Dandanayaka, famed for its scalloped mantapa ceilings and epic narrative friezes.",
+    "culturalSignificance": "Showcases mature Hoysala chloritic schist artistry nestled in the Malnad foothills alongside Sringeri and Belavadi.",
+    "monumentAttribution": "Archaeological Survey of India (ASI)",
+    "galleryImages": ["amruteshwara-temple"],
+    "description": "Western Ghats coffee and temple highland spanning Mullayanagiri, Sringeri, and Amruthapura; full district cultural dossiers are in preparation.",
+    "history": "Known as the cradle of Hoysala origins near Sosevur (Angadi) and home to the 8th-century Sringeri Sharada Peetham.",
+    "festivals": [],
+    "arts": [],
+    "cuisine": [],
+    "traditions": [],
+    "heritageSites": ["Amruteshwara Temple, Amruthapura", "Sringeri Vidyashankara Temple", "Belavadi Veera Narayana Temple"],
+    "images": ["amruteshwara-temple"],
+    "sources": [
+      {
+        "title": "Amruteshwara Temple Protected Monument",
+        "organization": "Archaeological Survey of India (ASI)",
+        "url": "https://asi.nic.in/"
+      }
+    ]
+  },
+  {
+    "id": "chitradurga",
+    "name": "Chitradurga",
+    "region": "Central Karnataka",
+    "division": "Bengaluru",
+    "documented": false,
+    "monumentName": "Chitradurga Fort (Yelu Suttina Kote)",
+    "monumentLocation": "Chitradurga Granite Hills",
+    "monumentLat": 14.2255,
+    "monumentLng": 76.398,
+    "monumentImageKey": "chitradurga-fort",
+    "monumentDescription": "Seven-ringed granite boulder fortress engineered by the Madakari Nayaka dynasty between the 14th and 18th centuries with interconnected rainwater reservoirs.",
+    "culturalSignificance": "Masterpiece of Deccan military hydrology and hero-lore remembering Obavva and the Chitradurga Nayakas.",
+    "monumentAttribution": "Archaeological Survey of India (ASI)",
+    "galleryImages": ["chitradurga-fort"],
+    "description": "Central Deccan fort-town dominated by the seven concentric stone ramparts of Chitradurga Fort; detailed folklore records are currently being archived.",
+    "history": "Rose to prominence under the Nayakas of Chitradurga, who transformed natural granite outcrops into an interconnected water-harvesting citadel.",
+    "festivals": [],
+    "arts": [],
+    "cuisine": [],
+    "traditions": [],
+    "heritageSites": ["Chitradurga Fort", "Chandravalli Archaeological Site"],
+    "images": ["chitradurga-fort"],
+    "sources": [
+      {
+        "title": "Chitradurga Fort Monument Profile",
+        "organization": "Archaeological Survey of India (ASI)",
+        "url": "https://asi.nic.in/"
+      }
+    ]
+  },
+  {
+    "id": "dakshina-kannada",
+    "name": "Dakshina Kannada",
+    "region": "Coastal Karnataka",
+    "division": "Mysuru",
+    "documented": true,
+    "monumentName": "Kadri Manjunatha Temple",
+    "monumentLocation": "Kadri Hills, Mangaluru",
+    "monumentLat": 12.8804,
+    "monumentLng": 74.854,
+    "monumentImageKey": "kadri-manjunatha",
+    "monumentDescription": "10th–11th century coastal shrine housing rare dated 968 CE Chola-period bronze Lokeshwara statues, laterite tiered roofs, and stepped natural spring tanks.",
+    "culturalSignificance": "Reflects coastal Tuluva syncretic heritage linking Natha traditions, monsoon laterite architecture, Tenkuthittu Yakshagana, and Kambala.",
+    "monumentAttribution": "Karnataka State Department of Archaeology & KSTDC",
+    "galleryImages": ["kadri-manjunatha", "yakshagana"],
+    "description": "Coastal Tuluva region renowned for Tenkuthittu Yakshagana theatre, seasonal Kambala buffalo-race traditions, and coastal temple architecture.",
+    "history": "Situated between the Arabian Sea and Western Ghats, Dakshina Kannada developed distinctive Tulu-Kannada cultural and maritime trading traditions.",
+    "festivals": ["Kambala (Seasonal Coastal Tradition)"],
+    "arts": ["Tenkuthittu Yakshagana"],
+    "cuisine": ["Neer Dosa & Coastal Spiced Curries"],
+    "traditions": ["Bhoota Aradhane & Tuluva Folk Rituals"],
+    "heritageSites": ["Kadri Manjunatha Temple", "Moodabidri Thousand Pillar Basadi"],
+    "images": ["kadri-manjunatha", "yakshagana"],
+    "sources": [
+      {
+        "title": "Coastal Karnataka Heritage & Festivals",
+        "organization": "Karnataka State Tourism Development Corporation (KSTDC)",
+        "url": "https://www.karnatakatourism.org/"
+      }
+    ]
+  },
+  {
+    "id": "davanagere",
+    "name": "Davanagere",
+    "region": "Central Karnataka",
+    "division": "Bengaluru",
+    "documented": false,
+    "monumentName": "Santhebennur Pushkarani (Stepped Tank)",
+    "monumentLocation": "Santhebennur, Channagiri Taluk",
+    "monumentLat": 14.4076,
+    "monumentLng": 75.8071,
+    "monumentImageKey": "santhebennur-tank",
+    "monumentDescription": "Monumental 16th-century stepped stone water tank flanked by an octagonal Vasant Mantapa pavilion built by local Nayaka chieftain Kenga Hanumappa.",
+    "culturalSignificance": "Celebrated example of post-Vijayanagara hydraulic and Indo-Islamic pavilion synthesis alongside Harihareshwara Temple.",
+    "monumentAttribution": "Archaeological Survey of India (ASI)",
+    "galleryImages": ["santhebennur-tank"],
+    "description": "Central plains district featuring the Santhebennur Pushkarani and Hoysala-era Harihareshwara Temple; full archival entries are being verified.",
+    "history": "Historically linked with the Basavapatna Nayakas and medieval Tungabhadra riverine trade corridors.",
+    "festivals": [],
+    "arts": [],
+    "cuisine": [],
+    "traditions": [],
+    "heritageSites": ["Santhebennur Pushkarani", "Harihareshwara Temple, Harihar"],
+    "images": ["santhebennur-tank"],
+    "sources": [
+      {
+        "title": "Santhebennur Pushkarani Protected Monument",
+        "organization": "Archaeological Survey of India (ASI)",
+        "url": "https://asi.nic.in/"
+      }
+    ]
+  },
+  {
+    "id": "dharwad",
+    "name": "Dharwad",
+    "region": "Northern Karnataka",
+    "division": "Belagavi",
+    "documented": true,
+    "monumentName": "Chandramouleswara Temple, Unkal",
+    "monumentLocation": "Unkal, Hubballi–Dharwad",
+    "monumentLat": 15.4589,
+    "monumentLng": 75.0078,
+    "monumentImageKey": "unkal-dharwad",
+    "monumentDescription": "12th-century Kalyana Chalukyan cruciform sandstone temple distinguished by four ornate cardinal doorways and pierced stone latticework.",
+    "culturalSignificance": "Anchors Dharwad's medieval Chalukyan sculptural heritage alongside its modern renown for Hindustani music gharanas and GI-tagged Dharwad Peda.",
+    "monumentAttribution": "Archaeological Survey of India (ASI)",
+    "galleryImages": ["unkal-dharwad", "dharwad-peda"],
+    "description": "Cultural and literary capital of northern Karnataka, celebrated for Hindustani classical music traditions and GI-certified Dharwad Peda.",
+    "history": "Nurtured major Hindustani classical vocalists and literary figures across modern Karnataka, while the Thakur family introduced Dharwad Peda over 175 years ago.",
+    "festivals": ["Dharwad Utsav"],
+    "arts": ["Hindustani Classical Music Lineage"],
+    "cuisine": ["Dharwad Peda (GI App. No. 80, 2008)"],
+    "traditions": ["Kasuti Embroidery Heritage"],
+    "heritageSites": ["Chandramouleswara Temple, Unkal", "Amargol Banashankari Temple"],
+    "images": ["unkal-dharwad", "dharwad-peda"],
+    "sources": [
+      {
+        "title": "Geographical Indications Registry — Application No. 80 (Dharwad Pedha)",
+        "organization": "IP India, Government of India",
+        "url": "https://ipindia.gov.in/gi.htm"
+      }
+    ]
+  },
+  {
+    "id": "gadag",
+    "name": "Gadag",
+    "region": "Northern Karnataka",
+    "division": "Belagavi",
+    "documented": false,
+    "monumentName": "Kasivisvesvara Temple, Lakkundi",
+    "monumentLocation": "Lakkundi Heritage Village",
+    "monumentLat": 15.3976,
+    "monumentLng": 75.6764,
+    "monumentImageKey": "lakkundi-gadag",
+    "monumentDescription": "11th-century Kalyana Chalukya soapstone masterwork celebrated for deeply undercut stone toranas, twin shrines, and over 100 ancient stepped wells.",
+    "culturalSignificance": "Bridge between Early Chalukyan stone carving and ornate Hoysala sculpture, accompanied by the Trikuteshwara Temple in Gadag.",
+    "monumentAttribution": "Archaeological Survey of India (ASI)",
+    "galleryImages": ["lakkundi-gadag"],
+    "description": "Home to the Kalyana Chalukya temple clusters of Lakkundi, Dambal, and Gadag; full festival and craft documentation is in progress.",
+    "history": "Lakkundi (ancient Lokkigundi) served as a prominent royal mint and architectural center of the Kalyana Chalukyas in the 10th–12th centuries CE.",
+    "festivals": [],
+    "arts": [],
+    "cuisine": [],
+    "traditions": [],
+    "heritageSites": ["Kasivisvesvara Temple, Lakkundi", "Trikuteshwara Temple, Gadag", "Doddabasappa Temple, Dambal"],
+    "images": ["lakkundi-gadag"],
+    "sources": [
+      {
+        "title": "Lakkundi Group of Monuments",
+        "organization": "Archaeological Survey of India (ASI)",
+        "url": "https://asi.nic.in/"
+      }
+    ]
+  },
+  {
+    "id": "hassan",
+    "name": "Hassan",
+    "region": "Southern Karnataka",
+    "division": "Mysuru",
+    "documented": true,
+    "monumentName": "Chennakesava Temple, Belur",
+    "monumentLocation": "Belur, Yagachi River Bank",
+    "monumentLat": 13.1592,
+    "monumentLng": 75.8569,
+    "monumentImageKey": "belur-hoysala",
+    "monumentDescription": "12th-century UNESCO-inscribed Hoysala chloritic schist sanctuary built in 1117 CE on a stellate plinth with lathe-turned pillars and signed sculptures.",
+    "culturalSignificance": "Flagship of the Sacred Ensembles of the Hoysalas (UNESCO Ref. 1670) alongside Hoysaleswara Temple at Halebidu and Shravanabelagola.",
+    "monumentAttribution": "UNESCO World Heritage Centre (Ref. 1670) & ASI",
+    "galleryImages": ["belur-hoysala", "halebidu-temple", "shravanabelagola"],
+    "description": "Heartland of the Hoysala Empire, housing the UNESCO-inscribed chloritic schist sanctuaries of Belur and Halebidu.",
+    "history": "Initiated in the 12th century CE under King Vishnuvardhana at Belur and Dorasamudra (Halebidu), Hoysala temple workshops created signed soapstone sculptures on stellate plinths.",
+    "festivals": ["Hoysala Mahotsava"],
+    "arts": ["Hoysala Chloritic Schist Sculpture"],
+    "cuisine": ["Hassan Malnad & Plains Traditional Fare"],
+    "traditions": ["Signed Guild Sculptor Epigraphs"],
+    "heritageSites": [
+      "Chennakesava Temple, Belur (UNESCO Ref. 1670, 2023)",
+      "Hoysaleswara Temple, Halebidu (UNESCO Ref. 1670, 2023)",
+      "Shravanabelagola Gommateshwara Monolith"
+    ],
+    "images": ["belur-hoysala", "halebidu-temple", "shravanabelagola"],
+    "sources": [
+      {
+        "title": "Sacred Ensembles of the Hoysalas (Ref. 1670)",
+        "organization": "UNESCO World Heritage Centre",
+        "url": "https://whc.unesco.org/en/list/1670/"
+      }
+    ]
+  },
+  {
+    "id": "haveri",
+    "name": "Haveri",
+    "region": "Northern Karnataka",
+    "division": "Belagavi",
+    "documented": false,
+    "monumentName": "Galageshwara Temple, Galaganatha",
+    "monumentLocation": "Galaganatha, Confluence of Tungabhadra & Varada",
+    "monumentLat": 14.8193,
+    "monumentLng": 75.5841,
+    "monumentImageKey": "galaganatha-haveri",
+    "monumentDescription": "11th-century Kalyana Chalukyan sandstone temple marked by a distinctive pyramidal stepped shikhara towering along the Tungabhadra-Varada river confluence.",
+    "culturalSignificance": "Celebrated for Chalukyan stepped-tower geometry and nearby Siddhesvara Temple and Kaginele literary heritage.",
+    "monumentAttribution": "Archaeological Survey of India (ASI)",
+    "galleryImages": ["galaganatha-haveri"],
+    "description": "Tungabhadra riverine district rich in Chalukyan temples at Galaganatha, Haveri, and Bankapura; detailed cultural entries are in progress.",
+    "history": "Flourished along ancient river crossings under the Kalyana Chalukyas and later gave rise to Kanakadasa's bhakti poetry at Kaginele.",
+    "festivals": [],
+    "arts": [],
+    "cuisine": [],
+    "traditions": [],
+    "heritageSites": ["Galageshwara Temple, Galaganatha", "Siddhesvara Temple, Haveri", "Tarakeshwara Temple, Hangal"],
+    "images": ["galaganatha-haveri"],
+    "sources": [
+      {
+        "title": "Galageshwara Temple Protected Monument",
+        "organization": "Archaeological Survey of India (ASI)",
+        "url": "https://asi.nic.in/"
+      }
+    ]
+  },
+  {
+    "id": "kalaburagi",
+    "name": "Kalaburagi",
+    "region": "Kalyana Karnataka",
+    "division": "Kalaburagi",
+    "documented": false,
+    "monumentName": "Kalaburagi Fort & Jama Masjid",
+    "monumentLocation": "Kalaburagi City",
+    "monumentLat": 17.3364,
+    "monumentLng": 76.8335,
+    "monumentImageKey": "gulbarga-fort",
+    "monumentDescription": "14th-century Bahmani stone fortress housing 15 watchtowers, a rare fully roofed 63-dome Jama Masjid (1367 CE), and the Bara Gazi cannon.",
+    "culturalSignificance": "First capital of the Bahmani Sultanate (1347–1424 CE), showcasing early Deccan arched vaulting and Haft Gumbaz tombs.",
+    "monumentAttribution": "Archaeological Survey of India (ASI)",
+    "galleryImages": ["gulbarga-fort"],
+    "description": "Historic Kalyana Karnataka center preserving Bahmani stone citadels, Sannati-adjacent Buddhist links, and Sufi heritage; full archive records pending.",
+    "history": "Served as the founding Bahmani capital from 1347 CE before the court relocated north to Bidar.",
+    "festivals": [],
+    "arts": [],
+    "cuisine": [],
+    "traditions": [],
+    "heritageSites": ["Kalaburagi Fort", "Jama Masjid (1367 CE)", "Haft Gumbaz"],
+    "images": ["gulbarga-fort"],
+    "sources": [
+      {
+        "title": "Kalaburagi Fort & Monument Profile",
+        "organization": "Archaeological Survey of India (ASI)",
+        "url": "https://asi.nic.in/"
+      }
+    ]
+  },
+  {
+    "id": "kodagu",
+    "name": "Kodagu",
+    "region": "Malnad & Western Ghats",
+    "division": "Mysuru",
+    "documented": true,
+    "monumentName": "Madikeri Fort & Raja's Palace",
+    "monumentLocation": "Madikeri Highland Ridge",
+    "monumentLat": 12.4244,
+    "monumentLng": 75.7382,
+    "monumentImageKey": "madikeri-fort",
+    "monumentDescription": "17th-century hilltop citadel built in mud by Muddu Raja and rebuilt in granite under Tipu Sultan and Lingarajendra Wadiyar II.",
+    "culturalSignificance": "Anchors Kodagu's highland history alongside community-guarded Devarakadu sacred forest groves and Kodava harvest traditions.",
+    "monumentAttribution": "Karnataka State Department of Archaeology & Forest Department",
+    "galleryImages": ["madikeri-fort", "malnad-groves"],
+    "description": "Highland Western Ghats district known for community-guarded Devarakadu sacred forest groves, Kodava cultural customs, and headwater conservation.",
+    "history": "Home to ancestral Kodava communities and hundreds of sacred Devarakadu forest patches protected through village taboos and Forest Department co-management.",
+    "festivals": ["Puttari (Harvest Festival)", "Kailpodh"],
+    "arts": ["Kodava Folk Songs & Bolakaat"],
+    "cuisine": ["Kodava Akki Otti & Bamboo Shoot Preparations"],
+    "traditions": ["Devarakadu Sacred Forest Groves"],
+    "heritageSites": ["Madikeri Fort", "Omkareshwara Temple", "Talacauvery"],
+    "images": ["madikeri-fort", "malnad-groves"],
+    "sources": [
+      {
+        "title": "Sacred Groves (Devarakadus) of Kodagu",
+        "organization": "Karnataka Forest Department",
+        "url": "https://aranya.gov.in/"
+      }
+    ]
+  },
+  {
+    "id": "kolar",
+    "name": "Kolar",
+    "region": "Southern Karnataka",
+    "division": "Bengaluru",
+    "documented": false,
+    "monumentName": "Someshwara & Kolaramma Temples",
+    "monumentLocation": "Kolar Historic Core",
+    "monumentLat": 13.1374,
+    "monumentLng": 78.1292,
+    "monumentImageKey": "kolaramma-temple",
+    "monumentDescription": "Granite Vijayanagara-period Someshwara complex famed for its ornate kalyana mandapa and sculpted dravidian gopura beside 11th-century Chola inscriptions.",
+    "culturalSignificance": "Preserves rare early Western Ganga and Chola-period stone reliefs alongside Antargange and Kurudumale.",
+    "monumentAttribution": "Archaeological Survey of India (ASI)",
+    "galleryImages": ["kolaramma-temple"],
+    "description": "Ancient Eastern Maidan district known as Kuvalalapura under the Western Gangas; full cultural dossiers are currently under compilation.",
+    "history": "Served as an early capital of the Western Ganga dynasty before Chola and Vijayanagara temple expansions.",
+    "festivals": [],
+    "arts": [],
+    "cuisine": [],
+    "traditions": [],
+    "heritageSites": ["Someshwara Temple, Kolar", "Kolaramma Temple", "Kurudumale Ganesha Temple"],
+    "images": ["kolaramma-temple"],
+    "sources": [
+      {
+        "title": "Someshwara & Kolaramma Temples",
+        "organization": "Archaeological Survey of India (ASI)",
+        "url": "https://asi.nic.in/"
+      }
+    ]
+  },
+  {
+    "id": "koppal",
+    "name": "Koppal",
+    "region": "Kalyana Karnataka",
+    "division": "Kalaburagi",
+    "documented": false,
+    "monumentName": "Mahadeva Temple, Itagi",
+    "monumentLocation": "Itagi, Kuknur Taluk",
+    "monumentLat": 15.334,
+    "monumentLng": 76.155,
+    "monumentImageKey": "itagi-mahadeva",
+    "monumentDescription": "1112 CE Kalyana Chalukyan soapstone sanctuary lauded in contemporary epigraphs as 'Devalaya Chakravarti' (Emperor among Temples).",
+    "culturalSignificance": "Monumental zenith of 12th-century Chalukyan carved ceilings and 68-pillar open mandapa near Ashokan rock edicts at Koppal.",
+    "monumentAttribution": "Archaeological Survey of India (ASI)",
+    "galleryImages": ["itagi-mahadeva"],
+    "description": "Tungabhadra-Anegundi heartland preserving Ashokan edicts, Koppal Fort, and the 1112 CE Mahadeva Temple at Itagi; full records in preparation.",
+    "history": "Celebrated across Mauryan, Rashtrakuta, Kalyana Chalukya, and early Vijayanagara (Anegundi) history.",
+    "festivals": [],
+    "arts": [],
+    "cuisine": [],
+    "traditions": [],
+    "heritageSites": ["Mahadeva Temple, Itagi", "Anegundi Heritage Settlement", "Koppal Fort & Ashokan Edicts"],
+    "images": ["itagi-mahadeva"],
+    "sources": [
+      {
+        "title": "Mahadeva Temple at Itagi Monument Record",
+        "organization": "Archaeological Survey of India (ASI)",
+        "url": "https://asi.nic.in/"
+      }
+    ]
+  },
+  {
+    "id": "mandya",
+    "name": "Mandya",
+    "region": "Southern Karnataka",
+    "division": "Mysuru",
+    "documented": false,
+    "monumentName": "Daria Daulat Bagh & Srirangapatna",
+    "monumentLocation": "Srirangapatna River Island, Kaveri",
+    "monumentLat": 12.4259,
+    "monumentLng": 76.6903,
+    "monumentImageKey": "srirangapatna-fort",
+    "monumentDescription": "1784 CE teakwood garden palace adorned with vivid battle and court murals within the historic Kaveri island citadel of Srirangapatna.",
+    "culturalSignificance": "Unites 9th-century Ranganathaswamy temple heritage with 18th-century Mysore court murals and river island fortifications.",
+    "monumentAttribution": "Archaeological Survey of India (ASI)",
+    "galleryImages": ["srirangapatna-fort"],
+    "description": "Fertile Kaveri basin district anchored by the historic island capital of Srirangapatna and Hoysala temples at Kikkeri and Hosaholalu.",
+    "history": "Srirangapatna served as provincial seat under Vijayanagara and royal capital of Mysuru prior to 1799 CE.",
+    "festivals": [],
+    "arts": [],
+    "cuisine": [],
+    "traditions": [],
+    "heritageSites": ["Daria Daulat Bagh", "Srirangapatna Fort", "Sri Ranganathaswamy Temple"],
+    "images": ["srirangapatna-fort"],
+    "sources": [
+      {
+        "title": "Daria Daulat Bagh & Srirangapatna Heritage",
+        "organization": "Archaeological Survey of India (ASI)",
+        "url": "https://asi.nic.in/"
+      }
+    ]
+  },
+  {
+    "id": "mysuru",
+    "name": "Mysuru",
+    "region": "Southern Karnataka",
+    "division": "Mysuru",
+    "documented": true,
+    "monumentName": "Amba Vilas (Mysore Palace)",
+    "monumentLocation": "Mysuru Royal Precinct",
+    "monumentLat": 12.3052,
+    "monumentLng": 76.6551,
+    "monumentImageKey": "mysore-palace",
+    "monumentDescription": "Indo-Saracenic royal residence rebuilt between 1897 and 1912 CE under the Wadiyar dynasty, blending Rajput domes, stained glass, and carved rosewood halls.",
+    "culturalSignificance": "Focal stage for Karnataka's Nada Habba Mysuru Dasara, Mysore Traditional Paintings (GI No. 32), and KSIC Mysore Silk (GI No. 22).",
+    "monumentAttribution": "Mysore Palace Board & Karnataka State Tourism (KSTDC)",
+    "galleryImages": ["mysore-palace", "mysore-painting", "dollu-kunitha"],
+    "description": "Cultural capital of southern Karnataka, anchored by Amba Vilas Palace, Nada Habba Mysuru Dasara, Mysore Traditional Paintings, and KSIC Mysore Silk.",
+    "history": "Under the Wadiyar dynasty, Mysuru developed a renowned synthesis of Indo-Saracenic architecture, classical music, gold-gilded gesso painting, and pure mulberry silk weaving.",
+    "festivals": ["Mysuru Dasara & Jambu Savari (Nada Habba)"],
+    "arts": [
+      "Mysore Traditional Paintings (GI App. No. 32, 2006)",
+      "Dollu Kunitha & Folk Processional Arts"
+    ],
+    "cuisine": ["Mysore Pak (Traditional Gram Flour Confection)"],
+    "traditions": ["Mysore Silk Weaving (GI App. No. 22, 2005)", "Wadiyar Court Music Patronage"],
+    "heritageSites": [
+      "Amba Vilas (Mysore Palace)",
+      "Keshava Temple, Somnathapura (UNESCO Ref. 1670, 2023)",
+      "Chamundi Hill Heritage Steps"
+    ],
+    "images": ["mysore-palace", "mysore-painting", "dollu-kunitha", "karnataka-crafts"],
+    "sources": [
+      {
+        "title": "Mysuru Heritage & Dasara Official Guide",
+        "organization": "Karnataka State Tourism Development Corporation (KSTDC)",
+        "url": "https://www.karnatakatourism.org/"
+      },
+      {
+        "title": "Geographical Indications Registry — GI App. Nos. 22 & 32",
+        "organization": "IP India, Government of India",
+        "url": "https://ipindia.gov.in/gi.htm"
+      }
+    ]
+  },
+  {
+    "id": "raichur",
+    "name": "Raichur",
+    "region": "Kalyana Karnataka",
+    "division": "Kalaburagi",
+    "documented": false,
+    "monumentName": "Raichur Fort",
+    "monumentLocation": "Raichur Doab Hilltop",
+    "monumentLat": 16.2076,
+    "monumentLng": 77.3565,
+    "monumentImageKey": "raichur-fort",
+    "monumentDescription": "1294 CE Kakatiya-built hill fortress erected by Gore Gangaya Reddivaru, notable for its cyclopean dry-stone ramparts and a monumental 12-meter inscribed monolith.",
+    "culturalSignificance": "Key strategic monument of the Krishna–Tungabhadra Raichur Doab alongside Maski's Ashokan inscription.",
+    "monumentAttribution": "Karnataka State Department of Archaeology, Museums and Heritage",
+    "galleryImages": ["raichur-fort"],
+    "description": "Historic Krishna–Tungabhadra Doab district famous for Raichur Fort and the Maski Ashokan edict; detailed cultural records are currently in compilation.",
+    "history": "The Maski edict here famously recorded Emperor Ashoka's personal name ('Devanampriya Ashoka'), while Raichur Fort changed hands between Kakatiyas, Bahmanis, and Vijayanagara.",
+    "festivals": [],
+    "arts": [],
+    "cuisine": [],
+    "traditions": [],
+    "heritageSites": ["Raichur Fort", "Maski Ashokan Edict Site", "Mudgal Fort"],
+    "images": ["raichur-fort"],
+    "sources": [
+      {
+        "title": "Raichur & Maski Archaeological Overview",
+        "organization": "Karnataka State Tourism Development Corporation (KSTDC)",
+        "url": "https://www.karnatakatourism.org/"
+      }
+    ]
+  },
+  {
+    "id": "ramanagara",
+    "name": "Ramanagara",
+    "region": "Southern Karnataka",
+    "division": "Bengaluru",
+    "documented": true,
+    "monumentName": "Ramadevara Betta & Craft Mandapa",
+    "monumentLocation": "Ramanagara Granite Massif",
+    "monumentLat": 12.7536,
+    "monumentLng": 77.3025,
+    "monumentImageKey": "ramadevara-betta",
+    "monumentDescription": "Granite hill sanctuary crowned by medieval stone mandapas and steps rising above the historic Channapatna artisan corridor.",
+    "culturalSignificance": "Links monumental granite hill-shrines with Channapatna ('Gombegala Ooru'), internationally protected under GI No. 23 for botanical lac-finished wooden toys.",
+    "monumentAttribution": "Karnataka State Tourism (KSTDC) & IP India GI Registry",
+    "galleryImages": ["ramadevara-betta", "karnataka-crafts"],
+    "description": "Home to Channapatna ('Gombegala Ooru'), internationally recognized for botanical lac-finished wooden toys protected under Geographical Indication status.",
+    "history": "Historical craft patronage dates back over two centuries to Tipu Sultan, who invited Persian artisans to train local lathe-turners working with Wrightia tinctoria timber.",
+    "festivals": [],
+    "arts": ["Channapatna Wooden Toys & Dolls (GI App. No. 23, 2006)"],
+    "cuisine": [],
+    "traditions": ["Botanical Lacquer & Ivory-Wood Turning Guilds"],
+    "heritageSites": ["Ramadevara Betta & Heritage Steps", "Channapatna Craft Clusters", "Janapada Loka"],
+    "images": ["ramadevara-betta", "karnataka-crafts"],
+    "sources": [
+      {
+        "title": "Geographical Indications Registry — Application No. 23 (Channapatna Toys & Dolls)",
+        "organization": "IP India, Government of India",
+        "url": "https://ipindia.gov.in/gi.htm"
+      }
+    ]
+  },
+  {
+    "id": "shivamogga",
+    "name": "Shivamogga",
+    "region": "Malnad & Western Ghats",
+    "division": "Bengaluru",
+    "documented": false,
+    "monumentName": "Aghoreshwara Temple, Ikkeri",
+    "monumentLocation": "Ikkeri, Sagara Taluk",
+    "monumentLat": 14.1867,
+    "monumentLng": 75.0189,
+    "monumentImageKey": "ikkeri-temple",
+    "monumentDescription": "16th-century granite sanctuary built by the Keladi Nayakas, uniting Vijayanagara mandapas with coastal sloping eaves and a Nandi pavilion.",
+    "culturalSignificance": "Testament to the Keladi Nayaka kingdom alongside Keladi Rameshwara Temple, Kavaledurga Fort, and Balligavi.",
+    "monumentAttribution": "Archaeological Survey of India (ASI)",
+    "galleryImages": ["ikkeri-temple"],
+    "description": "Malnad gateway housing the Keladi Nayaka monuments of Ikkeri and Kavaledurga alongside Balligavi and Kudali; full archival entries pending.",
+    "history": "Ruled successively by Kadambas, Chalukyas, Hoysalas, and the Keladi Nayakas whose 16th-century capital stood at Ikkeri and Bidanur.",
+    "festivals": [],
+    "arts": [],
+    "cuisine": [],
+    "traditions": [],
+    "heritageSites": ["Aghoreshwara Temple, Ikkeri", "Keladi Rameshwara Temple", "Kedarashwara Temple, Balligavi"],
+    "images": ["ikkeri-temple"],
+    "sources": [
+      {
+        "title": "Aghoreshwara Temple, Ikkeri Monument Record",
+        "organization": "Archaeological Survey of India (ASI)",
+        "url": "https://asi.nic.in/"
+      }
+    ]
+  },
+  {
+    "id": "tumakuru",
+    "name": "Tumakuru",
+    "region": "Central Karnataka",
+    "division": "Bengaluru",
+    "documented": false,
+    "monumentName": "Madhugiri Fort (Monolithic Hill Citadel)",
+    "monumentLocation": "Madhugiri, Tumakuru",
+    "monumentLat": 13.6581,
+    "monumentLng": 77.2094,
+    "monumentImageKey": "madhugiri-fort",
+    "monumentDescription": "17th-century hilltop fortification rising up Asia's second-largest monolithic rock dome, engineered with multi-gate stone ramparts and granaries.",
+    "culturalSignificance": "Dramatic fusion of Deccan hill-fort masonry, water cistern engineering, and nearby Hoysala temples at Aralaguppe.",
+    "monumentAttribution": "Archaeological Survey of India (ASI)",
+    "galleryImages": ["madhugiri-fort"],
+    "description": "Plains and hill-fort district crowned by Madhugiri monolith, Devarayanadurga, and 9th-century Nolamba temples; full records are under review.",
+    "history": "Originally fortified by Raja Hira Gowda of the Madhugiri chieftains and later strengthened by Hyder Ali.",
+    "festivals": [],
+    "arts": [],
+    "cuisine": [],
+    "traditions": [],
+    "heritageSites": ["Madhugiri Fort", "Channakeshava Temple, Aralaguppe", "Devarayanadurga"],
+    "images": ["madhugiri-fort"],
+    "sources": [
+      {
+        "title": "Madhugiri Fort Heritage Profile",
+        "organization": "Karnataka State Tourism Development Corporation (KSTDC)",
+        "url": "https://www.karnatakatourism.org/"
+      }
+    ]
+  },
+  {
+    "id": "udupi",
+    "name": "Udupi",
+    "region": "Coastal Karnataka",
+    "division": "Mysuru",
+    "documented": true,
+    "monumentName": "Udupi Sri Krishna Matha",
+    "monumentLocation": "Car Street, Udupi",
+    "monumentLat": 13.3413,
+    "monumentLng": 74.7521,
+    "monumentImageKey": "udupi-matha",
+    "monumentDescription": "13th-century coastal monastery complex founded by Madhvacharya featuring tiled coastal roofs, the Madhwa Sarovara tank, and Kanakana Kindi.",
+    "culturalSignificance": "Center of Dvaita philosophy, the biennial Paryaya festival, Badaguthittu Yakshagana theatre, and Udupi's temple culinary lineage.",
+    "monumentAttribution": "Karnataka State Tourism (KSTDC) & Sangeet Natak Akademi",
+    "galleryImages": ["udupi-matha", "yakshagana"],
+    "description": "Coastal cultural and culinary hub celebrated for Badaguthittu Yakshagana theatre, Sri Krishna Matha heritage, and vegetarian Udupi culinary traditions.",
+    "history": "Evolved as a prominent center of Dvaita philosophy, classical Yakshagana prasanga traditions, and coastal temple cuisine.",
+    "festivals": ["Paryaya Festival (Biennial)"],
+    "arts": ["Yakshagana Dance-Drama (Sangeet Natak Akademi Recognized)"],
+    "cuisine": ["Udupi Temple & Vegetarian Culinary Tradition"],
+    "traditions": ["All-Night Prasanga Performance Traditions"],
+    "heritageSites": ["Udupi Sri Krishna Matha", "Barkur Heritage Ruins", "Kollur Mookambika Temple"],
+    "images": ["udupi-matha", "yakshagana"],
+    "sources": [
+      {
+        "title": "Traditional Performing Arts Inventory — Yakshagana",
+        "organization": "Sangeet Natak Akademi, New Delhi",
+        "url": "https://sangeetnatak.gov.in/"
+      }
+    ]
+  },
+  {
+    "id": "uttara-kannada",
+    "name": "Uttara Kannada",
+    "region": "Malnad & Western Ghats",
+    "division": "Belagavi",
+    "documented": false,
+    "monumentName": "Murudeshwar Temple & Raja Gopura",
+    "monumentLocation": "Kanduka Hill, Arabian Sea Coast",
+    "monumentLat": 14.0942,
+    "monumentLng": 74.4847,
+    "monumentImageKey": "murudeshwar-temple",
+    "monumentDescription": "Coastal sanctuary perched on Kanduka headland surrounded on three sides by the Arabian Sea, crowned by its monumental 20-storey Raja Gopura.",
+    "culturalSignificance": "Anchors Uttara Kannada's coastal-ghat heritage alongside Kadamba-era Banavasi, Mirjan Fort, and Devarakadu sacred groves.",
+    "monumentAttribution": "Karnataka State Tourism Development Corporation (KSTDC)",
+    "galleryImages": ["murudeshwar-temple", "malnad-groves"],
+    "description": "Coastal and Sahyadri forest district linking Kanduka coastal shrines, Mirjan Fort, and Kadamba-capital Banavasi; full archival monographs pending.",
+    "history": "Banavasi in Uttara Kannada served as the first native royal capital of Karnataka under the Kadamba dynasty in the 4th century CE.",
+    "festivals": [],
+    "arts": [],
+    "cuisine": [],
+    "traditions": [],
+    "heritageSites": ["Murudeshwar Temple", "Madhukeshwara Temple, Banavasi", "Mirjan Fort"],
+    "images": ["murudeshwar-temple", "malnad-groves"],
+    "sources": [
+      {
+        "title": "Uttara Kannada Coastal & Kadamba Heritage",
+        "organization": "Karnataka State Tourism Development Corporation (KSTDC)",
+        "url": "https://www.karnatakatourism.org/"
+      }
+    ]
+  },
+  {
+    "id": "vijayanagara",
+    "name": "Vijayanagara",
+    "region": "Kalyana Karnataka",
+    "division": "Kalaburagi",
+    "documented": true,
+    "geoBoundaryNote": "Carved out of Ballari on November 17, 2021; represented within the Ballari boundary polygon in the 2021 geoBoundaries LGD snapshot.",
+    "monumentName": "Vijaya Vittala Temple & Stone Chariot",
+    "monumentLocation": "Hampi, Tungabhadra River Basin",
+    "monumentLat": 15.335,
+    "monumentLng": 76.46,
+    "monumentImageKey": "hero-hampi",
+    "monumentDescription": "15th–16th century Vijayanagara granite masterpiece housing the iconic interlocking Stone Chariot and 56 musical monolithic pillars.",
+    "culturalSignificance": "Heart of the UNESCO World Heritage Group of Monuments at Hampi (Ref. 241, 1986), exemplifying medieval Deccan urbanism and stonecraft.",
+    "monumentAttribution": "UNESCO World Heritage Centre (Ref. 241) & ASI",
+    "galleryImages": ["hero-hampi"],
+    "description": "Karnataka's 31st district, encompassing the UNESCO World Heritage Group of Monuments at Hampi along the Tungabhadra River.",
+    "history": "Hampi served as the capital of the Vijayanagara Empire (14th–16th centuries CE) and was inscribed by UNESCO in 1986 under Reference No. 241.",
+    "festivals": ["Hampi Utsav (Vijayanagara Festival)"],
+    "arts": ["Vijayanagara Stone Sculpture & Temple Music"],
+    "cuisine": [],
+    "traditions": ["Tungabhadra River Basin Temple Rituals"],
+    "heritageSites": [
+      "Group of Monuments at Hampi (UNESCO Ref. 241, 1986)",
+      "Vijaya Vittala Temple & Stone Chariot",
+      "Virupaksha Temple Complex"
+    ],
+    "images": ["hero-hampi"],
+    "sources": [
+      {
+        "title": "Group of Monuments at Hampi (Ref. 241)",
+        "organization": "UNESCO World Heritage Centre",
+        "url": "https://whc.unesco.org/en/list/241/"
+      }
+    ]
+  },
+  {
+    "id": "vijayapura",
+    "name": "Vijayapura",
+    "region": "Northern Karnataka",
+    "division": "Belagavi",
+    "documented": false,
+    "monumentName": "Gol Gumbaz (Mausoleum of Adil Shah)",
+    "monumentLocation": "Vijayapura City",
+    "monumentLat": 16.831,
+    "monumentLng": 75.7305,
+    "monumentImageKey": "gol-gumbaz",
+    "monumentDescription": "17th-century Adil Shahi mausoleum completed in 1656 CE, crowned by one of the world's largest unsupported masonry domes and an acoustic Whispering Gallery.",
+    "culturalSignificance": "Pinnacle of Deccan Indo-Islamic structural engineering alongside Ibrahim Rauza, Bara Kaman, and Malik-e-Maidan.",
+    "monumentAttribution": "Archaeological Survey of India (ASI)",
+    "galleryImages": ["gol-gumbaz"],
+    "description": "Deccan architectural capital of the Adil Shahi dynasty, centered around Gol Gumbaz and Ibrahim Rauza; full festival and craft monographs pending.",
+    "history": "Built as the capital of the Bijapur Sultanate (1490–1686 CE), yielding landmark pendentive domes and basalt civic waterworks.",
+    "festivals": [],
+    "arts": [],
+    "cuisine": [],
+    "traditions": [],
+    "heritageSites": ["Gol Gumbaz", "Ibrahim Rauza", "Bara Kaman"],
+    "images": ["gol-gumbaz"],
+    "sources": [
+      {
+        "title": "Gol Gumbaz National Monument Profile",
+        "organization": "Archaeological Survey of India (ASI)",
+        "url": "https://asi.nic.in/"
+      }
+    ]
+  },
+  {
+    "id": "yadgir",
+    "name": "Yadgir",
+    "region": "Kalyana Karnataka",
+    "division": "Kalaburagi",
+    "documented": false,
+    "monumentName": "Yadgir Fort & Granite Bastions",
+    "monumentLocation": "Yadgir Monolithic Hill, Bhima Basin",
+    "monumentLat": 16.7667,
+    "monumentLng": 77.1333,
+    "monumentImageKey": "sannati-yadgir",
+    "monumentDescription": "Hilltop fortress perched on a dramatic granite monolith overlooking the Bhima valley, preserving Adil Shahi and Vijayanagara masonry, bastions, and rock tanks.",
+    "culturalSignificance": "Marks the Bhima–Krishna riverine corridor connecting Yadgir Fort, Shahpur Sleeping Buddha hills, and Shorapur heritage.",
+    "monumentAttribution": "Karnataka State Department of Archaeology, Museums and Heritage",
+    "galleryImages": ["sannati-yadgir"],
+    "description": "Bhima river basin district formed in 2010, home to Yadgir Fort and Surpur historical heritage; full cultural archives are in preparation.",
+    "history": "Shaped by Yadava, Bahmani, Adil Shahi, and Surpur Bedar Nayaka administrations.",
+    "festivals": [],
+    "arts": [],
+    "cuisine": [],
+    "traditions": [],
+    "heritageSites": ["Yadgir Fort", "Shahpur Sleeping Buddha Hill", "Wagingera Fort"],
+    "images": ["sannati-yadgir"],
+    "sources": [
+      {
+        "title": "Yadgir District Heritage Overview",
+        "organization": "Karnataka State Tourism Development Corporation (KSTDC)",
+        "url": "https://www.karnatakatourism.org/"
+      }
+    ]
+  }
+]

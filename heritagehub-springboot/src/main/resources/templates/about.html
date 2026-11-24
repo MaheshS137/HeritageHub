@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{fragments/layout :: head('About')}"></head>
+<body>
+<header th:replace="~{fragments/layout :: navbar}"></header>
+
+<main>
+    <section class="hh-section hh-section-white">
+        <div class="hh-container hh-hero-enter">
+            <p class="hh-kicker">About HeritageHub</p>
+            <h1 style="font-size:2.8rem;max-width:22ch;">Discover Karnataka. Preserve its Heritage.</h1>
+            <p class="hh-muted" style="max-width:65ch;margin-top:16px;">
+                HeritageHub is a digital archive dedicated to documenting Karnataka's monuments, festivals, traditional arts, folk dances, cuisine, handicrafts, and customs using real GeoJSON district boundaries and source-verified records across all 31 districts.
+            </p>
+        </div>
+    </section>
+
+    <section class="hh-section">
+        <div class="hh-container hh-grid-3 hh-reveal">
+            <div class="hh-card" style="padding:24px;border-top:3px solid #C92332;">
+                <h3 style="margin-bottom:10px;">Project Objectives</h3>
+                <p class="hh-muted">Connect authentic district boundaries with structured JSON heritage records backed by public institutional sources.</p>
+            </div>
+            <div class="hh-card" style="padding:24px;border-top:3px solid #F8C928;">
+                <h3 style="margin-bottom:10px;">Information Sources</h3>
+                <p class="hh-muted">UNESCO World Heritage Centre, IP India GI Registry, Sangeet Natak Akademi, KSTDC, Karnataka Forest Department, and geoBoundaries IND-ADM2 (ODbL 1.0).</p>
+            </div>
+            <div class="hh-card" style="padding:24px;border-top:3px solid #941D2A;">
+                <h3 style="margin-bottom:10px;">Future Scope</h3>
+                <p class="hh-muted">Expand full 7-pillar monographs across all 31 districts and integrate post-2021 standalone Vijayanagara GIS boundary polygons once openly licensed.</p>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+</body>
+</html>

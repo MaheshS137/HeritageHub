@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{fragments/layout :: head('Cultural Heritage')}"></head>
+<body>
+<header th:replace="~{fragments/layout :: navbar}"></header>
+
+<main>
+    <section class="hh-section hh-section-white" style="padding:48px 0;">
+        <div class="hh-container hh-hero-enter">
+            <p class="hh-kicker">7 Cultural Disciplines</p>
+            <h1 style="font-size:2.6rem;">Cultural Heritage of Karnataka</h1>
+            <form method="get" th:action="@{/culture}" style="display:flex;flex-wrap:wrap;gap:12px;margin-top:24px;">
+                <select name="category" class="hh-select">
+                    <option value="all" th:selected="${selectedCategory == 'all'}">All 7 Categories</option>
+                    <option th:each="c : ${categories}" th:value="${c.slug}" th:text="${c.title}" th:selected="${selectedCategory == c.slug}"></option>
+                </select>
+                <select name="district" class="hh-select">
+                    <option value="all" th:selected="${selectedDistrict == 'all'}">All 31 Districts</option>
+                    <option th:each="d : ${districts}" th:value="${d.id}" th:text="${d.name}" th:selected="${selectedDistrict == d.id or selectedDistrict == d.name}"></option>
+                </select>
+                <input type="text" name="q" th:value="${searchQuery}" class="hh-input" placeholder="Search cultural records..."/>
+                <button type="submit" class="hh-btn hh-btn-primary">Filter Archive</button>
+                <a th:href="@{/culture}" class="hh-btn hh-btn-outline">Reset</a>
+            </form>
+        </div>
+    </section>
+
+    <section class="hh-section">
+        <div class="hh-container">
+            <div th:if="${currentLang != 'en'}" class="hh-card" style="padding:12px 18px;margin-bottom:20px;background:#FBF6E8;border-color:#F8C928;font-size:0.875rem;color:#941D2A;">
+                <strong th:text="#{culture.englishFallbackNote}">Verified translation unavailable — displayed in English</strong>
+            </div>
+
+            <div th:if="${#lists.isEmpty(records)}" class="hh-card" style="padding:40px;text-align:center;background:#FBF6E8;">
+                <h3>Verified Information Currently Unavailable</h3>
+                <p class="hh-muted">No verified records match your selected district or category filter. HeritageHub does not publish unverified placeholder traditions.</p>
+                <div style="margin-top:16px;"><a th:href="@{/culture}" class="hh-btn hh-btn-primary">Show All Verified Records</a></div>
+            </div>
+
+            <div th:if="${!#lists.isEmpty(records)}" class="hh-grid-3 hh-reveal">
+                <article th:each="rec : ${records}" class="hh-card">
+                    <img class="hh-card-img" th:src="@{'/images/' + ${rec.imageKey} + '.jpg'}" th:alt="${rec.altText}" loading="lazy"/>
+                    <div class="hh-card-body">
+                        <span class="hh-meta" style="color:#941D2A;font-weight:600;" th:text="${rec.districtName} + ' · ' + ${rec.category}"></span>
+                        <h3 th:text="${rec.title}" style="font-size:1.25rem;"></h3>
+                        <p class="hh-muted" th:text="${rec.description}" style="font-size:0.875rem;"></p>
+                        <p style="font-size:0.75rem;color:#941D2A;margin-top:auto;">
+                            Source: <a th:href="${rec.sourceUrl}" th:text="${rec.sourceOrganization}" target="_blank" rel="noopener noreferrer" style="text-decoration:underline;"></a>
+                        </p>
+                        <a th:href="@{/district/{id}(id=${rec.districtId})}" style="font-size:0.8rem;font-weight:600;color:#941D2A;">View District Profile →</a>
+                    </div>
+                </article>
+            </div>
+
+            <div th:if="${publishedArticles != null and !#lists.isEmpty(publishedArticles)}" style="margin-top:52px;">
+                <p class="hh-kicker">Editorial Field Dispatches</p>
+                <h2 style="font-size:1.85rem;margin-bottom:20px;">Published Journalist Features</h2>
+                <div class="hh-grid-3 hh-reveal">
+                    <article th:each="art : ${publishedArticles}" class="hh-card">
+                        <img class="hh-card-img"
+                             th:src="${art.coverImageUrl != null and !#strings.isEmpty(art.coverImageUrl) ? art.coverImageUrl : '/images/hero-hampi.jpg'}"
+                             th:alt="${art.title}" loading="lazy"/>
+                        <div class="hh-card-body">
+                            <span class="hh-meta" style="color:#941D2A;font-weight:600;" th:text="${art.districtName} + ' · ' + ${art.categoryTitle}"></span>
+                            <h3 th:text="${art.title}" style="font-size:1.2rem;"></h3>
+                            <p class="hh-muted" th:text="${art.shortDescription}" style="font-size:0.875rem;"></p>
+                            <p class="hh-meta" style="margin-top:auto;" th:text="'By ' + ${art.authorName}"></p>
+                            <a th:href="@{/article/{slug}(slug=${art.slug})}" style="font-size:0.82rem;font-weight:600;color:#941D2A;">Read Feature →</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+</body>
+</html>

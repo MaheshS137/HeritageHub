@@ -1,0 +1,65 @@
+[
+  {
+    "slug": "festivals-celebrations",
+    "indexNumber": "01",
+    "title": "Festivals and Celebrations",
+    "subtitle": "State processions, seasonal harvest observances, and temple fairs",
+    "description": "Public observances and historic state festivals celebrating Karnataka's seasonal cycles, civic heritage, and classical processional traditions.",
+    "imageKey": "mysore-palace",
+    "altText": "Mysore Palace Amba Vilas illuminated at twilight in warm gold light, focal venue of the annual Mysuru Dasara state festival."
+  },
+  {
+    "slug": "traditional-arts",
+    "indexNumber": "02",
+    "title": "Traditional Arts",
+    "subtitle": "Classical court painting, mineral pigments, and dramatic theatre",
+    "description": "Visual and theatrical disciplines refined through centuries of court and temple patronage, including gold-gilded Mysore paintings and coastal Yakshagana.",
+    "imageKey": "mysore-painting",
+    "altText": "Artisan applying delicate mineral pigments and raised gold leaf gesso details to a traditional Mysore painting."
+  },
+  {
+    "slug": "folk-music-dance",
+    "indexNumber": "03",
+    "title": "Folk Music and Dance",
+    "subtitle": "Ritual percussion ensembles, heroic ballads, and community dance",
+    "description": "High-energy drum dances and rural performance traditions preserved by regional communities and documented by state cultural academies.",
+    "imageKey": "dollu-kunitha",
+    "altText": "Karnataka Dollu Kunitha folk drummers performing synchronized choreography with traditional cylindrical drums in a stone temple courtyard."
+  },
+  {
+    "slug": "historical-monuments",
+    "indexNumber": "04",
+    "title": "Historical Monuments",
+    "subtitle": "UNESCO stone ensembles, rock-cut sanctuaries, and dynastic architecture",
+    "description": "Built heritage spanning Early Chalukyan sandstone caves, Hoysala stellate soapstone temples, and the granite capital of the Vijayanagara Empire.",
+    "imageKey": "hero-hampi",
+    "altText": "Golden hour view of the Vittala Temple stone chariot and carved granite mandapa pillars at Hampi."
+  },
+  {
+    "slug": "food-cuisine",
+    "indexNumber": "05",
+    "title": "Food and Cuisine",
+    "subtitle": "Geographical Indication confections and regional culinary lineages",
+    "description": "Distinctive regional preparations shaped by local agriculture, dairy traditions, and multi-generational family sweet-making guilds.",
+    "imageKey": "dharwad-peda",
+    "altText": "Caramelized deep-brown Dharwad Peda milk sweets lightly dusted with sugar crystals on a hammered brass plate."
+  },
+  {
+    "slug": "handicrafts-textiles",
+    "indexNumber": "06",
+    "title": "Handicrafts and Textiles",
+    "subtitle": "GI-protected mulberry silk looms, lacquerware, and silver inlay",
+    "description": "Material craft traditions protected under India's Geographical Indications framework, uniting natural pigments, pure zari, and Bidri metallurgy.",
+    "imageKey": "karnataka-crafts",
+    "altText": "Handloom Mysore silk sarees with zari borders beside wooden Channapatna lacquerware and a silver-inlaid Bidriware vessel."
+  },
+  {
+    "slug": "customs-traditions",
+    "indexNumber": "07",
+    "title": "Customs and Traditions",
+    "subtitle": "Community forest stewardship and ancestral ecological covenants",
+    "description": "Living social customs that safeguard biocultural landscapes, sacred groves, and shared community water and temple stewardship.",
+    "imageKey": "malnad-groves",
+    "altText": "Ancient stone shrine framed by dense mossy Western Ghats forest inside a community-protected sacred grove."
+  }
+]

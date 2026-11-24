@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{fragments/layout :: head('Home')}"></head>
+<body>
+<header th:replace="~{fragments/layout :: navbar}"></header>
+
+<main>
+    <!-- Hero Section -->
+    <section class="hh-hero">
+        <img class="hh-hero-bg" th:src="@{/images/hero-hampi.jpg}" alt="Vittala Temple stone chariot and granite pillars in Hampi, Karnataka"/>
+        <div class="hh-hero-scrim"></div>
+        <div class="hh-container">
+            <div class="hh-hero-content hh-hero-enter">
+                <p class="hh-kicker" th:text="#{hero.kicker}">Karnataka Cultural &amp; Architectural Archive</p>
+                <h1 th:text="#{hero.title}">Discover the Heritage of Karnataka</h1>
+                <p class="hh-lead">From Vijayanagara stone chariots and Hoysala soapstone temples to Yakshagana theatre, Mysore Dasara, and GI-protected crafts—explore every district's living cultural history.</p>
+                <div class="hh-hero-actions">
+                    <a th:href="@{/culture}" class="hh-btn hh-btn-primary" th:text="#{hero.exploreHeritage} + ' →'">Explore Heritage →</a>
+                    <a href="#interactive-karnataka-map" class="hh-btn hh-btn-yellow" th:text="#{hero.discoverDistricts}">Discover Districts</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Prominent Interactive Karnataka District Map Immediately Below Hero -->
+    <section id="interactive-karnataka-map" class="hh-section">
+        <div class="hh-container">
+            <div class="hh-section-header hh-reveal">
+                <div>
+                    <p class="hh-kicker">Interactive 31-District Monument Atlas</p>
+                    <h2>Explore Karnataka by District</h2>
+                </div>
+                <a th:href="@{/explore}" class="hh-btn hh-btn-outline">Open Full-Screen Explorer →</a>
+            </div>
+
+            <div class="hh-map-shell hh-reveal">
+                <div class="hh-map-toolbar">
+                    <input id="home-district-search" class="hh-input" list="home-district-list" placeholder="Search district or monument (e.g. Mysuru, Hampi, Hassan)..." style="min-width:260px;"/>
+                    <datalist id="home-district-list">
+                        <option th:each="d : ${districts}" th:value="${d.name}"></option>
+                    </datalist>
+                    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+                        <button id="home-map-zoom-in" type="button" class="hh-btn hh-btn-outline" style="min-height:38px;padding:6px 12px;" aria-label="Zoom in map">+</button>
+                        <button id="home-map-zoom-out" type="button" class="hh-btn hh-btn-outline" style="min-height:38px;padding:6px 12px;" aria-label="Zoom out map">−</button>
+                        <button id="home-map-reset" type="button" class="hh-btn hh-btn-yellow" style="min-height:38px;">Reset Map</button>
+                    </div>
+                </div>
+                <div class="hh-map-grid">
+                    <div id="home-karnataka-map" class="hh-map-canvas" aria-label="Interactive Karnataka District Map"></div>
+                    <aside id="home-district-panel" class="hh-map-panel">
+                        <p class="hh-kicker">Interactive District Atlas</p>
+                        <h3 style="font-size:1.5rem;margin-bottom:10px;">Select Any District in Karnataka</h3>
+                        <p class="hh-muted" style="font-size:0.9rem;">Hover over any district or monument photo marker to preview it, or click to inspect its flagship monument, history, cultural significance, and gallery photos.</p>
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Introduction to Karnataka's Cultural Diversity -->
+    <section class="hh-section hh-section-white">
+        <div class="hh-container hh-grid-2 hh-reveal">
+            <div>
+                <p class="hh-kicker">Curatorial Note</p>
+                <h2 style="font-size:2.1rem;">A living archive connecting built stone heritage with regional traditions.</h2>
+            </div>
+            <div>
+                <p class="hh-muted">Karnataka holds an extraordinary cultural continuum—from Early Chalukyan sandstone shrines at Badami and Hoysala soapstone temples at Belur to Vijayanagara ruins at Hampi, coastal Yakshagana theatre, and GI-protected crafts.</p>
+                <div style="display:flex;gap:28px;margin-top:24px;padding-top:18px;border-top:1px solid #EADEC8;flex-wrap:wrap;">
+                    <div><div style="font-family:var(--hh-font-serif);font-size:1.85rem;color:#C92332;font-weight:600;" th:text="${#lists.size(districts)}">31</div><div class="hh-meta">Official Districts</div></div>
+                    <div><div style="font-family:var(--hh-font-serif);font-size:1.85rem;color:#941D2A;font-weight:600;">7</div><div class="hh-meta">Cultural Pillars</div></div>
+                    <div><div style="font-family:var(--hh-font-serif);font-size:1.85rem;color:#292522;font-weight:600;">100%</div><div class="hh-meta">Source-Cited Records</div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Heritage Destinations -->
+    <section class="hh-section">
+        <div class="hh-container">
+            <div class="hh-section-header hh-reveal">
+                <div>
+                    <p class="hh-kicker">Architectural Archive</p>
+                    <h2>Featured Heritage Destinations</h2>
+                </div>
+                <a th:href="@{/culture(category='historical-monuments')}" class="hh-btn hh-btn-outline">All Monuments →</a>
+            </div>
+            <div class="hh-grid-3 hh-reveal">
+                <a th:each="m : ${monuments}" th:href="@{/district/{id}(id=${m.districtId})}" class="hh-card">
+                    <img class="hh-card-img" th:src="@{'/images/' + ${m.imageKey} + '.jpg'}" th:alt="${m.altText}" loading="lazy"/>
+                    <div class="hh-card-body">
+                        <span class="hh-meta" style="color:#941D2A;font-weight:600;" th:text="${m.districtName} + ' District · ' + ${m.referenceId}"></span>
+                        <h3 th:text="${m.title}" style="font-size:1.25rem;"></h3>
+                        <p class="hh-muted" th:text="${m.description}" style="font-size:0.875rem;"></p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Festivals and Celebrations -->
+    <section class="hh-section hh-section-white">
+        <div class="hh-container">
+            <div class="hh-section-header hh-reveal">
+                <div>
+                    <p class="hh-kicker">Seasonal Observances</p>
+                    <h2>Festivals and Celebrations</h2>
+                </div>
+                <a th:href="@{/culture(category='festivals-celebrations')}" class="hh-btn hh-btn-outline">All Festivals →</a>
+            </div>
+            <div class="hh-grid-2 hh-reveal">
+                <a th:each="f : ${festivals}" th:href="@{/district/{id}(id=${f.districtId})}" class="hh-card">
+                    <img class="hh-card-img" th:src="@{'/images/' + ${f.imageKey} + '.jpg'}" th:alt="${f.altText}" loading="lazy"/>
+                    <div class="hh-card-body">
+                        <span class="hh-meta" style="color:#941D2A;font-weight:600;" th:text="${f.districtName} + ' District · ' + ${f.sourceOrganization}"></span>
+                        <h3 th:text="${f.title}" style="font-size:1.35rem;"></h3>
+                        <p class="hh-muted" th:text="${f.description}" style="font-size:0.875rem;"></p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Traditional Arts and Crafts -->
+    <section class="hh-section">
+        <div class="hh-container">
+            <div class="hh-section-header hh-reveal">
+                <div>
+                    <p class="hh-kicker">Living Guilds</p>
+                    <h2>Traditional Arts and Crafts</h2>
+                </div>
+                <a th:href="@{/culture(category='traditional-arts')}" class="hh-btn hh-btn-outline">Explore All Arts →</a>
+            </div>
+            <div class="hh-grid-3 hh-reveal">
+                <a th:each="a : ${artsAndCrafts}" th:href="@{/district/{id}(id=${a.districtId})}" class="hh-card">
+                    <img class="hh-card-img" th:src="@{'/images/' + ${a.imageKey} + '.jpg'}" th:alt="${a.altText}" loading="lazy"/>
+                    <div class="hh-card-body">
+                        <span class="hh-meta" style="color:#941D2A;font-weight:600;" th:text="${a.districtName} + ' · ' + ${a.referenceId}"></span>
+                        <h3 th:text="${a.title}" style="font-size:1.25rem;"></h3>
+                        <p class="hh-muted" th:text="${a.description}" style="font-size:0.875rem;"></p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  if (window.HeritageHubMap) {
+    window.HeritageHubMap.initKarnatakaMap({
+      mapElementId: 'home-karnataka-map',
+      panelElementId: 'home-district-panel',
+      searchInputId: 'home-district-search',
+      resetButtonId: 'home-map-reset',
+      zoomInButtonId: 'home-map-zoom-in',
+      zoomOutButtonId: 'home-map-zoom-out'
+    });
+  }
+});
+</script>
+</body>
+</html>

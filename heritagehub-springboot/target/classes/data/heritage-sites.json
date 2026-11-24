@@ -1,0 +1,53 @@
+[
+  {
+    "id": "site-hampi",
+    "slug": "group-of-monuments-at-hampi",
+    "title": "Group of Monuments at Hampi",
+    "category": "Historical Monuments",
+    "categorySlug": "historical-monuments",
+    "districtId": "vijayanagara",
+    "districtName": "Vijayanagara",
+    "description": "Extensive ruins of the Vijayanagara imperial capital along the Tungabhadra River, featuring the Vittala Stone Chariot, Virupaksha Temple, and medieval waterworks.",
+    "imageKey": "hero-hampi",
+    "altText": "Sunrise panorama of the Vittala Temple stone chariot and granite mandapas at Hampi.",
+    "historicalBackground": "Flourished from the 14th to 16th centuries CE; inscribed on the UNESCO World Heritage List in 1986 (Reference No. 241) across 4,187.24 hectares.",
+    "sourceUrl": "https://whc.unesco.org/en/list/241/",
+    "sourceOrganization": "UNESCO World Heritage Centre",
+    "referenceId": "WHC Property No. 241 (1986)",
+    "verificationStatus": "verified"
+  },
+  {
+    "id": "site-belur",
+    "slug": "chennakesava-temple-belur",
+    "title": "Chennakesava Temple, Belur (Sacred Ensembles of the Hoysalas)",
+    "category": "Historical Monuments",
+    "categorySlug": "historical-monuments",
+    "districtId": "hassan",
+    "districtName": "Hassan",
+    "description": "12th-century Hoysala chloritic schist temple built under King Vishnuvardhana, famed for star-shaped plinths, lathe-turned columns, and signed sculptures.",
+    "imageKey": "belur-hoysala",
+    "altText": "Chennakesava Temple in Belur showing stellate plinth and carved Hoysala friezes.",
+    "historicalBackground": "Inscribed alongside Halebidu and Somnathapura on the UNESCO World Heritage List on September 18, 2023 (Reference No. 1670).",
+    "sourceUrl": "https://whc.unesco.org/en/list/1670/",
+    "sourceOrganization": "UNESCO World Heritage Centre",
+    "referenceId": "WHC Property No. 1670 (2023)",
+    "verificationStatus": "verified"
+  },
+  {
+    "id": "site-badami",
+    "slug": "badami-cave-temples",
+    "title": "Badami Rock-Cut Cave Temples",
+    "category": "Historical Monuments",
+    "categorySlug": "historical-monuments",
+    "districtId": "bagalkot",
+    "districtName": "Bagalkot",
+    "description": "Four Early Chalukyan rock-cut sandstone sanctuaries overlooking Agastya Lake, illustrating the foundational synthesis of Nagara and Dravida temple forms.",
+    "imageKey": "badami-caves",
+    "altText": "Red sandstone cliffs and rock-cut verandahs of Badami Cave Temples above Agastya Lake.",
+    "historicalBackground": "Carved between the 6th and 8th centuries CE under Early Chalukya patronage; Cave 3 preserves an inscription dated 578 CE.",
+    "sourceUrl": "https://www.karnatakatourism.org/",
+    "sourceOrganization": "Karnataka State Tourism Development Corporation (KSTDC)",
+    "referenceId": "ASI Protected National Monument",
+    "verificationStatus": "verified"
+  }
+]

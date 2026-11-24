@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${currentLang ?: 'en'}">
+<head th:replace="~{fragments/layout :: head('Account Portal')}"></head>
+<body>
+<header th:replace="~{fragments/layout :: navbar}"></header>
+
+<main class="hh-section" style="background:var(--hh-bg);min-height:80vh;">
+    <div class="hh-container" style="max-width:980px;">
+        <p class="hh-kicker">Role-Based Archive Access</p>
+        <h1 style="font-size:clamp(2rem,3.6vw,3rem);margin-bottom:10px;" th:text="#{auth.title}">HeritageHub Account Portal</h1>
+        <p class="hh-muted" style="max-width:64ch;margin-bottom:28px;" th:text="#{auth.subtitle}">
+            Select your role to sign in or create an account. Personal email addresses (Gmail, Outlook, Yahoo) are welcome.
+        </p>
+
+        <div th:if="${authError}" style="margin-bottom:18px;padding:14px 18px;border:1px solid var(--hh-red);background:#FFF5F5;color:var(--hh-red-dark);border-radius:8px;font-size:0.9rem;font-weight:500;" th:text="${authError}"></div>
+        <div th:if="${param.error}" style="margin-bottom:18px;padding:14px 18px;border:1px solid var(--hh-red);background:#FFF5F5;color:var(--hh-red-dark);border-radius:8px;font-size:0.9rem;font-weight:500;">Invalid email or password, or account deactivated.</div>
+        <div th:if="${authSuccess}" style="margin-bottom:18px;padding:14px 18px;border:1px solid #166534;background:#F0FDF4;color:#166534;border-radius:8px;font-size:0.9rem;font-weight:500;" th:text="${authSuccess}"></div>
+
+        <!-- Initial Admin Setup Banner -->
+        <div th:if="${needsInitialAdmin}" style="margin-bottom:28px;padding:24px;border:1.5px solid var(--hh-red);background:var(--hh-warm);border-radius:10px;">
+            <p class="hh-kicker" style="margin-bottom:6px;" th:text="#{auth.initialAdminTitle}">Initial Administrator Setup Required</p>
+            <p class="hh-muted" style="font-size:0.9rem;margin-bottom:18px;" th:text="#{auth.initialAdminDesc}">
+                Zero administrator accounts exist yet in SQLite. Provision the founding HeritageHub administrator once.
+            </p>
+            <form th:action="@{/setup-admin}" method="post" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;">
+                <input class="hh-input" type="text" name="fullName" placeholder="Administrator Full Name" required/>
+                <input class="hh-input" type="email" name="email" placeholder="Email Address (Gmail, Outlook, Yahoo...)" required/>
+                <input class="hh-input" type="password" name="password" placeholder="Password (8+ chars, letter & number)" required/>
+                <input class="hh-input" type="password" name="confirmPassword" placeholder="Confirm Password" required/>
+                <select class="hh-select" name="securityQuestion" required>
+                    <option th:each="q : ${securityQuestions}" th:value="${q}" th:text="${q}"></option>
+                </select>
+                <input class="hh-input" type="text" name="securityAnswer" placeholder="Security Answer" required/>
+                <div style="grid-column:1 / -1;">
+                    <button type="submit" class="hh-btn hh-btn-primary">Create Initial Administrator</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Three Role Selection Cards -->
+        <div class="hh-grid-3" style="margin-bottom:28px;">
+            <a th:href="@{/auth(role='USER',mode=${authMode})}"
+               th:style="${selectedRole == 'USER' ? 'padding:20px;border:2px solid var(--hh-red);background:var(--hh-white);border-radius:10px;' : 'padding:20px;border:1px solid var(--hh-border);background:var(--hh-white);border-radius:10px;'}">
+                <p class="hh-kicker" style="margin-bottom:6px;">01 · USER</p>
+                <h2 style="font-size:1.3rem;margin-bottom:6px;">Community Explorer</h2>
+                <p class="hh-muted" style="font-size:0.85rem;">Save favorite monuments &amp; districts, track recent views, and sync language preferences.</p>
+            </a>
+            <a th:href="@{/auth(role='JOURNALIST',mode=${authMode})}"
+               th:style="${selectedRole == 'JOURNALIST' ? 'padding:20px;border:2px solid var(--hh-red);background:var(--hh-white);border-radius:10px;' : 'padding:20px;border:1px solid var(--hh-border);background:var(--hh-white);border-radius:10px;'}">
+                <p class="hh-kicker" style="margin-bottom:6px;">02 · JOURNALIST</p>
+                <h2 style="font-size:1.3rem;margin-bottom:6px;">Heritage Journalist</h2>
+                <p class="hh-muted" style="font-size:0.85rem;">Draft district heritage features, upload cover photographs, and submit articles for editorial review.</p>
+            </a>
+            <a th:href="@{/auth(role='ADMIN',mode=${authMode})}"
+               th:style="${selectedRole == 'ADMIN' ? 'padding:20px;border:2px solid var(--hh-red);background:var(--hh-white);border-radius:10px;' : 'padding:20px;border:1px solid var(--hh-border);background:var(--hh-white);border-radius:10px;'}">
+                <p class="hh-kicker" style="margin-bottom:6px;">03 · ADMIN</p>
+                <h2 style="font-size:1.3rem;margin-bottom:6px;">Archive Administrator</h2>
+                <p class="hh-muted" style="font-size:0.85rem;">Manage users &amp; journalists, review/publish articles, and curate monuments across Karnataka.</p>
+            </a>
+        </div>
+
+        <!-- Sign In / Register Panel -->
+        <div style="background:var(--hh-white);border:1px solid var(--hh-border);border-radius:12px;padding:30px;">
+            <div style="display:flex;gap:10px;margin-bottom:22px;border-bottom:1px solid var(--hh-border);padding-bottom:16px;">
+                <a th:href="@{/auth(role=${selectedRole},mode='login')}"
+                   th:class="${authMode != 'register' ? 'hh-btn hh-btn-primary' : 'hh-btn hh-btn-outline'}"
+                   th:text="#{auth.signIn}">Sign In</a>
+                <a th:if="${selectedRole != 'ADMIN'}"
+                   th:href="@{/auth(role=${selectedRole},mode='register')}"
+                   th:class="${authMode == 'register' ? 'hh-btn hh-btn-primary' : 'hh-btn hh-btn-outline'}"
+                   th:text="#{auth.register}">Register</a>
+            </div>
+
+            <!-- Login Form -->
+            <form th:if="${authMode != 'register' || selectedRole == 'ADMIN'}" th:action="@{/auth/login}" method="post" style="display:flex;flex-direction:column;gap:14px;max-width:480px;">
+                <div>
+                    <label style="display:block;font-size:0.8rem;font-weight:600;margin-bottom:6px;">Email Address</label>
+                    <input class="hh-input" style="width:100%;" type="email" name="email" required/>
+                </div>
+                <div>
+                    <label style="display:block;font-size:0.8rem;font-weight:600;margin-bottom:6px;">Password</label>
+                    <input class="hh-input" style="width:100%;" type="password" name="password" required/>
+                </div>
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+                    <button type="submit" class="hh-btn hh-btn-primary" th:text="#{auth.signIn}">Sign In</button>
+                    <a th:href="@{/forgot-password}" style="font-size:0.85rem;font-weight:600;color:var(--hh-red-dark);" th:text="#{auth.forgotPassword}">Forgot Password?</a>
+                </div>
+                <p th:if="${selectedRole == 'ADMIN'}" class="hh-meta" style="margin-top:8px;">
+                    Subsequent administrator accounts can only be provisioned by an authenticated administrator inside the Admin Console.
+                </p>
+            </form>
+
+            <!-- User Registration Form -->
+            <form th:if="${authMode == 'register' && selectedRole == 'USER'}" th:action="@{/register/user}" method="post" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;">
+                <div>
+                    <label style="display:block;font-size:0.8rem;font-weight:600;margin-bottom:6px;">Full Name</label>
+                    <input class="hh-input" style="width:100%;" type="text" name="fullName" required/>
+                </div>
+                <div>
+                    <label style="display:block;font-size:0.8rem;font-weight:600;margin-bottom:6px;">Email Address (Gmail, Outlook, Yahoo)</label>
+                    <input class="hh-input" style="width:100%;" type="email" name="email" required/>
+                </div>
+                <div>
+                    <label style="display:block;font-size:0.8rem;font-weight:600;margin-bottom:6px;">Password</label>
+                    <input class="hh-input" style="width:100%;" type="password" name="password" required/>
+                </div>
+                <div>
+                    <label style="display:block;font-size:0.8rem;font-weight:600;margin-bottom:6px;">Confirm Password</label>
+                    <input class="hh-input" style="width:100%;" type="password" name="confirmPassword" required/>
+                </div>
+                <div>
+                    <label style="display:block;font-size:0.8rem;font-weight:600;margin-bottom:6px;">Security Question</label>
+                    <select class="hh-select" style="width:100%;" name="securityQuestion" required>
+                        <option th:each="q : ${securityQuestions}" th:value="${q}" th:text="${q}"></option>
+                    </select>
+                </div>
+                <div>
+                    <label style="display:block;font-size:0.8rem;font-weight:600;margin-bottom:6px;">Security Answer</label>
+                    <input class="hh-input" style="width:100%;" type="text" name="securityAnswer" required/>
+                </div>
+                <div style="grid-column:1 / -1;">
+                    <button type="submit" class="hh-btn hh-btn-primary">Register User Account</button>
+                </div>
+            </form>
+
+            <!-- Journalist Registration Form -->
+            <form th:if="${authMode == 'register' && selectedRole == 'JOURNALIST'}" th:action="@{/register/journalist}" method="post" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;">
+                <div>
+                    <label style="display:block;font-size:0.8rem;font-weight:600;margin-bottom:6px;">Full Name</label>
+                    <input class="hh-input" style="width:100%;" type="text" name="fullName" required/>
+                </div>
+                <div>
+                    <label style="display:block;font-size:0.8rem;font-weight:600;margin-bottom:6px;">Email Address (Gmail, Outlook, Yahoo)</label>
+                    <input class="hh-input" style="width:100%;" type="email" name="email" required/>
+                </div>
+                <div style="grid-column:1 / -1;">
+                    <label style="display:block;font-size:0.8rem;font-weight:600;margin-bottom:6px;">Short Professional Introduction</label>
+                    <textarea class="hh-input" style="width:100%;min-height:90px;" name="bioIntro" required placeholder="Describe your cultural journalism or regional research focus..."></textarea>
+                </div>
+                <div>
+                    <label style="display:block;font-size:0.8rem;font-weight:600;margin-bottom:6px;">Password</label>
+                    <input class="hh-input" style="width:100%;" type="password" name="password" required/>
+                </div>
+                <div>
+                    <label style="display:block;font-size:0.8rem;font-weight:600;margin-bottom:6px;">Confirm Password</label>
+                    <input class="hh-input" style="width:100%;" type="password" name="confirmPassword" required/>
+                </div>
+                <div>
+                    <label style="display:block;font-size:0.8rem;font-weight:600;margin-bottom:6px;">Security Question</label>
+                    <select class="hh-select" style="width:100%;" name="securityQuestion" required>
+                        <option th:each="q : ${securityQuestions}" th:value="${q}" th:text="${q}"></option>
+                    </select>
+                </div>
+                <div>
+                    <label style="display:block;font-size:0.8rem;font-weight:600;margin-bottom:6px;">Security Answer</label>
+                    <input class="hh-input" style="width:100%;" type="text" name="securityAnswer" required/>
+                </div>
+                <div style="grid-column:1 / -1;">
+                    <button type="submit" class="hh-btn hh-btn-primary">Register Journalist Account</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+</body>
+</html>

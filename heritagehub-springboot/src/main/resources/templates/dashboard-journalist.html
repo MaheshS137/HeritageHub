@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${currentLang ?: 'en'}">
+<head th:replace="~{fragments/layout :: head('Journalist Studio')}"></head>
+<body>
+<header th:replace="~{fragments/layout :: navbar}"></header>
+
+<main class="hh-section" style="background:var(--hh-bg);min-height:80vh;">
+    <div class="hh-container">
+        <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;padding-bottom:20px;border-bottom:1px solid var(--hh-border);margin-bottom:28px;">
+            <div>
+                <p class="hh-kicker">HERITAGE JOURNALIST STUDIO</p>
+                <h1 style="font-size:2.2rem;" th:text="${journalist.fullName}">Journalist Name</h1>
+                <p class="hh-muted" th:text="${journalist.bioIntro}"></p>
+            </div>
+            <form th:action="@{/logout}" method="post">
+                <button type="submit" class="hh-btn hh-btn-outline" th:text="#{nav.logout}">Sign Out</button>
+            </form>
+        </div>
+
+        <div th:if="${dashError}" style="margin-bottom:18px;padding:12px 16px;border:1px solid var(--hh-red);background:#FFF5F5;color:var(--hh-red-dark);border-radius:8px;" th:text="${dashError}"></div>
+        <div th:if="${dashSuccess}" style="margin-bottom:18px;padding:12px 16px;border:1px solid #166534;background:#F0FDF4;color:#166534;border-radius:8px;" th:text="${dashSuccess}"></div>
+
+        <!-- Article Composer -->
+        <div style="background:var(--hh-white);border:1px solid var(--hh-border);border-radius:12px;padding:26px;margin-bottom:32px;">
+            <h2 style="font-size:1.45rem;margin-bottom:16px;" th:text="${editingArticle != null ? 'Edit & Resubmit Article' : 'Write Heritage Article'}">Write Heritage Article</h2>
+            <form th:action="@{/dashboard/journalist/articles}" method="post" enctype="multipart/form-data" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;">
+                <input type="hidden" name="articleId" th:value="${editingArticle != null ? editingArticle.id : ''}"/>
+                <input type="hidden" name="existingCoverUrl" th:value="${editingArticle != null ? editingArticle.coverImageUrl : ''}"/>
+                <div style="grid-column:1 / -1;">
+                    <label style="display:block;font-size:0.8rem;font-weight:600;margin-bottom:6px;">Article Title</label>
+                    <input class="hh-input" style="width:100%;" type="text" name="title" th:value="${editingArticle != null ? editingArticle.title : ''}" required/>
+                </div>
+                <div>
+                    <label style="display:block;font-size:0.8rem;font-weight:600;margin-bottom:6px;">Karnataka District</label>
+                    <select class="hh-select" style="width:100%;" name="districtId" required>
+                        <option th:each="d : ${districts}" th:value="${d.id}" th:text="${d.name}"
+                                th:selected="${editingArticle != null && editingArticle.districtId == d.id}"></option>
+                    </select>
+                </div>
+                <div>
+                    <label style="display:block;font-size:0.8rem;font-weight:600;margin-bottom:6px;">Cultural Category</label>
+                    <select class="hh-select" style="width:100%;" name="categorySlug" required>
+                        <option value="festivals-celebrations" th:selected="${editingArticle != null && editingArticle.categorySlug == 'festivals-celebrations'}">Festivals and Celebrations</option>
+                        <option value="traditional-arts" th:selected="${editingArticle != null && editingArticle.categorySlug == 'traditional-arts'}">Traditional Arts</option>
+                        <option value="folk-music-dance" th:selected="${editingArticle != null && editingArticle.categorySlug == 'folk-music-dance'}">Folk Music and Dance</option>
+                        <option value="historical-monuments" th:selected="${editingArticle != null && editingArticle.categorySlug == 'historical-monuments'}">Historical Monuments</option>
+                        <option value="food-cuisine" th:selected="${editingArticle != null && editingArticle.categorySlug == 'food-cuisine'}">Food and Cuisine</option>
+                        <option value="handicrafts-textiles" th:selected="${editingArticle != null && editingArticle.categorySlug == 'handicrafts-textiles'}">Handicrafts and Textiles</option>
+                        <option value="customs-traditions" th:selected="${editingArticle != null && editingArticle.categorySlug == 'customs-traditions'}">Customs and Traditions</option>
+                    </select>
+                </div>
+                <div style="grid-column:1 / -1;">
+                    <label style="display:block;font-size:0.8rem;font-weight:600;margin-bottom:6px;">Cover Photograph Upload</label>
+                    <input class="hh-input" type="file" name="coverPhoto" accept="image/*"/>
+                </div>
+                <div style="grid-column:1 / -1;">
+                    <label style="display:block;font-size:0.8rem;font-weight:600;margin-bottom:6px;">Short Description</label>
+                    <textarea class="hh-input" style="width:100%;min-height:70px;" name="shortDescription" required th:text="${editingArticle != null ? editingArticle.shortDescription : ''}"></textarea>
+                </div>
+                <div style="grid-column:1 / -1;">
+                    <label style="display:block;font-size:0.8rem;font-weight:600;margin-bottom:6px;">Full Article Content</label>
+                    <textarea class="hh-input" style="width:100%;min-height:170px;" name="content" required th:text="${editingArticle != null ? editingArticle.content : ''}"></textarea>
+                </div>
+                <div style="grid-column:1 / -1;display:flex;gap:10px;flex-wrap:wrap;">
+                    <button type="submit" name="action" value="draft" class="hh-btn hh-btn-outline">Save Draft</button>
+                    <button type="submit" name="action" value="submit" class="hh-btn hh-btn-primary">Submit for Admin Review</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- My Submissions -->
+        <h2 style="font-size:1.5rem;margin-bottom:14px;">My Articles &amp; Review Status</h2>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+            <div th:each="art : ${articles}" style="background:var(--hh-white);border:1px solid var(--hh-border);border-radius:10px;padding:20px;">
+                <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;align-items:center;">
+                    <div>
+                        <p class="hh-kicker" style="margin-bottom:4px;" th:text="${art.districtName + ' · ' + art.categoryTitle + ' · ' + art.status}"></p>
+                        <h3 style="font-size:1.25rem;" th:text="${art.title}"></h3>
+                        <p class="hh-muted" style="font-size:0.88rem;margin-top:4px;" th:text="${art.shortDescription}"></p>
+                    </div>
+                    <a th:if="${art.status.name() != 'PUBLISHED'}" th:href="@{/dashboard/journalist(editId=${art.id})}" class="hh-btn hh-btn-outline">Edit / Resubmit</a>
+                </div>
+                <div th:if="${art.adminFeedback != null && !art.adminFeedback.isBlank()}" style="margin-top:12px;padding:12px;background:var(--hh-warm);border:1px solid var(--hh-border);border-radius:8px;font-size:0.85rem;">
+                    <strong>Administrator Feedback:</strong> <span th:text="${art.adminFeedback}"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+</body>
+</html>

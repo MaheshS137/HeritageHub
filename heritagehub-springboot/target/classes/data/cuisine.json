@@ -1,0 +1,19 @@
+[
+  {
+    "id": "food-dharwad-peda",
+    "slug": "dharwad-peda-confection",
+    "title": "Dharwad Peda",
+    "category": "Food and Cuisine",
+    "categorySlug": "food-cuisine",
+    "districtId": "dharwad",
+    "districtName": "Dharwad",
+    "description": "Caramelized deep-brown milk sweet with a subtly grainy texture and fine sugar coating, holding over 175 years of culinary continuity in Dharwad.",
+    "imageKey": "dharwad-peda",
+    "altText": "Caramelized brown Dharwad Peda confections dusted with fine sugar on a hammered brass plate.",
+    "historicalBackground": "Introduced by the Thakur family in Line Bazar, Dharwad over 175 years ago; registered under Geographical Indication Application No. 80 on September 9, 2008.",
+    "sourceUrl": "https://ipindia.gov.in/gi.htm",
+    "sourceOrganization": "Geographical Indications Registry (IP India)",
+    "referenceId": "GI App. No. 80 (2008)",
+    "verificationStatus": "verified"
+  }
+]

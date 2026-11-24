@@ -1,0 +1,36 @@
+[
+  {
+    "id": "fest-mysuru-dasara",
+    "slug": "mysuru-dasara-state-festival",
+    "title": "Mysuru Dasara & Jambu Savari",
+    "category": "Festivals and Celebrations",
+    "categorySlug": "festivals-celebrations",
+    "districtId": "mysuru",
+    "districtName": "Mysuru",
+    "description": "Official ten-day state festival (Nada Habba) centered at Amba Vilas Palace, culminating in the Vijayadashami Jambu Savari procession showcasing Karnataka's folk ensembles.",
+    "imageKey": "mysore-palace",
+    "altText": "Amba Vilas (Mysore Palace) illuminated in warm gold lights at dusk during Mysuru Dasara.",
+    "historicalBackground": "Recognized by the Government of Karnataka Department of Kannada and Culture as the state festival, continuing centuries-old royal Navaratri observance traditions.",
+    "sourceUrl": "https://www.karnatakatourism.org/",
+    "sourceOrganization": "Karnataka State Tourism Development Corporation (KSTDC)",
+    "referenceId": "Official State Festival Portal",
+    "verificationStatus": "verified"
+  },
+  {
+    "id": "fest-pattadakal-utsav",
+    "slug": "pattadakal-chalukya-utsav",
+    "title": "Pattadakal Chalukya Dance Festival",
+    "category": "Festivals and Celebrations",
+    "categorySlug": "festivals-celebrations",
+    "districtId": "bagalkot",
+    "districtName": "Bagalkot",
+    "description": "Cultural dance and music festival hosted against the sandstone temple backdrop of UNESCO-listed Pattadakal along the Malaprabha River.",
+    "imageKey": "badami-caves",
+    "altText": "Sandstone Chalukyan cliff and temple architecture in Bagalkot district, Karnataka.",
+    "historicalBackground": "Organized by the Government of Karnataka to celebrate Early Chalukyan architectural heritage at Pattadakal, Badami, and Aihole.",
+    "sourceUrl": "https://www.karnatakatourism.org/",
+    "sourceOrganization": "Karnataka State Tourism Development Corporation (KSTDC)",
+    "referenceId": "State Heritage Festival Archive",
+    "verificationStatus": "verified"
+  }
+]

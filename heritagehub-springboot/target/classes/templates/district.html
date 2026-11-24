@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{fragments/layout :: head(${district.name} + ' District')}"></head>
+<body>
+<header th:replace="~{fragments/layout :: navbar}"></header>
+
+<main>
+    <section class="hh-section hh-section-white" style="padding:48px 0;">
+        <div class="hh-container hh-hero-enter">
+            <a th:href="@{/explore}" style="font-size:0.84rem;color:#941D2A;font-weight:600;">← Back to Explore Karnataka Map</a>
+            <p class="hh-kicker" style="margin-top:16px;" th:text="${district.region} + ' · ' + ${district.division} + ' Division'"></p>
+            <h1 style="font-size:2.8rem;" th:text="${district.name} + ' District'">District</h1>
+            <p class="hh-muted" style="max-width:65ch;margin-top:12px;" th:text="${district.description}"></p>
+            <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;">
+                <form th:if="${currentAccount != null and currentAccount.role.name() == 'USER'}" th:action="@{/dashboard/user/favorites/districts/toggle}" method="post">
+                    <input type="hidden" name="districtId" th:value="${district.id}"/>
+                    <input type="hidden" name="districtName" th:value="${district.name}"/>
+                    <input type="hidden" name="region" th:value="${district.region}"/>
+                    <input type="hidden" name="imageUrl" th:value="${'/images/' + (district.monumentImageKey != null ? district.monumentImageKey : 'hero-hampi') + '.jpg'}"/>
+                    <input type="hidden" name="redirectTo" th:value="${'/district/' + district.id}"/>
+                    <button type="submit" class="hh-btn hh-btn-primary">Save District to Favourites</button>
+                </form>
+                <a th:if="${currentAccount == null}" th:href="@{/auth(role='USER',mode='login')}" class="hh-btn hh-btn-outline">Sign in as User to Save Favourites</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Flagship Monument & Cultural Significance (Available for all 31 Districts) -->
+    <section class="hh-section" th:if="${district.monumentName != null}">
+        <div class="hh-container">
+            <div class="hh-grid-2 hh-reveal" style="align-items:center;">
+                <div class="hh-card">
+                    <img class="hh-card-img" style="aspect-ratio:16/10;" th:src="@{'/images/' + ${district.monumentImageKey != null ? district.monumentImageKey : 'hero-hampi'} + '.jpg'}" th:alt="${district.monumentName}" loading="lazy"/>
+                </div>
+                <div>
+                    <p class="hh-kicker">Signature Heritage Landmark</p>
+                    <h2 style="font-size:2.1rem;margin-bottom:8px;" th:text="${district.monumentName}"></h2>
+                    <p class="hh-meta" style="color:#941D2A;font-weight:600;margin-bottom:14px;" th:text="${district.monumentLocation}"></p>
+                    <p class="hh-muted" style="margin-bottom:16px;" th:text="${district.monumentDescription}"></p>
+                    <div style="padding:14px 16px;background:#FBF6E8;border-left:3px solid #F8C928;border-radius:6px;">
+                        <div style="font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.12em;color:#941D2A;margin-bottom:4px;">Cultural Significance</div>
+                        <p style="font-size:0.9rem;margin:0;color:#292522;" th:text="${district.culturalSignificance}"></p>
+                    </div>
+                    <form th:if="${currentAccount != null and currentAccount.role.name() == 'USER'}" th:action="@{/dashboard/user/favorites/monuments/toggle}" method="post" style="margin-top:16px;">
+                        <input type="hidden" name="monumentId" th:value="${district.id + '-flagship'}"/>
+                        <input type="hidden" name="monumentName" th:value="${district.monumentName}"/>
+                        <input type="hidden" name="districtId" th:value="${district.id}"/>
+                        <input type="hidden" name="districtName" th:value="${district.name}"/>
+                        <input type="hidden" name="imageUrl" th:value="${'/images/' + (district.monumentImageKey != null ? district.monumentImageKey : 'hero-hampi') + '.jpg'}"/>
+                        <input type="hidden" name="redirectTo" th:value="${'/district/' + district.id}"/>
+                        <button type="submit" class="hh-btn hh-btn-outline">Save Monument to Favourites</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="hh-grid-3 hh-reveal" style="margin-top:28px;" th:if="${!#lists.isEmpty(district.galleryImages)}">
+                <div th:each="img : ${district.galleryImages}" class="hh-card">
+                    <img class="hh-card-img" th:src="@{'/images/' + ${img} + '.jpg'}" th:alt="${district.name} + ' heritage view'" loading="lazy"/>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="hh-section hh-section-white" th:if="${!district.documented}">
+        <div class="hh-container">
+            <div class="hh-card" style="padding:36px;text-align:center;background:#FBF6E8;">
+                <p class="hh-kicker">7-Pillar Monograph Status</p>
+                <h2 style="margin-bottom:10px;">Full Cultural Monograph In Compilation</h2>
+                <p class="hh-muted" style="max-width:60ch;margin:0 auto;">Verified festivals, folk arts, cuisine, and craft monographs for <span th:text="${district.name}"></span> are awaiting archival verification from institutional sources. HeritageHub never publishes unverified placeholder records.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="hh-section hh-section-white" th:if="${district.documented}">
+        <div class="hh-container" style="display:flex;flex-direction:column;gap:36px;">
+            <div class="hh-grid-2 hh-reveal">
+                <div>
+                    <p class="hh-kicker">Regional History</p>
+                    <h2 style="font-size:1.85rem;margin-bottom:12px;">Historical Background</h2>
+                    <p class="hh-muted" th:text="${district.history}"></p>
+                </div>
+                <div class="hh-grid-2" th:if="${!#lists.isEmpty(district.images)}">
+                    <img th:each="img : ${district.images}" class="hh-card-img" style="border-radius:8px;border:1px solid #EADEC8;" th:src="@{'/images/' + ${img} + '.jpg'}" th:alt="${district.name} + ' heritage photograph'" loading="lazy"/>
+                </div>
+            </div>
+
+            <div class="hh-grid-3 hh-reveal">
+                <div class="hh-card" style="padding:22px;">
+                    <h3>Major Festivals</h3>
+                    <ul th:if="${!#lists.isEmpty(district.festivals)}"><li th:each="x : ${district.festivals}" th:text="${x}"></li></ul>
+                    <p th:if="${#lists.isEmpty(district.festivals)}" class="hh-muted">Unavailable</p>
+                </div>
+                <div class="hh-card" style="padding:22px;">
+                    <h3>Traditional Arts</h3>
+                    <ul th:if="${!#lists.isEmpty(district.arts)}"><li th:each="x : ${district.arts}" th:text="${x}"></li></ul>
+                    <p th:if="${#lists.isEmpty(district.arts)}" class="hh-muted">Unavailable</p>
+                </div>
+                <div class="hh-card" style="padding:22px;">
+                    <h3>Local Cuisine</h3>
+                    <ul th:if="${!#lists.isEmpty(district.cuisine)}"><li th:each="x : ${district.cuisine}" th:text="${x}"></li></ul>
+                    <p th:if="${#lists.isEmpty(district.cuisine)}" class="hh-muted">Unavailable</p>
+                </div>
+                <div class="hh-card" style="padding:22px;">
+                    <h3>Traditions &amp; Customs</h3>
+                    <ul th:if="${!#lists.isEmpty(district.traditions)}"><li th:each="x : ${district.traditions}" th:text="${x}"></li></ul>
+                    <p th:if="${#lists.isEmpty(district.traditions)}" class="hh-muted">Unavailable</p>
+                </div>
+                <div class="hh-card" style="padding:22px;">
+                    <h3>Historical Places</h3>
+                    <ul th:if="${!#lists.isEmpty(district.heritageSites)}"><li th:each="x : ${district.heritageSites}" th:text="${x}"></li></ul>
+                    <p th:if="${#lists.isEmpty(district.heritageSites)}" class="hh-muted">Unavailable</p>
+                </div>
+                <div class="hh-card" style="padding:22px;">
+                    <h3>Source References</h3>
+                    <ul th:if="${!#lists.isEmpty(district.sources)}">
+                        <li th:each="s : ${district.sources}">
+                            <a th:href="${s.url}" th:text="${s.title} + ' (' + ${s.organization} + ')'" target="_blank" rel="noopener noreferrer" style="color:#941D2A;text-decoration:underline;"></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="hh-section" th:if="${!#lists.isEmpty(districtRecords)}">
+        <div class="hh-container">
+            <h2 style="font-size:1.75rem;margin-bottom:24px;">Cataloged Cultural Records</h2>
+            <div class="hh-grid-3 hh-reveal">
+                <article th:each="rec : ${districtRecords}" class="hh-card">
+                    <img class="hh-card-img" th:src="@{'/images/' + ${rec.imageKey} + '.jpg'}" th:alt="${rec.altText}" loading="lazy"/>
+                    <div class="hh-card-body">
+                        <span class="hh-meta" style="color:#941D2A;font-weight:600;" th:text="${rec.category}"></span>
+                        <h3 th:text="${rec.title}" style="font-size:1.2rem;"></h3>
+                        <p class="hh-muted" th:text="${rec.description}" style="font-size:0.875rem;"></p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="hh-section hh-section-white" th:if="${extraMonuments != null and !#lists.isEmpty(extraMonuments)}">
+        <div class="hh-container">
+            <p class="hh-kicker">Additional Cataloged Landmarks</p>
+            <h2 style="font-size:1.75rem;margin-bottom:24px;">Curated Monuments in <span th:text="${district.name}"></span></h2>
+            <div class="hh-grid-3 hh-reveal">
+                <article th:each="mon : ${extraMonuments}" class="hh-card">
+                    <img class="hh-card-img" th:src="${mon.imageUrl != null and !#strings.isEmpty(mon.imageUrl) ? mon.imageUrl : '/images/hero-hampi.jpg'}" th:alt="${mon.name}" loading="lazy"/>
+                    <div class="hh-card-body">
+                        <span class="hh-meta" style="color:#941D2A;font-weight:600;" th:text="${mon.location} + ' · ' + ${mon.eraOrDynasty}"></span>
+                        <h3 th:text="${mon.name}" style="font-size:1.2rem;"></h3>
+                        <p class="hh-muted" th:text="${mon.description}" style="font-size:0.875rem;"></p>
+                        <form th:if="${currentAccount != null and currentAccount.role.name() == 'USER'}" th:action="@{/dashboard/user/favorites/monuments/toggle}" method="post" style="margin-top:auto;">
+                            <input type="hidden" name="monumentId" th:value="${mon.id}"/>
+                            <input type="hidden" name="monumentName" th:value="${mon.name}"/>
+                            <input type="hidden" name="districtId" th:value="${district.id}"/>
+                            <input type="hidden" name="districtName" th:value="${district.name}"/>
+                            <input type="hidden" name="imageUrl" th:value="${mon.imageUrl}"/>
+                            <input type="hidden" name="redirectTo" th:value="${'/district/' + district.id}"/>
+                            <button type="submit" class="hh-btn hh-btn-outline" style="min-height:34px;padding:6px 12px;">Save Monument</button>
+                        </form>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="hh-section" th:if="${districtArticles != null and !#lists.isEmpty(districtArticles)}">
+        <div class="hh-container">
+            <p class="hh-kicker">Verified Journalist Dispatches</p>
+            <h2 style="font-size:1.75rem;margin-bottom:24px;">Published Heritage Features</h2>
+            <div class="hh-grid-3 hh-reveal">
+                <article th:each="art : ${districtArticles}" class="hh-card">
+                    <img class="hh-card-img" th:src="${art.coverImageUrl != null and !#strings.isEmpty(art.coverImageUrl) ? art.coverImageUrl : '/images/hero-hampi.jpg'}" th:alt="${art.title}" loading="lazy"/>
+                    <div class="hh-card-body">
+                        <span class="hh-meta" style="color:#941D2A;font-weight:600;" th:text="${art.categoryTitle}"></span>
+                        <h3 th:text="${art.title}" style="font-size:1.2rem;"></h3>
+                        <p class="hh-muted" th:text="${art.shortDescription}" style="font-size:0.875rem;"></p>
+                        <a th:href="@{/article/{slug}(slug=${art.slug})}" style="font-size:0.82rem;font-weight:600;color:#941D2A;margin-top:auto;">Read Feature →</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="hh-section hh-section-white">
+        <div class="hh-container">
+            <h2 style="font-size:1.75rem;margin-bottom:24px;">Related Districts</h2>
+            <div class="hh-grid-4 hh-reveal">
+                <a th:each="rel : ${relatedDistricts}" th:href="@{/district/{id}(id=${rel.id})}" class="hh-card" style="padding:18px;">
+                    <span class="hh-meta" style="color:#941D2A;font-weight:600;" th:text="${rel.region}"></span>
+                    <h3 th:text="${rel.name}" style="font-size:1.15rem;margin-top:4px;"></h3>
+                    <span class="hh-meta" th:text="${rel.monumentName}"></span>
+                </a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+</body>
+</html>

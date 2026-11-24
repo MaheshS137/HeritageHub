@@ -1,0 +1,6 @@
+{
+  "name": "HeritageHub",
+  "description": "Discover Karnataka. Preserve its Heritage — an editorial cultural archive and heritage preservation guide to Karnataka's monuments, living arts, and sacred landscapes.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

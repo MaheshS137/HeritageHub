@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{fragments/layout :: head('Explore Karnataka')}"></head>
+<body>
+<header th:replace="~{fragments/layout :: navbar}"></header>
+
+<main>
+    <section class="hh-section hh-section-white" style="padding:40px 0;">
+        <div class="hh-container hh-hero-enter">
+            <p class="hh-kicker">Explore Karnataka · District Boundary Atlas</p>
+            <h1 style="font-size:2.4rem;">Interactive District Cultural Explorer</h1>
+            <p class="hh-muted" style="margin-top:8px;">Covering all <span th:text="${#lists.size(districts)}">31</span> official districts with flagship monument photography (<span th:text="${documentedCount}">0</span> full monographs active).</p>
+        </div>
+    </section>
+
+    <section class="hh-section" style="padding:36px 0 64px;">
+        <div class="hh-container">
+            <div class="hh-map-shell">
+                <div class="hh-map-toolbar">
+                    <input id="explore-district-search" class="hh-input" list="explore-district-list" placeholder="Search all 31 districts..." style="min-width:260px;"/>
+                    <datalist id="explore-district-list">
+                        <option th:each="d : ${districts}" th:value="${d.name}"></option>
+                    </datalist>
+                    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+                        <button id="explore-map-zoom-in" type="button" class="hh-btn hh-btn-outline" style="min-height:38px;padding:6px 12px;" aria-label="Zoom in map">+</button>
+                        <button id="explore-map-zoom-out" type="button" class="hh-btn hh-btn-outline" style="min-height:38px;padding:6px 12px;" aria-label="Zoom out map">−</button>
+                        <button id="explore-map-reset" type="button" class="hh-btn hh-btn-yellow" style="min-height:38px;">Reset Map</button>
+                    </div>
+                </div>
+                <div class="hh-map-grid">
+                    <div id="explore-karnataka-map" class="hh-map-canvas" style="height:640px;"></div>
+                    <aside id="explore-district-panel" class="hh-map-panel">
+                        <p class="hh-kicker">Interactive District Atlas</p>
+                        <h3 style="font-size:1.5rem;margin-bottom:10px;">Select Any District in Karnataka</h3>
+                        <p class="hh-muted" style="font-size:0.9rem;">Click a monument photo thumbnail or district boundary to inspect its famous monument, historical summary, and gallery photos.</p>
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="hh-section hh-section-white">
+        <div class="hh-container">
+            <div class="hh-section-header hh-reveal">
+                <div>
+                    <p class="hh-kicker">Statewide Directory</p>
+                    <h2>All 31 Districts &amp; Signature Monuments</h2>
+                </div>
+            </div>
+            <div class="hh-grid-3 hh-reveal">
+                <a th:each="d : ${districts}" th:href="@{/district/{id}(id=${d.id})}" class="hh-card">
+                    <img class="hh-card-img" th:src="@{'/images/' + ${d.monumentImageKey != null ? d.monumentImageKey : 'hero-hampi'} + '.jpg'}" th:alt="${d.monumentName != null ? d.monumentName : d.name}" loading="lazy"/>
+                    <div class="hh-card-body">
+                        <span class="hh-meta" style="color:#941D2A;font-weight:600;" th:text="${d.region} + ' · ' + ${d.division} + ' Division'"></span>
+                        <h3 th:text="${d.name}" style="font-size:1.3rem;"></h3>
+                        <div style="font-size:0.85rem;font-weight:600;color:#292522;" th:text="${d.monumentName}"></div>
+                        <p class="hh-muted" style="font-size:0.84rem;" th:text="${d.monumentDescription != null ? d.monumentDescription : d.description}"></p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  if (window.HeritageHubMap) {
+    window.HeritageHubMap.initKarnatakaMap({
+      mapElementId: 'explore-karnataka-map',
+      panelElementId: 'explore-district-panel',
+      searchInputId: 'explore-district-search',
+      resetButtonId: 'explore-map-reset',
+      zoomInButtonId: 'explore-map-zoom-in',
+      zoomOutButtonId: 'explore-map-zoom-out'
+    });
+  }
+});
+</script>
+</body>
+</html>

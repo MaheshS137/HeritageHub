@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${currentLang ?: 'en'}">
+<head th:replace="~{fragments/layout :: head(${article.title})}"></head>
+<body>
+<header th:replace="~{fragments/layout :: navbar}"></header>
+
+<main class="hh-section" style="background:var(--hh-bg);min-height:76vh;">
+    <div class="hh-container" style="max-width:880px;">
+        <a th:href="@{/culture}" style="font-size:0.85rem;font-weight:600;color:var(--hh-red-dark);">← Back to Cultural Heritage</a>
+        <p class="hh-kicker" style="margin-top:18px;" th:text="${article.categoryTitle + ' · ' + article.districtName + ' District'}"></p>
+        <h1 style="font-size:clamp(2rem,3.6vw,3rem);margin-bottom:12px;" th:text="${article.title}"></h1>
+        <p class="hh-muted" style="margin-bottom:16px;" th:text="${article.shortDescription}"></p>
+        <p class="hh-meta" style="margin-bottom:20px;">By <strong th:text="${article.authorName}"></strong></p>
+
+        <div th:if="${currentLang != 'en'}" style="margin-bottom:20px;padding:10px 14px;border:1px solid var(--hh-border);background:var(--hh-warm);border-radius:8px;font-size:0.85rem;color:var(--hh-red-dark);" th:text="#{culture.englishFallbackNote}">
+            Verified translation unavailable — displayed in English
+        </div>
+
+        <img th:if="${article.coverImageUrl != null && !article.coverImageUrl.isBlank()}"
+             th:src="@{${article.coverImageUrl}}"
+             th:alt="${article.title}"
+             style="width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:12px;border:1px solid var(--hh-border);margin-bottom:24px;"/>
+
+        <div style="background:var(--hh-white);border:1px solid var(--hh-border);border-radius:12px;padding:28px;line-height:1.85;white-space:pre-line;" th:text="${article.content}"></div>
+    </div>
+</main>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+</body>
+</html>

@@ -7,6 +7,8 @@ import type {
 } from '../../types/culture';
 import { resolveHeritageImage } from '../../data/imageAssets';
 import { HeritageImage } from '../HeritageImage';
+import { PhotoCredit } from '../PhotoCredit';
+import { RevealSection } from '../motion/MotionPrimitives';
 import { SourceCitationList } from './SourceCitationList';
 import { useI18n } from '../../i18n/I18nContext';
 
@@ -81,6 +83,7 @@ export function CulturalDetailView({
               <p className="mt-3 font-serif italic text-xs text-[#77716B]">
                 Archive Plate — {tr.title}, {distTr.name}, Karnataka
               </p>
+              <PhotoCredit imageKey={record.imageKey} className="mt-1" />
             </div>
 
             <aside className="lg:col-span-5 rounded-xl border border-[#EADEC8] bg-[#FFFFFF] p-6 sm:p-7 shadow-xs">
@@ -140,7 +143,7 @@ export function CulturalDetailView({
       </section>
 
       {/* Verified Narrative, Key Facts & Citations */}
-      <section className="py-14 lg:py-20 border-b border-[#EADEC8]">
+      <RevealSection className="py-14 lg:py-20 border-b border-[#EADEC8]">
         <div className="max-w-[1240px] mx-auto px-5 sm:px-8 space-y-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
             <div className="lg:col-span-7 space-y-8">
@@ -186,7 +189,7 @@ export function CulturalDetailView({
 
           <SourceCitationList sources={record.sources} />
         </div>
-      </section>
+      </RevealSection>
     </article>
   );
 }

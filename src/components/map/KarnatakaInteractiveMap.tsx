@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { AnimatePresence, motion } from 'motion/react';
 import L from 'leaflet';
 import {
   ArrowRight,
@@ -17,6 +18,8 @@ import { createKarnatakaDistrictMap, normalizeDistrictId } from '../../lib/karna
 import type { DistrictRecord } from '../../hooks/useDistrictArchive';
 import { resolveHeritageImage } from '../../data/imageAssets';
 import { HeritageImage } from '../HeritageImage';
+import { PhotoCredit } from '../PhotoCredit';
+import { HERITAGE_EASE } from '../motion/MotionPrimitives';
 import { useI18n } from '../../i18n/I18nContext';
 import { useAuth } from '../../context/AuthContext';
 
@@ -386,71 +389,82 @@ export function KarnatakaInteractiveMap({
           aria-live="polite"
           className="lg:col-span-5 p-6 sm:p-7 flex flex-col justify-between bg-[#FFFFFF]"
         >
-          {selectedDistrict ? (
-            (() => {
-              const trSelected = translateDistrict(selectedDistrict);
-              const isFavMonument = favoriteMonumentIds.has(selectedDistrict.id);
-              return (
-                <div key={selectedDistrict.id} className="hh-panel-crossfade space-y-5">
-                  <div>
-                    <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
-                      <span className="font-semibold tracking-[0.16em] uppercase text-[#941D2A]">
-                        {translateRegion(selectedDistrict.region)} · {selectedDistrict.division}{' '}
-                        Division
-                      </span>
-                      <span className="text-[#77716B] tabular-nums">
-                        {selectedDistrict.monumentLat.toFixed(2)}° N,{' '}
-                        {selectedDistrict.monumentLng.toFixed(2)}° E
-                      </span>
-                    </div>
-
-                    <h3 className="mt-1.5 font-serif text-2xl sm:text-3xl font-medium text-[#292522]">
-                      {trSelected.name}
-                    </h3>
-                  </div>
-
-                  {/* Famous Monument Hero Card */}
-                  <div className="rounded-lg border border-[#EADEC8] overflow-hidden bg-[#FFFDF7]">
-                    <HeritageImage
-                      src={resolveHeritageImage(selectedDistrict.monumentImageKey)}
-                      alt={`${selectedDistrict.monumentName} in ${selectedDistrict.name} District`}
-                      containerClassName="aspect-[16/9] w-full"
-                    />
-                    <div className="px-4 py-3 bg-[#FBF6E8] border-t border-[#EADEC8] flex items-center justify-between gap-3">
-                      <div className="min-w-0">
-                        <p className="font-serif text-base font-semibold text-[#292522] truncate">
-                          {trSelected.monumentName}
-                        </p>
-                        <p className="text-xs font-medium text-[#941D2A] mt-0.5 truncate">
-                          {selectedDistrict.monumentLocation}
-                        </p>
+          <AnimatePresence mode="wait">
+            {selectedDistrict ? (
+              (() => {
+                const trSelected = translateDistrict(selectedDistrict);
+                const isFavMonument = favoriteMonumentIds.has(selectedDistrict.id);
+                return (
+                  <motion.div
+                    key={selectedDistrict.id}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    transition={{ duration: 0.28, ease: HERITAGE_EASE }}
+                    className="space-y-5"
+                  >
+                    <div>
+                      <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
+                        <span className="font-semibold tracking-[0.16em] uppercase text-[#941D2A]">
+                          {translateRegion(selectedDistrict.region)} · {selectedDistrict.division}{' '}
+                          Division
+                        </span>
+                        <span className="text-[#77716B] tabular-nums">
+                          {selectedDistrict.monumentLat.toFixed(2)}° N,{' '}
+                          {selectedDistrict.monumentLng.toFixed(2)}° E
+                        </span>
                       </div>
-                      <button
-                        type="button"
-                        onClick={async () => {
-                          if (!user) {
-                            navigate('/auth');
-                            return;
-                          }
-                          await toggleFavoriteMonument({
-                            monumentId: selectedDistrict.id,
-                            monumentName: selectedDistrict.monumentName,
-                            districtId: selectedDistrict.id,
-                            districtName: selectedDistrict.name,
-                            imageUrl: selectedDistrict.monumentImageKey,
-                          });
-                        }}
-                        className={`inline-flex items-center gap-1.5 px-3 py-1.5 min-h-[34px] text-xs font-semibold rounded-md border transition-colors cursor-pointer shrink-0 ${
-                          isFavMonument
-                            ? 'bg-[#C92332] text-[#FFFFFF] border-[#C92332]'
-                            : 'bg-[#FFFFFF] text-[#941D2A] border-[#EADEC8] hover:border-[#C92332]'
-                        }`}
-                      >
-                        <Bookmark className="w-3.5 h-3.5" aria-hidden="true" />
-                        <span>{isFavMonument ? t('map.savedFavorite') : t('map.saveFavorite')}</span>
-                      </button>
+
+                      <h3 className="mt-1.5 font-serif text-2xl sm:text-3xl font-medium text-[#292522]">
+                        {trSelected.name}
+                      </h3>
                     </div>
-                  </div>
+
+                    {/* Famous Monument Hero Card */}
+                    <div className="space-y-1.5">
+                      <div className="rounded-lg border border-[#EADEC8] overflow-hidden bg-[#FFFDF7]">
+                        <HeritageImage
+                          src={resolveHeritageImage(selectedDistrict.monumentImageKey)}
+                          alt={`${selectedDistrict.monumentName} in ${selectedDistrict.name} District`}
+                          containerClassName="aspect-[16/9] w-full"
+                        />
+                        <div className="px-4 py-3 bg-[#FBF6E8] border-t border-[#EADEC8] flex items-center justify-between gap-3">
+                          <div className="min-w-0">
+                            <p className="font-serif text-base font-semibold text-[#292522] truncate">
+                              {trSelected.monumentName}
+                            </p>
+                            <p className="text-xs font-medium text-[#941D2A] mt-0.5 truncate">
+                              {selectedDistrict.monumentLocation}
+                            </p>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={async () => {
+                              if (!user) {
+                                navigate('/auth');
+                                return;
+                              }
+                              await toggleFavoriteMonument({
+                                monumentId: selectedDistrict.id,
+                                monumentName: selectedDistrict.monumentName,
+                                districtId: selectedDistrict.id,
+                                districtName: selectedDistrict.name,
+                                imageUrl: selectedDistrict.monumentImageKey,
+                              });
+                            }}
+                            className={`inline-flex items-center gap-1.5 px-3 py-1.5 min-h-[34px] text-xs font-semibold rounded-md border transition-colors cursor-pointer shrink-0 ${
+                              isFavMonument
+                                ? 'bg-[#C92332] text-[#FFFFFF] border-[#C92332]'
+                                : 'bg-[#FFFFFF] text-[#941D2A] border-[#EADEC8] hover:border-[#C92332]'
+                            }`}
+                          >
+                            <Bookmark className="w-3.5 h-3.5" aria-hidden="true" />
+                            <span>{isFavMonument ? t('map.savedFavorite') : t('map.saveFavorite')}</span>
+                          </button>
+                        </div>
+                      </div>
+                      <PhotoCredit imageKey={selectedDistrict.monumentImageKey} />
+                    </div>
 
                   {/* Clarify 2021 Ballari/Vijayanagara shared boundary polygon */}
                   {(selectedDistrict.id === 'ballari' ||
@@ -537,11 +551,18 @@ export function KarnatakaInteractiveMap({
                       {t('map.culturalArchive')} →
                     </Link>
                   </div>
-                </div>
+                </motion.div>
               );
             })()
           ) : (
-            <div className="space-y-6 flex flex-col justify-between h-full">
+            <motion.div
+              key="empty-district-panel"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.25, ease: HERITAGE_EASE }}
+              className="space-y-6 flex flex-col justify-between h-full"
+            >
               <div>
                 <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.16em] uppercase text-[#941D2A]">
                   <MapPin className="w-4 h-4 text-[#C92332]" aria-hidden="true" />
@@ -602,8 +623,9 @@ export function KarnatakaInteractiveMap({
                 <strong className="text-[#292522]">geoBoundaries IND-ADM2 (2021)</strong> (ODbL 1.0)
                 · Zoom-aware monument thumbnails anchor all 31 Karnataka districts without overlap.
               </div>
-            </div>
+            </motion.div>
           )}
+          </AnimatePresence>
         </aside>
       </div>
     </div>

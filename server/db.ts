@@ -180,6 +180,11 @@ export function getDb(): DatabaseSync {
       route_path TEXT NOT NULL,
       viewed_at TEXT NOT NULL
     );
+
+    CREATE TABLE IF NOT EXISTS schema_meta (
+      key TEXT PRIMARY KEY,
+      value TEXT NOT NULL
+    );
   `);
 
   seedInitialData(db);
@@ -187,14 +192,45 @@ export function getDb(): DatabaseSync {
   return db;
 }
 
+const ARCHIVE_SEED_VERSION = 'authentic-31-v2';
+
 function seedInitialData(db: DatabaseSync): void {
   const now = new Date().toISOString();
 
+  const versionRow = db
+    .prepare("SELECT value FROM schema_meta WHERE key = 'archive_seed_version'")
+    .get() as { value?: string } | undefined;
   const districtCount = (db.prepare('SELECT COUNT(*) AS count FROM districts').get() as { count: number }).count;
-  if (districtCount === 0) {
-    const districtsPath = path.resolve(process.cwd(), 'public/data/districts.json');
+  const categoryCount = (db.prepare('SELECT COUNT(*) AS count FROM categories').get() as { count: number }).count;
+  const recordCount = (db.prepare('SELECT COUNT(*) AS count FROM cultural_records').get() as { count: number }).count;
+  const demoCount = (
+    db.prepare("SELECT COUNT(*) AS count FROM cultural_records WHERE id LIKE 'demo-%'").get() as {
+      count: number;
+    }
+  ).count;
+
+  const needsArchiveSync =
+    versionRow?.value !== ARCHIVE_SEED_VERSION ||
+    demoCount > 0 ||
+    districtCount === 0 ||
+    categoryCount === 0 ||
+    recordCount === 0;
+
+  if (!needsArchiveSync) {
+    return;
+  }
+
+  const districtsPath = path.resolve(process.cwd(), 'public/data/districts.json');
+  const categoriesPath = path.resolve(process.cwd(), 'public/data/cultural-categories.json');
+  const recordsPath = path.resolve(process.cwd(), 'public/data/cultural-records.json');
+
+  db.exec('BEGIN IMMEDIATE');
+  try {
     if (fs.existsSync(districtsPath)) {
       const districts = JSON.parse(fs.readFileSync(districtsPath, 'utf8')) as Array<Record<string, unknown>>;
+      db.exec('DELETE FROM districts');
+      db.exec("DELETE FROM monuments WHERE created_by = 'archive'");
+
       const insertDistrict = db.prepare(`
         INSERT INTO districts (
           id, name, region, division, documented, geo_boundary_note,
@@ -214,8 +250,8 @@ function seedInitialData(db: DatabaseSync): void {
       `);
 
       for (const d of districts) {
-        const imgKey = String(d.monumentImageKey || 'hero-hampi');
-        const imgUrl = imgKey.startsWith('/') ? imgKey : `/images/${imgKey}.jpg`;
+        const imgKey = String(d.monumentImageKey ?? '').trim();
+        const imgUrl = !imgKey ? '' : imgKey.startsWith('/') ? imgKey : `/images/${imgKey}.jpg`;
 
         insertDistrict.run(
           String(d.id),
@@ -262,13 +298,11 @@ function seedInitialData(db: DatabaseSync): void {
         );
       }
     }
-  }
 
-  const categoryCount = (db.prepare('SELECT COUNT(*) AS count FROM categories').get() as { count: number }).count;
-  if (categoryCount === 0) {
-    const categoriesPath = path.resolve(process.cwd(), 'public/data/cultural-categories.json');
     if (fs.existsSync(categoriesPath)) {
       const categories = JSON.parse(fs.readFileSync(categoriesPath, 'utf8')) as Array<Record<string, unknown>>;
+      db.exec('DELETE FROM categories');
+
       const insertCat = db.prepare(`
         INSERT INTO categories (slug, index_number, title, subtitle, description, image_key, alt_text, sort_order)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?)
@@ -280,19 +314,17 @@ function seedInitialData(db: DatabaseSync): void {
           String(c.title),
           String(c.subtitle || ''),
           String(c.description || ''),
-          String(c.imageKey || 'hero-hampi'),
+          String(c.imageKey ?? ''),
           String(c.altText || ''),
           idx + 1,
         );
       });
     }
-  }
 
-  const recordCount = (db.prepare('SELECT COUNT(*) AS count FROM cultural_records').get() as { count: number }).count;
-  if (recordCount === 0) {
-    const recordsPath = path.resolve(process.cwd(), 'public/data/cultural-records.json');
     if (fs.existsSync(recordsPath)) {
       const records = JSON.parse(fs.readFileSync(recordsPath, 'utf8')) as Array<Record<string, unknown>>;
+      db.exec('DELETE FROM cultural_records');
+
       const insertRec = db.prepare(`
         INSERT INTO cultural_records (
           id, slug, title, category_slug, district, region, recognition_or_era,
@@ -313,12 +345,21 @@ function seedInitialData(db: DatabaseSync): void {
           String(r.description || ''),
           JSON.stringify(r.verifiedFacts || []),
           String(r.preservationNote || ''),
-          String(r.imageKey || 'hero-hampi'),
+          String(r.imageKey ?? ''),
           String(r.altText || ''),
           JSON.stringify(r.sources || []),
           now,
         );
       }
     }
+
+    db.prepare('INSERT OR REPLACE INTO schema_meta (key, value) VALUES (?, ?)').run(
+      'archive_seed_version',
+      ARCHIVE_SEED_VERSION,
+    );
+    db.exec('COMMIT');
+  } catch (err) {
+    db.exec('ROLLBACK');
+    throw err;
   }
 }

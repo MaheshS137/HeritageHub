@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
+import { motion } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 import { useCulturalData } from '../hooks/useCulturalData';
 import { resolveHeritageImage } from '../data/imageAssets';
 import { HeritageImage } from '../components/HeritageImage';
 import { UnavailableNotice } from '../components/culture/UnavailableNotice';
+import { HERITAGE_EASE } from '../components/motion/MotionPrimitives';
 
 export function CategoriesPage() {
   const { status, categories, records, errorMessage, retry } = useCulturalData();
@@ -114,7 +116,13 @@ export function CategoriesPage() {
           )}
 
           {status === 'ready' && (
-            <div className="space-y-12">
+            <motion.div
+              key={activeSlug}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, ease: HERITAGE_EASE }}
+              className="space-y-12"
+            >
               {visibleCategories.map((category) => {
                 const matchingRecords = records.filter(
                   (rec) => rec.categorySlug === category.slug,
@@ -201,7 +209,7 @@ export function CategoriesPage() {
                   </article>
                 );
               })}
-            </div>
+            </motion.div>
           )}
         </div>
       </section>

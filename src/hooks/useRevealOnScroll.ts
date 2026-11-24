@@ -1,12 +1,15 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
-export function useRevealOnScroll<T extends HTMLElement = HTMLDivElement>(threshold = 0.12) {
-  const ref = useRef<T | null>(null);
+export function useRevealOnScroll<T extends HTMLElement = HTMLDivElement>(threshold = 0.02) {
+  const [element, setElement] = useState<T | null>(null);
   const [visible, setVisible] = useState(false);
 
+  const ref = useCallback((node: T | null) => {
+    setElement(node);
+  }, []);
+
   useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
+    if (!element) return;
 
     if (
       typeof window === 'undefined' ||
@@ -26,12 +29,12 @@ export function useRevealOnScroll<T extends HTMLElement = HTMLDivElement>(thresh
           }
         }
       },
-      { threshold, rootMargin: '0px 0px -30px 0px' },
+      { threshold, rootMargin: '0px 0px -10px 0px' },
     );
 
-    observer.observe(el);
+    observer.observe(element);
     return () => observer.disconnect();
-  }, [threshold]);
+  }, [element, threshold]);
 
   return { ref, visible };
 }

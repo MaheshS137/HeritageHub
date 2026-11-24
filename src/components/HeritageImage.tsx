@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Landmark } from 'lucide-react';
 
 interface HeritageImageProps {
@@ -18,10 +18,17 @@ export function HeritageImage({
   zoomOnHover = false,
   priority = false,
 }: HeritageImageProps) {
+  const imgRef = useRef<HTMLImageElement | null>(null);
   const [hasError, setHasError] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     setHasError(false);
+    if (imgRef.current && imgRef.current.complete && imgRef.current.naturalWidth > 0) {
+      setLoaded(true);
+    } else {
+      setLoaded(false);
+    }
   }, [src]);
 
   if (!src || hasError) {
@@ -40,18 +47,18 @@ export function HeritageImage({
   }
 
   return (
-    <div className={`overflow-hidden bg-[#FBF6E8] ${containerClassName}`}>
+    <div className={`relative overflow-hidden bg-[#FBF6E8] ${containerClassName}`}>
       <img
+        ref={imgRef}
         src={src}
         alt={alt}
         referrerPolicy="no-referrer"
         loading={priority ? 'eager' : 'lazy'}
+        onLoad={() => setLoaded(true)}
         onError={() => setHasError(true)}
-        className={`w-full h-full object-cover ${
-          zoomOnHover
-            ? 'transition-transform duration-300 ease-out group-hover:scale-[1.04]'
-            : ''
-        } ${className}`}
+        className={`w-full h-full object-cover transition-[opacity,transform] duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          loaded ? 'opacity-100 scale-100' : 'opacity-0 scale-[1.015]'
+        } ${zoomOnHover ? 'group-hover:scale-[1.04]' : ''} ${className}`}
       />
     </div>
   );

@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
+import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'motion/react';
 import { LayoutDashboard, LogIn, Menu, Search, X } from 'lucide-react';
 import { GlobalSearchModal } from './GlobalSearchModal';
 import { useI18n, type SupportedLanguage } from '../i18n/I18nContext';
 import { useAuth } from '../context/AuthContext';
 import { getDashboardPathForRole } from './auth/ProtectedRoute';
+import { HERITAGE_EASE, ScrollProgressBar } from './motion/MotionPrimitives';
 
 const LANG_OPTIONS: Array<{ code: SupportedLanguage; label: string; aria: string }> = [
   { code: 'en', label: 'EN', aria: 'English' },
@@ -15,9 +17,16 @@ const LANG_OPTIONS: Array<{ code: SupportedLanguage; label: string; aria: string
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
   const { lang, t } = useI18n();
   const { user, changeLanguageAndSync } = useAuth();
+  const { scrollY } = useScroll();
+
+  useMotionValueEvent(scrollY, 'change', (latest) => {
+    const next = latest > 12;
+    if (next !== isScrolled) setIsScrolled(next);
+  });
 
   const navItems = [
     { label: t('nav.home', 'Home'), to: '/' },
@@ -41,7 +50,13 @@ export function Navbar() {
 
   return (
     <>
-      <header className="sticky top-0 z-40 w-full bg-[#FFFDF7]/95 backdrop-blur-md border-b border-[#EADEC8]">
+      <header
+        className={`sticky top-0 z-40 w-full backdrop-blur-md border-b border-[#EADEC8] transition-[background-color,box-shadow] duration-250 ${
+          isScrolled
+            ? 'bg-[#FFFDF7]/98 shadow-[0_6px_22px_rgba(32,28,27,0.08)]'
+            : 'bg-[#FFFDF7]/95 shadow-none'
+        }`}
+      >
         <div className="hh-karnataka-rule w-full" aria-hidden="true" />
         <div className="max-w-[1240px] mx-auto px-5 sm:px-8 h-16 flex items-center justify-between gap-4 lg:gap-8">
           {/* Zone 1: Single-line Brand Wordmark */}
@@ -78,27 +93,34 @@ export function Navbar() {
             aria-label="Primary navigation"
             className="hidden md:flex items-center gap-6 lg:gap-7 text-sm font-medium text-[#77716B]"
           >
-            {navItems.map((item) => (
-              <NavLink
-                key={item.to}
-                to={item.to}
-                end={item.to === '/'}
-                className={({ isActive }) =>
-                  `editorial-link py-1.5 transition-colors duration-150 whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#C92332] ${
-                    isActive
+            {navItems.map((item) => {
+              const active =
+                item.to === '/'
+                  ? location.pathname === '/'
+                  : location.pathname.startsWith(item.to);
+              return (
+                <NavLink
+                  key={item.to}
+                  to={item.to}
+                  end={item.to === '/'}
+                  className={`relative py-2 transition-colors duration-150 whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#C92332] ${
+                    active
                       ? 'text-[#941D2A] font-semibold'
                       : 'text-[#77716B] hover:text-[#292522]'
-                  }`
-                }
-                data-active={
-                  item.to === '/'
-                    ? location.pathname === '/'
-                    : location.pathname.startsWith(item.to)
-                }
-              >
-                {item.label}
-              </NavLink>
-            ))}
+                  }`}
+                >
+                  <span>{item.label}</span>
+                  {active && (
+                    <motion.span
+                      layoutId="hh-nav-active-bar"
+                      transition={{ duration: 0.24, ease: HERITAGE_EASE }}
+                      className="absolute left-0 right-0 -bottom-[1px] h-[2px] rounded-full bg-gradient-to-r from-[#C92332] to-[#F8C928]"
+                      aria-hidden="true"
+                    />
+                  )}
+                </NavLink>
+              );
+            })}
           </nav>
 
           {/* Zone 3: Language Switcher + Account + Global Search + Mobile Toggle */}
@@ -165,65 +187,74 @@ export function Navbar() {
         </div>
 
         {/* Responsive mobile drawer */}
-        {mobileOpen && (
-          <div
-            id="mobile-navigation-drawer"
-            className="md:hidden bg-[#FFFDF7] border-t border-[#EADEC8] px-5 py-5 space-y-4"
-          >
-            <nav aria-label="Mobile navigation" className="flex flex-col gap-1">
-              {navItems.map((item) => (
-                <NavLink
-                  key={item.to}
-                  to={item.to}
-                  end={item.to === '/'}
-                  className={({ isActive }) =>
-                    `px-3 py-3 text-base font-medium rounded-md border-b border-[#EADEC8]/60 last:border-b-0 transition-colors ${
-                      isActive
-                        ? 'text-[#941D2A] bg-[#FBF6E8] font-semibold'
-                        : 'text-[#292522] hover:bg-[#FFFFFF]'
-                    }`
-                  }
-                >
-                  {item.label}
-                </NavLink>
-              ))}
-              <Link
-                to={dashboardHref}
-                className="px-3 py-3 text-base font-semibold text-[#C92332] hover:bg-[#FBF6E8] rounded-md flex items-center gap-2"
-              >
-                {user ? (
-                  <LayoutDashboard className="w-4 h-4" aria-hidden="true" />
-                ) : (
-                  <LogIn className="w-4 h-4" aria-hidden="true" />
-                )}
-                <span>{dashboardLabel}</span>
-              </Link>
-            </nav>
-
-            <div className="pt-3 border-t border-[#EADEC8] flex items-center justify-between gap-2">
-              <span className="text-xs font-semibold uppercase tracking-[0.12em] text-[#77716B]">
-                {t('nav.language', 'Language')}
-              </span>
-              <div className="inline-flex items-center border border-[#EADEC8] bg-[#FFFFFF] rounded-md overflow-hidden">
-                {LANG_OPTIONS.map((opt) => (
-                  <button
-                    key={opt.code}
-                    type="button"
-                    onClick={() => changeLanguageAndSync(opt.code)}
-                    aria-pressed={lang === opt.code}
-                    className={`px-3 py-2 text-xs font-semibold border-r border-[#EADEC8] last:border-r-0 cursor-pointer ${
-                      lang === opt.code
-                        ? 'bg-[#F8C928] text-[#201C1B]'
-                        : 'text-[#77716B] hover:text-[#292522]'
-                    }`}
+        <AnimatePresence initial={false}>
+          {mobileOpen && (
+            <motion.div
+              id="mobile-navigation-drawer"
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.24, ease: HERITAGE_EASE }}
+              className="md:hidden overflow-hidden bg-[#FFFDF7] border-t border-[#EADEC8]"
+            >
+              <div className="px-5 py-5 space-y-4">
+                <nav aria-label="Mobile navigation" className="flex flex-col gap-1">
+                  {navItems.map((item) => (
+                    <NavLink
+                      key={item.to}
+                      to={item.to}
+                      end={item.to === '/'}
+                      className={({ isActive }) =>
+                        `px-3 py-3 text-base font-medium rounded-md border-b border-[#EADEC8]/60 last:border-b-0 transition-colors ${
+                          isActive
+                            ? 'text-[#941D2A] bg-[#FBF6E8] font-semibold'
+                            : 'text-[#292522] hover:bg-[#FFFFFF]'
+                        }`
+                      }
+                    >
+                      {item.label}
+                    </NavLink>
+                  ))}
+                  <Link
+                    to={dashboardHref}
+                    className="px-3 py-3 text-base font-semibold text-[#C92332] hover:bg-[#FBF6E8] rounded-md flex items-center gap-2"
                   >
-                    {opt.label}
-                  </button>
-                ))}
+                    {user ? (
+                      <LayoutDashboard className="w-4 h-4" aria-hidden="true" />
+                    ) : (
+                      <LogIn className="w-4 h-4" aria-hidden="true" />
+                    )}
+                    <span>{dashboardLabel}</span>
+                  </Link>
+                </nav>
+
+                <div className="pt-3 border-t border-[#EADEC8] flex items-center justify-between gap-2">
+                  <span className="text-xs font-semibold uppercase tracking-[0.12em] text-[#77716B]">
+                    {t('nav.language', 'Language')}
+                  </span>
+                  <div className="inline-flex items-center border border-[#EADEC8] bg-[#FFFFFF] rounded-md overflow-hidden">
+                    {LANG_OPTIONS.map((opt) => (
+                      <button
+                        key={opt.code}
+                        type="button"
+                        onClick={() => changeLanguageAndSync(opt.code)}
+                        aria-pressed={lang === opt.code}
+                        className={`px-3 py-2 text-xs font-semibold border-r border-[#EADEC8] last:border-r-0 cursor-pointer ${
+                          lang === opt.code
+                            ? 'bg-[#F8C928] text-[#201C1B]'
+                            : 'text-[#77716B] hover:text-[#292522]'
+                        }`}
+                      >
+                        {opt.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        )}
+            </motion.div>
+          )}
+        </AnimatePresence>
+        <ScrollProgressBar />
       </header>
 
       <GlobalSearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />

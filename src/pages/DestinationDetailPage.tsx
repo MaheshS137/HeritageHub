@@ -2,6 +2,13 @@ import { Link, useParams } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, ShieldCheck, Clock, Calendar } from 'lucide-react';
 import { DESTINATIONS } from '../data/heritageData';
 import { HeritageImage } from '../components/HeritageImage';
+import { PhotoCredit } from '../components/PhotoCredit';
+import {
+  ParallaxFrame,
+  RevealSection,
+  StaggerGrid,
+  StaggerItem,
+} from '../components/motion/MotionPrimitives';
 
 export function DestinationDetailPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -68,15 +75,21 @@ export function DestinationDetailPage() {
         <div className="max-w-[1240px] mx-auto px-5 sm:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
             <div className="lg:col-span-8">
-              <HeritageImage
-                src={destination.image}
-                alt={destination.altText}
-                priority
-                containerClassName="aspect-[16/10] w-full rounded-xl border border-[#EADEC8] shadow-sm"
-              />
+              <ParallaxFrame
+                offsetPx={16}
+                className="aspect-[16/10] w-full rounded-xl border border-[#EADEC8] shadow-sm"
+              >
+                <HeritageImage
+                  src={destination.image}
+                  alt={destination.altText}
+                  priority
+                  containerClassName="w-full h-full"
+                />
+              </ParallaxFrame>
               <p className="mt-3 font-serif italic text-xs text-[#77716B]">
                 Archive Plate — {destination.name}, {destination.district} ({destination.coordinatesLabel})
               </p>
+              <PhotoCredit imageKey={destination.imageKey} className="mt-1" />
             </div>
 
             {/* Museum Accession Metadata Definition List */}
@@ -128,7 +141,7 @@ export function DestinationDetailPage() {
       </section>
 
       {/* Long-form Monograph & Preservation Guidance */}
-      <section className="py-14 lg:py-20 border-b border-[#EADEC8]">
+      <RevealSection className="py-14 lg:py-20 border-b border-[#EADEC8]">
         <div className="max-w-[1240px] mx-auto px-5 sm:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
             {/* Editorial Narrative */}
@@ -205,10 +218,10 @@ export function DestinationDetailPage() {
             </div>
           </div>
         </div>
-      </section>
+      </RevealSection>
 
       {/* Related Destinations */}
-      <section className="py-16 lg:py-20 bg-[#FBF6E8]">
+      <RevealSection className="py-16 lg:py-20 bg-[#FBF6E8]">
         <div className="max-w-[1240px] mx-auto px-5 sm:px-8">
           <div className="flex items-end justify-between gap-4 pb-6 border-b border-[#EADEC8]">
             <div>
@@ -227,36 +240,40 @@ export function DestinationDetailPage() {
             </Link>
           </div>
 
-          <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+          <StaggerGrid className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-8">
             {relatedDestinations.map((rel) => (
-              <Link
-                key={rel.slug}
-                to={`/destinations/${rel.slug}`}
-                className="group bg-[#FFFFFF] border border-[#EADEC8] hover:border-[#C92332] rounded-xl overflow-hidden transition-all"
-              >
-                <HeritageImage
-                  src={rel.image}
-                  alt={rel.altText}
-                  zoomOnHover
-                  containerClassName="aspect-[4/3] w-full"
-                />
-                <div className="p-5">
-                  <p className="text-xs text-[#77716B]">
-                    {rel.district} · {rel.dynasty}
-                  </p>
-                  <h3 className="mt-1.5 font-serif text-lg font-medium text-[#292522] group-hover:text-[#941D2A] transition-colors">
-                    {rel.name}
-                  </h3>
-                  <span className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-[#C92332]">
-                    <span>Inspect Site</span>
-                    <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
-                  </span>
-                </div>
-              </Link>
+              <StaggerItem key={rel.slug}>
+                <Link
+                  to={`/destinations/${rel.slug}`}
+                  className="group block h-full bg-[#FFFFFF] border border-[#EADEC8] hover:border-[#C92332] rounded-xl overflow-hidden shadow-[0_4px_14px_rgba(32,28,27,0.04)] hover:shadow-[0_12px_26px_rgba(148,29,42,0.1)] hover:-translate-y-1 transition-[transform,border-color,box-shadow] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]"
+                >
+                  <HeritageImage
+                    src={rel.image}
+                    alt={rel.altText}
+                    zoomOnHover
+                    containerClassName="aspect-[4/3] w-full"
+                  />
+                  <div className="p-5">
+                    <p className="text-xs text-[#77716B]">
+                      {rel.district} · {rel.dynasty}
+                    </p>
+                    <h3 className="mt-1.5 font-serif text-lg font-medium text-[#292522] group-hover:text-[#941D2A] transition-colors">
+                      {rel.name}
+                    </h3>
+                    <span className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-[#C92332]">
+                      <span>Inspect Site</span>
+                      <ArrowRight
+                        className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5"
+                        aria-hidden="true"
+                      />
+                    </span>
+                  </div>
+                </Link>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerGrid>
         </div>
-      </section>
+      </RevealSection>
     </article>
   );
 }

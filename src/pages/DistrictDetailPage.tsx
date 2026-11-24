@@ -13,6 +13,13 @@ import {
 import { useDistrictArchive } from '../hooks/useDistrictArchive';
 import { resolveHeritageImage } from '../data/imageAssets';
 import { HeritageImage } from '../components/HeritageImage';
+import { PhotoCredit } from '../components/PhotoCredit';
+import {
+  ParallaxFrame,
+  RevealSection,
+  StaggerGrid,
+  StaggerItem,
+} from '../components/motion/MotionPrimitives';
 import { CulturalRecordCard } from '../components/culture/CulturalRecordCard';
 import { UnavailableNotice } from '../components/culture/UnavailableNotice';
 import { useAuth } from '../context/AuthContext';
@@ -275,16 +282,22 @@ export function DistrictDetailPage() {
         <div className="max-w-[1240px] mx-auto px-5 sm:px-8 space-y-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
             <div className="lg:col-span-7">
-              <HeritageImage
-                src={resolveHeritageImage(district.monumentImageKey)}
-                alt={`${district.monumentName} in ${district.name} District`}
-                priority
-                containerClassName="aspect-[16/10] w-full rounded-xl border border-[#EADEC8] shadow-sm"
-              />
+              <ParallaxFrame
+                offsetPx={16}
+                className="aspect-[16/10] w-full rounded-xl border border-[#EADEC8] shadow-sm"
+              >
+                <HeritageImage
+                  src={resolveHeritageImage(district.monumentImageKey)}
+                  alt={`${district.monumentName} in ${district.name} District`}
+                  priority
+                  containerClassName="w-full h-full"
+                />
+              </ParallaxFrame>
               <p className="mt-3 font-serif italic text-xs text-[#77716B]">
                 {trDistrict.monumentName} · {district.monumentLocation} (
                 {district.monumentLat.toFixed(4)}° N, {district.monumentLng.toFixed(4)}° E)
               </p>
+              <PhotoCredit imageKey={district.monumentImageKey} className="mt-1" />
             </div>
 
             <div className="lg:col-span-5 space-y-5">
@@ -441,13 +454,15 @@ export function DistrictDetailPage() {
                 }`}
               >
                 {galleryKeys.map((imgKey, idx) => (
-                  <HeritageImage
-                    key={`${imgKey}-${idx}`}
-                    src={resolveHeritageImage(imgKey)}
-                    alt={`${district.name} District cultural heritage photograph ${idx + 1}`}
-                    zoomOnHover
-                    containerClassName="aspect-[4/3] w-full rounded-xl border border-[#EADEC8]"
-                  />
+                  <div key={`${imgKey}-${idx}`} className="space-y-1.5">
+                    <HeritageImage
+                      src={resolveHeritageImage(imgKey)}
+                      alt={`${district.name} District cultural heritage photograph ${idx + 1}`}
+                      zoomOnHover
+                      containerClassName="aspect-[4/3] w-full rounded-xl border border-[#EADEC8]"
+                    />
+                    <PhotoCredit imageKey={imgKey} />
+                  </div>
                 ))}
               </div>
             </div>
@@ -608,7 +623,7 @@ export function DistrictDetailPage() {
 
       {/* Verified Cultural Records for This District */}
       {districtRecords.length > 0 && (
-        <section className="py-14 lg:py-16 border-b border-[#EADEC8] bg-[#FFFFFF]">
+        <RevealSection className="py-14 lg:py-16 border-b border-[#EADEC8] bg-[#FFFFFF]">
           <div className="max-w-[1240px] mx-auto px-5 sm:px-8">
             <div className="flex items-end justify-between gap-4 pb-6 border-b border-[#EADEC8]">
               <div>
@@ -627,21 +642,22 @@ export function DistrictDetailPage() {
               </Link>
             </div>
 
-            <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <StaggerGrid className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {districtRecords.map((rec) => (
-                <CulturalRecordCard
-                  key={rec.id}
-                  record={rec}
-                  categoryTitle={categoryMap.get(rec.categorySlug) ?? rec.categorySlug}
-                />
+                <StaggerItem key={rec.id}>
+                  <CulturalRecordCard
+                    record={rec}
+                    categoryTitle={categoryMap.get(rec.categorySlug) ?? rec.categorySlug}
+                  />
+                </StaggerItem>
               ))}
-            </div>
+            </StaggerGrid>
           </div>
-        </section>
+        </RevealSection>
       )}
 
       {/* Related Districts */}
-      <section className="py-14 lg:py-16 bg-[#FBF6E8]">
+      <RevealSection className="py-14 lg:py-16 bg-[#FBF6E8]">
         <div className="max-w-[1240px] mx-auto px-5 sm:px-8">
           <div className="flex items-end justify-between gap-4 pb-6 border-b border-[#EADEC8]">
             <div>
@@ -660,35 +676,39 @@ export function DistrictDetailPage() {
             </Link>
           </div>
 
-          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <StaggerGrid className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {relatedDistricts.map((rel) => {
               const trRel = translateDistrict(rel);
               return (
-                <Link
-                  key={rel.id}
-                  to={`/district/${rel.id}`}
-                  className="group p-5 bg-[#FFFFFF] border border-[#EADEC8] hover:border-[#C92332] rounded-xl transition-all flex flex-col justify-between gap-3"
-                >
-                  <div>
-                    <p className="text-xs text-[#77716B]">{translateRegion(rel.region)}</p>
-                    <h3 className="mt-1 font-serif text-lg font-medium text-[#292522] group-hover:text-[#941D2A] transition-colors">
-                      {trRel.name}
-                    </h3>
-                    <p className="mt-1 text-xs font-medium text-[#941D2A] truncate">
-                      {trRel.monumentName}
-                    </p>
-                    <p className="mt-2 text-xs text-[#77716B] line-clamp-2">{rel.description}</p>
-                  </div>
-                  <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#C92332]">
-                    <span>{t('map.exploreDistrict')}</span>
-                    <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
-                  </span>
-                </Link>
+                <StaggerItem key={rel.id}>
+                  <Link
+                    to={`/district/${rel.id}`}
+                    className="group h-full p-5 bg-[#FFFFFF] border border-[#EADEC8] hover:border-[#C92332] rounded-xl shadow-[0_4px_12px_rgba(32,28,27,0.03)] hover:shadow-[0_10px_24px_rgba(148,29,42,0.09)] hover:-translate-y-1 transition-[transform,border-color,box-shadow] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] flex flex-col justify-between gap-3"
+                  >
+                    <div>
+                      <p className="text-xs text-[#77716B]">{translateRegion(rel.region)}</p>
+                      <h3 className="mt-1 font-serif text-lg font-medium text-[#292522] group-hover:text-[#941D2A] transition-colors">
+                        {trRel.name}
+                      </h3>
+                      <p className="mt-1 text-xs font-medium text-[#941D2A] truncate">
+                        {trRel.monumentName}
+                      </p>
+                      <p className="mt-2 text-xs text-[#77716B] line-clamp-2">{rel.description}</p>
+                    </div>
+                    <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#C92332]">
+                      <span>{t('map.exploreDistrict')}</span>
+                      <ArrowRight
+                        className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5"
+                        aria-hidden="true"
+                      />
+                    </span>
+                  </Link>
+                </StaggerItem>
               );
             })}
-          </div>
+          </StaggerGrid>
         </div>
-      </section>
+      </RevealSection>
     </article>
   );
 }

@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
+import { motion } from 'motion/react';
 import { Globe, PenTool, Search, X } from 'lucide-react';
 import { useCulturalData } from '../hooks/useCulturalData';
 import { CulturalRecordCard } from '../components/culture/CulturalRecordCard';
@@ -7,6 +8,12 @@ import { UnavailableNotice } from '../components/culture/UnavailableNotice';
 import { useI18n } from '../i18n/I18nContext';
 import { resolveHeritageImage } from '../data/imageAssets';
 import { HeritageImage } from '../components/HeritageImage';
+import {
+  HERITAGE_EASE,
+  RevealSection,
+  StaggerGrid,
+  StaggerItem,
+} from '../components/motion/MotionPrimitives';
 
 interface PublishedArticle {
   id: string;
@@ -173,35 +180,39 @@ export function DiscoveryPage() {
               aria-label="Filter cultural records by category"
               className="flex flex-wrap items-center gap-2"
             >
-              <button
-                type="button"
-                role="tab"
-                aria-selected={selectedCategory === 'all'}
-                onClick={() => handleCategoryChange('all')}
-                className={`px-3.5 py-2 min-h-[40px] text-xs font-semibold rounded-md border transition-colors cursor-pointer whitespace-nowrap shrink-0 ${
-                  selectedCategory === 'all'
-                    ? 'bg-[#C92332] text-[#FFFFFF] border-[#C92332]'
-                    : 'bg-[#FFFFFF] text-[#77716B] border-[#EADEC8] hover:border-[#C92332] hover:text-[#292522]'
-                }`}
-              >
-                {t('culture.allCategories')}
-              </button>
-              {categories.map((cat) => (
-                <button
-                  key={cat.slug}
-                  type="button"
-                  role="tab"
-                  aria-selected={selectedCategory === cat.slug}
-                  onClick={() => handleCategoryChange(cat.slug)}
-                  className={`px-3.5 py-2 min-h-[40px] text-xs font-semibold rounded-md border transition-colors cursor-pointer whitespace-nowrap shrink-0 ${
-                    selectedCategory === cat.slug
-                      ? 'bg-[#C92332] text-[#FFFFFF] border-[#C92332]'
-                      : 'bg-[#FFFFFF] text-[#77716B] border-[#EADEC8] hover:border-[#C92332] hover:text-[#292522]'
-                  }`}
-                >
-                  {translateCategory(cat).title}
-                </button>
-              ))}
+              {[
+                { slug: 'all', label: t('culture.allCategories') },
+                ...categories.map((cat) => ({
+                  slug: cat.slug,
+                  label: translateCategory(cat).title,
+                })),
+              ].map((tab) => {
+                const isSelected = selectedCategory === tab.slug;
+                return (
+                  <button
+                    key={tab.slug}
+                    type="button"
+                    role="tab"
+                    aria-selected={isSelected}
+                    onClick={() => handleCategoryChange(tab.slug)}
+                    className={`relative px-3.5 py-2 min-h-[40px] text-xs font-semibold rounded-md border transition-colors cursor-pointer whitespace-nowrap shrink-0 ${
+                      isSelected
+                        ? 'text-[#FFFFFF] border-[#C92332]'
+                        : 'bg-[#FFFFFF] text-[#77716B] border-[#EADEC8] hover:border-[#C92332] hover:text-[#292522]'
+                    }`}
+                  >
+                    {isSelected && (
+                      <motion.span
+                        layoutId="culture-category-tab-pill"
+                        transition={{ duration: 0.24, ease: HERITAGE_EASE }}
+                        className="absolute inset-0 bg-[#C92332] rounded-[5px]"
+                        aria-hidden="true"
+                      />
+                    )}
+                    <span className="relative z-10">{tab.label}</span>
+                  </button>
+                );
+              })}
             </div>
           )}
 
@@ -332,7 +343,12 @@ export function DiscoveryPage() {
           )}
 
           {status === 'ready' && filteredRecords.length > 0 && (
-            <div>
+            <motion.div
+              key={`${selectedCategory}-${selectedDistrict}-${searchQuery}`}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.28, ease: HERITAGE_EASE }}
+            >
               <h2 className="font-serif text-2xl font-medium text-[#292522] mb-6">
                 {t('culture.verifiedArchiveTitle')}
               </h2>
@@ -345,7 +361,7 @@ export function DiscoveryPage() {
                   />
                 ))}
               </div>
-            </div>
+            </motion.div>
           )}
 
           {/* Published Journalist Features */}
@@ -362,44 +378,45 @@ export function DiscoveryPage() {
                   </span>
                 )}
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <StaggerGrid className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {filteredArticles.map((art) => (
-                  <Link
-                    key={art.id}
-                    to={`/article/${art.slug}`}
-                    className="group flex flex-col bg-[#FFFFFF] border border-[#EADEC8] hover:border-[#C92332] rounded-xl overflow-hidden shadow-[0_4px_16px_rgba(32,28,27,0.04)] hover:shadow-[0_12px_26px_rgba(148,29,42,0.1)] transition-all duration-200"
-                  >
-                    {art.cover_image_url && (
-                      <HeritageImage
-                        src={resolveHeritageImage(art.cover_image_url)}
-                        alt={art.title}
-                        zoomOnHover
-                        containerClassName="aspect-[4/3] w-full"
-                      />
-                    )}
-                    <div className="p-6 flex-1 flex flex-col justify-between gap-4">
-                      <div>
-                        <p className="text-xs font-semibold text-[#941D2A]">
-                          {art.district_name} · {art.category_title}
-                        </p>
-                        <h3 className="mt-2 font-serif text-xl font-medium text-[#292522] group-hover:text-[#941D2A] leading-snug">
-                          {art.title}
-                        </h3>
-                        <p className="mt-3 text-sm text-[#77716B] leading-relaxed line-clamp-3">
-                          {art.short_description}
-                        </p>
+                  <StaggerItem key={art.id}>
+                    <Link
+                      to={`/article/${art.slug}`}
+                      className="group h-full flex flex-col bg-[#FFFFFF] border border-[#EADEC8] hover:border-[#C92332] rounded-xl overflow-hidden shadow-[0_4px_16px_rgba(32,28,27,0.04)] hover:shadow-[0_14px_30px_rgba(148,29,42,0.11)] hover:-translate-y-1 transition-[transform,border-color,box-shadow] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]"
+                    >
+                      {art.cover_image_url && (
+                        <HeritageImage
+                          src={resolveHeritageImage(art.cover_image_url)}
+                          alt={art.title}
+                          zoomOnHover
+                          containerClassName="aspect-[4/3] w-full"
+                        />
+                      )}
+                      <div className="p-6 flex-1 flex flex-col justify-between gap-4">
+                        <div>
+                          <p className="text-xs font-semibold text-[#941D2A]">
+                            {art.district_name} · {art.category_title}
+                          </p>
+                          <h3 className="mt-2 font-serif text-xl font-medium text-[#292522] group-hover:text-[#941D2A] leading-snug">
+                            {art.title}
+                          </h3>
+                          <p className="mt-3 text-sm text-[#77716B] leading-relaxed line-clamp-3">
+                            {art.short_description}
+                          </p>
+                        </div>
+                        <div className="pt-4 border-t border-[#EADEC8] flex items-center justify-between text-xs">
+                          <span className="inline-flex items-center gap-1.5 text-[#77716B]">
+                            <PenTool className="w-3.5 h-3.5 text-[#C92332]" aria-hidden="true" />
+                            <span>{art.author_name}</span>
+                          </span>
+                          <span className="font-semibold text-[#C92332]">Read Feature →</span>
+                        </div>
                       </div>
-                      <div className="pt-4 border-t border-[#EADEC8] flex items-center justify-between text-xs">
-                        <span className="inline-flex items-center gap-1.5 text-[#77716B]">
-                          <PenTool className="w-3.5 h-3.5 text-[#C92332]" aria-hidden="true" />
-                          <span>{art.author_name}</span>
-                        </span>
-                        <span className="font-semibold text-[#C92332]">Read Feature →</span>
-                      </div>
-                    </div>
-                  </Link>
+                    </Link>
+                  </StaggerItem>
                 ))}
-              </div>
+              </StaggerGrid>
             </div>
           )}
         </div>
@@ -407,7 +424,7 @@ export function DiscoveryPage() {
 
       {/* 31-District Archive Coverage Index */}
       {status === 'ready' && (
-        <section className="py-16 border-t border-[#EADEC8] bg-[#FFFFFF]">
+        <RevealSection className="py-16 border-t border-[#EADEC8] bg-[#FFFFFF]">
           <div className="max-w-[1240px] mx-auto px-5 sm:px-8">
             <div className="max-w-2xl mb-8">
               <p className="text-xs font-semibold tracking-[0.18em] uppercase text-[#941D2A] mb-2">
@@ -465,7 +482,7 @@ export function DiscoveryPage() {
               })}
             </div>
           </div>
-        </section>
+        </RevealSection>
       )}
     </div>
   );

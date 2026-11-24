@@ -1,6 +1,9 @@
+import { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { useAnimatedCounter, useRevealOnScroll } from '../../hooks/useRevealOnScroll';
+import { useInView } from 'motion/react';
+import { useAnimatedCounter } from '../../hooks/useRevealOnScroll';
 import { useI18n } from '../../i18n/I18nContext';
+import { RevealSection, StaggerGrid, StaggerItem } from '../motion/MotionPrimitives';
 
 interface StatSpec {
   target: number;
@@ -18,21 +21,24 @@ function AnimatedStatCard({ stat, active }: { stat: StatSpec; active: boolean })
       : count.toLocaleString('en-US');
 
   return (
-    <div className="space-y-2 p-6 rounded-xl border border-[#EADEC8] bg-[#FFFDF7]">
-      <p className="font-serif text-4xl font-semibold text-[#C92332] tabular-nums">
-        {formatted}
-        {stat.suffix}
-      </p>
-      <h3 className="font-sans text-sm font-semibold tracking-wide text-[#292522]">
-        {stat.label}
-      </h3>
-      <p className="text-sm text-[#77716B] leading-relaxed max-w-[36ch]">{stat.detail}</p>
-    </div>
+    <StaggerItem>
+      <div className="h-full space-y-2 p-6 rounded-xl border border-[#EADEC8] bg-[#FFFDF7] transition-[border-color,box-shadow] duration-250 hover:border-[#C92332]/60 hover:shadow-[0_8px_22px_rgba(32,28,27,0.05)]">
+        <p className="font-serif text-4xl font-semibold text-[#C92332] tabular-nums">
+          {formatted}
+          {stat.suffix}
+        </p>
+        <h3 className="font-sans text-sm font-semibold tracking-wide text-[#292522]">
+          {stat.label}
+        </h3>
+        <p className="text-sm text-[#77716B] leading-relaxed max-w-[36ch]">{stat.detail}</p>
+      </div>
+    </StaggerItem>
   );
 }
 
 export function IntroSection() {
-  const { ref, visible } = useRevealOnScroll<HTMLElement>(0.12);
+  const statsRef = useRef<HTMLDivElement | null>(null);
+  const statsInView = useInView(statsRef, { once: true, amount: 'some' });
   const { t } = useI18n();
 
   const stats: StatSpec[] = [
@@ -58,12 +64,9 @@ export function IntroSection() {
   ];
 
   return (
-    <section
-      ref={ref}
+    <RevealSection
       aria-labelledby="intro-heading"
-      className={`bg-[#FFFFFF] py-20 lg:py-24 border-b border-[#EADEC8] hh-reveal ${
-        visible ? 'is-visible' : ''
-      }`}
+      className="bg-[#FFFFFF] py-20 lg:py-24 border-b border-[#EADEC8]"
     >
       <div className="max-w-[1240px] mx-auto px-5 sm:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
@@ -106,12 +109,14 @@ export function IntroSection() {
         </div>
 
         {/* Animated Archival Metrics Strip */}
-        <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6">
-          {stats.map((stat) => (
-            <AnimatedStatCard key={stat.label} stat={stat} active={visible} />
-          ))}
+        <div ref={statsRef}>
+          <StaggerGrid className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6">
+            {stats.map((stat) => (
+              <AnimatedStatCard key={stat.label} stat={stat} active={statsInView} />
+            ))}
+          </StaggerGrid>
         </div>
       </div>
-    </section>
+    </RevealSection>
   );
 }

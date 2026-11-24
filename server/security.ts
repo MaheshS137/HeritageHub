@@ -148,19 +148,36 @@ export function verifySessionToken(token: string): SessionPayload | null {
   }
 }
 
+function isHttpsRequest(res: Response): boolean {
+  const req = res.req;
+  if (!req) return process.env.NODE_ENV === 'production';
+  const forwardedProto = String(req.headers['x-forwarded-proto'] || '')
+    .split(',')[0]
+    .trim()
+    .toLowerCase();
+  return Boolean(req.secure || forwardedProto === 'https' || process.env.NODE_ENV === 'production');
+}
+
 export function setSessionCookie(res: Response, account: { id: string; role: AccountRole; session_version: number }): void {
   const token = signSessionToken(account);
+  const secure = isHttpsRequest(res);
   res.cookie(SESSION_COOKIE_NAME, token, {
     httpOnly: true,
-    sameSite: 'lax',
-    secure: process.env.NODE_ENV === 'production',
+    sameSite: secure ? 'none' : 'lax',
+    secure,
     path: '/',
     maxAge: SESSION_TTL_MS,
   });
 }
 
 export function clearSessionCookie(res: Response): void {
-  res.clearCookie(SESSION_COOKIE_NAME, { path: '/' });
+  const secure = isHttpsRequest(res);
+  res.clearCookie(SESSION_COOKIE_NAME, {
+    httpOnly: true,
+    sameSite: secure ? 'none' : 'lax',
+    secure,
+    path: '/',
+  });
 }
 
 export function attachUser(req: AuthenticatedRequest, res: Response, next: NextFunction): void {

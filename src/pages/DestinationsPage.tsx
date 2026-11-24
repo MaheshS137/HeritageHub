@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
+import { motion } from 'motion/react';
 import { ArrowRight, Search, X } from 'lucide-react';
 import {
   DESTINATIONS,
@@ -8,6 +9,7 @@ import {
   type KarnatakaRegion,
 } from '../data/heritageData';
 import { HeritageImage } from '../components/HeritageImage';
+import { HERITAGE_EASE } from '../components/motion/MotionPrimitives';
 
 export function DestinationsPage() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -221,12 +223,18 @@ export function DestinationsPage() {
               </button>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <motion.div
+              key={`${selectedRegion}-${selectedCategory}-${query}`}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.28, ease: HERITAGE_EASE }}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            >
               {filteredDestinations.map((dest) => (
                 <Link
                   key={dest.slug}
                   to={`/destinations/${dest.slug}`}
-                  className="group flex flex-col bg-[#FFFFFF] border border-[#EADEC8] hover:border-[#C92332] rounded-xl overflow-hidden shadow-[0_4px_16px_rgba(32,28,27,0.04)] hover:shadow-[0_12px_26px_rgba(148,29,42,0.1)] transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#C92332]"
+                  className="group flex flex-col bg-[#FFFFFF] border border-[#EADEC8] hover:border-[#C92332] rounded-xl overflow-hidden shadow-[0_4px_16px_rgba(32,28,27,0.04)] hover:shadow-[0_14px_30px_rgba(148,29,42,0.11)] hover:-translate-y-1 transition-[transform,border-color,box-shadow] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#C92332]"
                 >
                   <HeritageImage
                     src={dest.image}
@@ -256,7 +264,7 @@ export function DestinationsPage() {
                       <span className="inline-flex items-center gap-1.5 whitespace-nowrap shrink-0">
                         <span>Read Monograph</span>
                         <ArrowRight
-                          className="w-3.5 h-3.5 transition-transform duration-150 group-hover:translate-x-0.5"
+                          className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5"
                           aria-hidden="true"
                         />
                       </span>
@@ -264,7 +272,7 @@ export function DestinationsPage() {
                   </div>
                 </Link>
               ))}
-            </div>
+            </motion.div>
           )}
         </div>
       </section>

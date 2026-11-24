@@ -1,11 +1,3 @@
-import heroHampiImg from '../assets/images/hero_hampi_chariot_1794747861538.jpg';
-import destBelurImg from '../assets/images/dest_belur_hoysala_1794747863608.jpg';
-import destMysoreImg from '../assets/images/dest_mysore_palace_1794747863190.jpg';
-import destBadamiImg from '../assets/images/dest_badami_caves_1794747864012.jpg';
-import cultureYakshaganaImg from '../assets/images/culture_yakshagana_art_1794747864409.jpg';
-import cultureCraftsImg from '../assets/images/culture_karnataka_crafts_1794747865084.jpg';
-import cultureMalnadImg from '../assets/images/culture_malnad_heritage_1794747865353.jpg';
-
 export type KarnatakaRegion =
   | 'Deccan Plateau'
   | 'Old Mysore'
@@ -21,6 +13,7 @@ export interface CulturalCategory {
   entryCount: number;
   regionHighlight: string;
   image: string;
+  imageKey: string;
   altText: string;
 }
 
@@ -44,6 +37,7 @@ export interface Destination {
   etiquette: string;
   coordinatesLabel: string;
   image: string;
+  imageKey: string;
   altText: string;
   featured: boolean;
 }
@@ -59,6 +53,7 @@ export interface CulturalSpotlight {
   summary: string;
   linkedDestinationSlug: string;
   image: string;
+  imageKey: string;
   altText: string;
 }
 
@@ -69,10 +64,11 @@ export interface ArchiveStat {
 }
 
 export const HERO_MEDIA = {
-  image: heroHampiImg,
+  image: '/images/hero-hampi.jpg',
+  imageKey: 'hero-hampi',
   altText:
-    'The carved granite stone chariot and pillared mandapa of Vittala Temple in Hampi, Karnataka bathed in golden sunrise light amid weathered boulders.',
-  caption: 'Fig. 01 — Vittala Temple Complex, Hampi · Vijayanagara Empire, 15th Century CE',
+    'The carved granite Garuda Stone Chariot and pillared mandapa of Vijaya Vittala Temple at Hampi in Vijayanagara district, Karnataka.',
+  caption: 'Fig. 01 — Vijaya Vittala Temple Complex, Hampi · Vijayanagara Empire, 15th–16th Century CE',
 };
 
 export const ARCHIVE_STATS: ArchiveStat[] = [
@@ -102,10 +98,11 @@ export const CULTURAL_CATEGORIES: CulturalCategory[] = [
     description:
       'Spanning Chalukyan sandstone experimentation at Badami, star-planned Hoysala soapstone shrines at Belur and Halebidu, and monumental Vijayanagara temple towns along the Tungabhadra.',
     entryCount: 18,
-    regionHighlight: 'Hassan, Ballari & Bagalkot',
-    image: destBelurImg,
+    regionHighlight: 'Hassan, Vijayanagara & Bagalkot',
+    image: '/images/belur-hoysala.jpg',
+    imageKey: 'belur-hoysala',
     altText:
-      'Intricately carved chloritic schist walls and star-shaped plinth of Chennakesava Temple in Belur illuminated by morning sunlight.',
+      'Illuminated exterior of Chennakesava Temple in Belur showing its stellate Hoysala plinth and carved chloritic schist superstructure.',
   },
   {
     slug: 'royal-palaces',
@@ -116,9 +113,10 @@ export const CULTURAL_CATEGORIES: CulturalCategory[] = [
       'From the Wadiyar ceremonial halls of Amba Vilas in Mysuru to Deccan basalt fortresses and Vijayanagara urban enclosures shaped by monsoon hydrology and royal patronage.',
     entryCount: 12,
     regionHighlight: 'Mysuru, Bidar & Chitradurga',
-    image: destMysoreImg,
+    image: '/images/mysore-palace.jpg',
+    imageKey: 'mysore-palace',
     altText:
-      'Mysore Palace illuminated at twilight in warm amber light, showing arched colonnades, domes, and manicured courtyard palms.',
+      'Amba Vilas (Mysore Palace) illuminated at dusk with arched colonnades, domes, and courtyard lawns.',
   },
   {
     slug: 'living-arts',
@@ -126,12 +124,13 @@ export const CULTURAL_CATEGORIES: CulturalCategory[] = [
     title: 'Living Performing Arts',
     subtitle: 'All-night coastal theatre, classical gharanas, and ritual percussion',
     description:
-      'Oral epics kept alive through Yakshagana dusk-to-dawn performances in coastal Karnataka, alongside the twin classical streams of Carnatic and Hindustani music nurtured across Mysuru and Dharwad.',
+      'Oral epics kept alive through Yakshagana dusk-to-dawn performances in coastal Karnataka, alongside classical music lineages and folk drum traditions across Mysuru and Dharwad.',
     entryCount: 14,
     regionHighlight: 'Udupi, Dakshina Kannada & Dharwad',
-    image: cultureYakshaganaImg,
+    image: '/images/yakshagana.jpg',
+    imageKey: 'yakshagana',
     altText:
-      'A coastal Karnataka Yakshagana artist backstage preparing in oil-lamp light, wearing a carved golden kirita crown and crimson silk costume.',
+      'Yakshagana performer in traditional ornate crown and costume during a live stage performance in Karnataka.',
   },
   {
     slug: 'artisanal-crafts',
@@ -142,9 +141,10 @@ export const CULTURAL_CATEGORIES: CulturalCategory[] = [
       'Centuries-old material knowledge embodied in pure mulberry Mysore silk weaving, vegetable-dyed Channapatna lacquerware, Bidri silver inlay, and community-protected Malnad devarakadu forest groves.',
     entryCount: 16,
     regionHighlight: 'Ramanagara, Bidar & Western Ghats',
-    image: cultureCraftsImg,
+    image: '/images/channapatna-toys.jpg',
+    imageKey: 'channapatna-toys',
     altText:
-      'Handloom Mysore silk sarees with gold zari borders beside wooden Channapatna lacquer toys and a silver-inlaid Bidriware vessel on a teak table.',
+      'Channapatna wooden toy artisans turning ivory-wood crafts in Ramanagara district, Karnataka.',
   },
 ];
 
@@ -165,7 +165,7 @@ export const DESTINATIONS: Destination[] = [
       'Spread across a surreal boulder-strewn basin carved by the Tungabhadra River, Hampi represents the urban and architectural zenith of medieval South India. Beyond its iconic temples, the site preserves an extraordinary network of subterranean aqueducts, stepped tanks, and fortified bazaars.',
     architecturalNotes: [
       'The Vittala Shrine Stone Chariot is crafted from interlocking granite blocks carved to resemble a processional temple ratha.',
-      'Fifty-six slender monolithic pillars inside the Maha Mandapa produce distinct melodic resonances when gently tapped.',
+      'Slender monolithic pillars inside the Maha Mandapa are celebrated for acoustic tonal variation when gently tapped.',
       'The Royal Enclosure pairs Islamic-influenced vaulted arches in the Lotus Mahal with classical stepped stone pushkaranis.',
     ],
     preservationStatus: 'Active Conservation Zone · Foot-traffic & Acoustic Regulation',
@@ -175,9 +175,10 @@ export const DESTINATIONS: Destination[] = [
     visitingHours: '06:00 – 18:00 IST Daily',
     etiquette: 'Remove footwear before entering consecrated temple pavilions; stay on flagged granite pathways.',
     coordinatesLabel: '15.3350° N, 76.4600° E',
-    image: heroHampiImg,
+    image: '/images/hero-hampi.jpg',
+    imageKey: 'hero-hampi',
     altText:
-      'Sunrise view across the stone courtyard of Vittala Temple in Hampi showing the carved granite chariot and colonnades.',
+      'The Garuda Stone Chariot inside the courtyard of Vijaya Vittala Temple at Hampi, Karnataka.',
     featured: true,
   },
   {
@@ -191,24 +192,25 @@ export const DESTINATIONS: Destination[] = [
     categorySlug: 'sacred-architecture',
     categoryLabel: 'Sacred & Temple Architecture',
     summary:
-      'Twelve-century chloritic schist sanctuary celebrated for star-shaped platforms, lathe-turned pillars, and signed stone sculptures.',
+      'Twelfth-century chloritic schist sanctuary celebrated for star-shaped platforms, lathe-turned pillars, and signed stone sculptures.',
     editorialIntro:
-      'Commissioned by King Vishnuvardhana in 1117 CE and completed over a century by generations of master guild sculptors, Chennakesava Temple turns soft grey-green soapstone into lace-like narrative reliefs. Unlike anonymous medieval monuments, more than forty sculptures here bear the carved signatures of their artists.',
+      'Commissioned by King Vishnuvardhana in 1117 CE and completed over generations by master guild sculptors, Chennakesava Temple turns soft grey-green soapstone into intricate narrative reliefs. Numerous sculptures here preserve the carved inscriptions and signatures of their medieval artists.',
     architecturalNotes: [
       'Stellate (star-shaped) jagati platform creates rhythmic vertical shadows that shift continuously with daylight.',
-      'Forty-eight interior pillars each carry distinct geometry, including the famed rotatable Narasimha pillar.',
+      'Interior lathe-turned soapstone pillars display distinct geometric bands and figurative carvings.',
       'Exterior madanika bracket figures depict musicians, dancers, and forest birds with miniature jewellery precision.',
     ],
     preservationStatus: 'Protected Living Monument · Controlled Cleaning Protocol',
     conservationFocus:
-      'Soapstone is softer than granite and sensitive to moisture and oil residue; non-invasive micro-crystalline wax and mist cleaning preserve original chisel marks.',
+      'Soapstone is softer than granite and sensitive to moisture and oil residue; non-invasive micro-crystalline conservation protects original chisel marks.',
     visitingSeason: 'September to March',
     visitingHours: '07:30 – 19:30 IST Daily',
     etiquette: 'Photography is restricted inside the inner sanctum; preserve silence during morning rituals.',
     coordinatesLabel: '13.1623° N, 75.8606° E',
-    image: destBelurImg,
+    image: '/images/belur-hoysala.jpg',
+    imageKey: 'belur-hoysala',
     altText:
-      'Exterior view of Chennakesava Temple at Belur displaying carved Hoysala friezes, stepped platform, and stone shikara.',
+      'Illuminated exterior view of Chennakesava Temple at Belur showing carved Hoysala friezes and star-shaped base.',
     featured: true,
   },
   {
@@ -222,24 +224,25 @@ export const DESTINATIONS: Destination[] = [
     categorySlug: 'royal-palaces',
     categoryLabel: 'Royal Palaces & Hill Citadels',
     summary:
-      'Ceremonial seat of the Wadiyars blending Rajput domes, Hoysala brackets, stained-glass pavilions, and hand-cast cast-iron colonnades.',
+      'Ceremonial seat of the Wadiyars blending Rajput domes, Hoysala brackets, stained-glass pavilions, and cast-iron colonnades.',
     editorialIntro:
-      'Rebuilt between 1897 and 1912 after fire destroyed the older wooden palace, Amba Vilas stands as a landmark of Indo-Saracenic synthesis. Designed in dialogue with Mysore court artisans, it unites Belgian stained glass, Glasgow ironwork, and regional rosewood carving around an open ceremonial courtyard.',
+      'Rebuilt between 1897 and 1912 after fire destroyed the older wooden palace, Amba Vilas stands as a landmark of Indo-Saracenic synthesis. Designed by Henry Irwin in dialogue with Mysuru court artisans, it unites stained glass, cast ironwork, and regional rosewood carving around an open ceremonial courtyard.',
     architecturalNotes: [
       'The Kalyana Mantapa features an octagonal stained-glass peacock ceiling engineered to diffuse natural daylight.',
-      'Carved rosewood doors inlaid with geometric motifs reflect traditional Mysuru guild craftsmanship.',
-      'The Durbar Hall opens unobstructed onto the eastern parade grounds, framing royal Dasara processions.',
+      'Carved rosewood doors and silver pavilions reflect traditional Mysuru guild craftsmanship.',
+      'The Durbar Hall opens onto the eastern parade grounds, framing annual Mysuru Dasara processions.',
     ],
     preservationStatus: 'Maintained Heritage Trust · Timber & Gilding Care',
     conservationFocus:
-      'Ongoing restoration focuses on humidity regulation for mineral-pigment murals depicting historical Mysuru royal processions and gold-leaf ceiling panels.',
+      'Ongoing restoration focuses on humidity regulation for mineral-pigment murals depicting historical Mysuru royal processions and gilded ceiling panels.',
     visitingSeason: 'October (Dasara) through February',
     visitingHours: '10:00 – 17:30 IST Daily',
     etiquette: 'Interior footwear must be deposited at courtyard lockers; tripods require prior curatorial permission.',
     coordinatesLabel: '12.3052° N, 76.6552° E',
-    image: destMysoreImg,
+    image: '/images/mysore-palace.jpg',
+    imageKey: 'mysore-palace',
     altText:
-      'Dusk architectural photograph of Mysore Palace facade glowing with warm gold lights against deep blue sky and green trees.',
+      'Amba Vilas (Mysore Palace) illuminated facade with domes and arched colonnades in Mysuru.',
     featured: true,
   },
   {
@@ -253,24 +256,25 @@ export const DESTINATIONS: Destination[] = [
     categorySlug: 'sacred-architecture',
     categoryLabel: 'Sacred & Temple Architecture',
     summary:
-      'Four rock-cut sandstone sanctuaries hewn into dramatic red cliffs above a sacred medieval water tank in northern Karnataka.',
+      'Four rock-cut sandstone sanctuaries hewn into red cliffs above a sacred medieval water tank in northern Karnataka.',
     editorialIntro:
       'Badami, ancient Vatapi, served as the crucible of Deccan temple architecture under the Early Chalukyas. Excavated directly into towering rust-red escarpments overlooking Agastya Lake, the four cave shrines trace the formative synthesis of Nagara and Dravida sculptural vocabularies.',
     architecturalNotes: [
       'Cave 3 houses a dated 578 CE inscription of Mangalesha alongside monumental reliefs of Trivikrama and Narasimha.',
-      'Verandah brackets feature flying celestial couples carved from single continuous sandstone planes.',
+      'Verandah brackets feature flying celestial figures carved from continuous sandstone planes.',
       'Across the lake, the Bhutanatha temple group extends the sandstone skyline directly into the water.',
     ],
     preservationStatus: 'Cliff Stability Monitoring · Salt Efflorescence Mitigation',
     conservationFocus:
-      'Sandstone cliffs face seasonal monsoon seepage; conservation engineers monitor rock fractures and clear mineral salt deposits from painted ceiling remnants.',
+      'Sandstone cliffs face seasonal monsoon seepage; conservation engineers monitor rock fractures and protect residual ceiling pigment traces.',
     visitingSeason: 'October to February',
     visitingHours: '09:00 – 17:30 IST Daily',
     etiquette: 'Ascend rock-cut stairways cautiously during wet weather; never touch fragile residual ceiling pigments.',
     coordinatesLabel: '15.9189° N, 75.6767° E',
-    image: destBadamiImg,
+    image: '/images/badami-caves.jpg',
+    imageKey: 'badami-caves',
     altText:
-      'Red sandstone cliff face of Badami Cave Temples with colonnaded rock-cut verandahs overlooking Agastya Lake.',
+      'Rock-cut Badami Cave Temples carved into red sandstone cliffs in Bagalkot district, Karnataka.',
     featured: true,
   },
   {
@@ -284,24 +288,25 @@ export const DESTINATIONS: Destination[] = [
     categorySlug: 'artisanal-crafts',
     categoryLabel: 'Artisanal Crafts & Sacred Groves',
     summary:
-      'Laterite and granite forest temples preserved within biodiversity-rich devarakadu sacred groves across the Western Ghats.',
+      'Kadamba and Keladi stone shrines preserved alongside biodiversity-rich Western Ghats watersheds and sacred devarakadu groves.',
     editorialIntro:
-      'In the mist-draped valleys of the Malnad Western Ghats, architectural heritage is inseparable from ecological stewardship. Ancient Kadamba-era shrines and Keladi laterite sanctuaries survive inside community-protected sacred groves (devarakadus) where traditional taboo against logging has shielded old-growth Dipterocarpus canopies for centuries.',
+      'In the mist-draped valleys of Malnad and the Western Ghats, architectural heritage is inseparable from ecological stewardship. Ancient Kadamba-era shrines at Banavasi and Keladi stone sanctuaries stand amidst watersheds shielded by community-protected sacred groves (devarakadus).',
     architecturalNotes: [
-      'Madhukeshwara Temple at Banavasi preserves an exquisitely carved stone cot and Kadamba lotus motifs.',
-      'Sloped terracotta-tiled outer roofs evolved specifically to shed heavy Western Ghats monsoon rainfall.',
+      'Madhukeshwara Temple at Banavasi preserves an exquisitely carved stone cot and early Kadamba architectural strata.',
+      'Keladi and Ikkeri temples combine Vijayanagara mandapas with sloped roofs suited to heavy Western Ghats monsoons.',
       'Surrounding sacred groves preserve endemic medicinal flora and perennial forest springs.',
     ],
-    preservationStatus: 'Community Stewardship · Canopy & Moss Conservation',
+    preservationStatus: 'Community Stewardship · Canopy & Stone Conservation',
     conservationFocus:
-      'Balancing gentle ecological cleaning of moss-covered granite with strict protection of surrounding sacred grove watersheds from road widening.',
+      'Balancing careful moss management on humid stone shrines with strict protection of surrounding sacred grove watersheds.',
     visitingSeason: 'November to March (Post-Monsoon Mist)',
     visitingHours: '06:30 – 18:30 IST Daily',
-    etiquette: 'Stay strictly on established forest footpaths; do not disturb native flora or stream ecosystems.',
+    etiquette: 'Stay on established forest footpaths and respect active temple and sacred grove customs.',
     coordinatesLabel: '14.5342° N, 75.0169° E',
-    image: cultureMalnadImg,
+    image: '/images/banavasi-temple.jpg',
+    imageKey: 'banavasi-temple',
     altText:
-      'Moss-covered granite temple gateway surrounded by misty Western Ghats rainforest and fern undergrowth in Malnad.',
+      'Madhukeshwara Temple complex at Banavasi in Uttara Kannada district, ancient Kadamba capital of Karnataka.',
     featured: false,
   },
   {
@@ -317,22 +322,23 @@ export const DESTINATIONS: Destination[] = [
     summary:
       'Living workshops turning ivory-wood (Aale Mara) toys with natural botanical lac alongside pure mulberry silk zari weaving.',
     editorialIntro:
-      'Along the historic corridor linking Bengaluru and Mysuru, generations of artisan households uphold two of Karnataka’s most recognizable Geographical Indication traditions: vegetable-dyed Channapatna lacquerware and pure silk kasavu-zari weaving.',
+      'Along the historic corridor linking Bengaluru and Mysuru, generations of artisan households uphold two of Karnataka’s most recognizable Geographical Indication traditions: vegetable-dyed Channapatna lacquerware and pure mulberry Mysore silk weaving.',
     architecturalNotes: [
-      'Aale Mara (Wrightia tinctoria) timber is seasoned for months before hand-turning on horizontal lathes.',
-      'Pigments are compounded exclusively from natural turmeric, indigo, kumkum, and shellac resin.',
-      'Nearby Mysuru handloom clusters still weave 100% pure mulberry silk with real silver-gold zari.',
+      'Aale Mara (Wrightia tinctoria) timber is seasoned before hand-turning on lathes.',
+      'Traditional pigments use natural turmeric, indigo, kumkum, and shellac resin.',
+      'Nearby Mysuru handloom clusters weave 100% pure mulberry silk with authentic gold-silver zari.',
     ],
-    preservationStatus: 'Protected Living Guild · Direct Artisan Fair-Trade Support',
+    preservationStatus: 'Protected Living Guild · Direct Artisan Support',
     conservationFocus:
       'Safeguarding sustainable Aale Mara timber replanting and supporting apprenticeship stipends so younger artisans remain in craft guilds.',
     visitingSeason: 'Year-round (Morning Workshop Hours)',
     visitingHours: '09:30 – 17:00 IST (Monday – Saturday)',
     etiquette: 'Ask artisans before photographing active lathe or loom work; support certified GI cooperative studios.',
     coordinatesLabel: '12.6518° N, 77.2067° E',
-    image: cultureCraftsImg,
+    image: '/images/channapatna-toys.jpg',
+    imageKey: 'channapatna-toys',
     altText:
-      'Artisan workbench displaying folded Mysore silk sarees, hand-turned Channapatna lacquer toys, and a silver-inlaid Bidriware vessel.',
+      'Channapatna artisans hand-turning ivory-wood toys finished with natural lac dyes in Ramanagara district.',
     featured: false,
   },
 ];
@@ -345,14 +351,14 @@ export const CULTURAL_SPOTLIGHTS: CulturalSpotlight[] = [
     district: 'Udupi & Dakshina Kannada',
     traditionType: 'Classical Folk Theatre',
     preservationNote:
-      'Over 400 palm-leaf prasanga manuscripts are currently being digitized alongside elder bhagavata vocal recordings.',
+      'Palm-leaf prasanga manuscripts and elder bhagavata vocal recordings are archived by regional academies.',
     conservationLevel: 'Active Stewardship',
     summary:
       'Dusk-to-dawn musical dance-drama combining rhythmic chande percussion, improvised Kannada/Tulu dialogue, and hand-carved kirita crowns.',
     linkedDestinationSlug: 'malnad-sacred-groves',
-    image: cultureYakshaganaImg,
-    altText:
-      'Yakshagana performer adjusting his intricate antique gold crown in a warm backstage greenroom.',
+    image: '/images/yakshagana.jpg',
+    imageKey: 'yakshagana',
+    altText: 'Yakshagana artist performing in traditional costume and headgear in Karnataka.',
   },
   {
     id: 'channapatna-mysore-silk',
@@ -361,14 +367,14 @@ export const CULTURAL_SPOTLIGHTS: CulturalSpotlight[] = [
     district: 'Ramanagara & Mysuru',
     traditionType: 'GI Material Craft',
     preservationNote:
-      'Native Wrightia tinctoria groves are replanted regionally to keep natural wood-turning zero-toxic and self-sustaining.',
+      'Native Wrightia tinctoria timber groves support non-toxic botanical lac wood-turning workshops.',
     conservationLevel: 'Protected Craft',
     summary:
-      'Botanical lac-dyed wooden crafts and pure mulberry silk weaves nurtured through family cooperatives across southern Karnataka.',
+      'Botanical lac-dyed wooden crafts and pure mulberry silk weaves nurtured through artisan cooperatives across southern Karnataka.',
     linkedDestinationSlug: 'channapatna-artisan-guild',
-    image: cultureCraftsImg,
-    altText:
-      'Folded Mysore silk sarees, turned lacquer toys, and Bidriware vessel arranged on a wooden craft table.',
+    image: '/images/mysore-silk.jpg',
+    imageKey: 'mysore-silk',
+    altText: 'Traditional handloom Mysore silk sarees displaying mulberry silk weave and gold zari borders.',
   },
   {
     id: 'vijayanagara-hydrology',
@@ -380,11 +386,11 @@ export const CULTURAL_SPOTLIGHTS: CulturalSpotlight[] = [
       'Hydrological surveys map 15th-century stone channels and stepped tanks to protect drainage lines from seasonal flooding.',
     conservationLevel: 'Active Stewardship',
     summary:
-      'Gravity-fed granite channels and terraced pushkaranis that once sustained an arid capital of half a million residents.',
+      'Gravity-fed granite channels and terraced pushkaranis engineered to supply the medieval capital at Hampi.',
     linkedDestinationSlug: 'hampi-vittala-ensemble',
-    image: heroHampiImg,
-    altText:
-      'Granite courtyard and carved stone chariot of Vittala Temple in Hampi under warm sunrise light.',
+    image: '/images/hero-hampi.jpg',
+    imageKey: 'hero-hampi',
+    altText: 'Vittala Temple stone chariot and granite mandapa courtyard at Hampi.',
   },
   {
     id: 'chalukyan-rock-carving',
@@ -393,14 +399,14 @@ export const CULTURAL_SPOTLIGHTS: CulturalSpotlight[] = [
     district: 'Bagalkot (Badami & Aihole)',
     traditionType: 'Early Deccan Stonecraft',
     preservationNote:
-      'Micro-climate cliff sensors monitor monsoon seepage and protect traces of 6th-century mineral ceiling frescoes.',
+      'Conservation teams monitor monsoon seepage and protect traces of 6th-century mineral ceiling frescoes.',
     conservationLevel: 'Needs Documentation',
     summary:
-      'Experimental temple workshops across Badami, Aihole, and Pattadakal where North and South Indian architectural forms first converged.',
+      'Experimental temple workshops across Badami, Aihole, and Pattadakal where North and South Indian architectural forms converged.',
     linkedDestinationSlug: 'badami-rock-cut-caves',
-    image: destBadamiImg,
-    altText:
-      'Rock-cut Badami Cave sanctuaries carved into towering red sandstone cliffs above Agastya Lake.',
+    image: '/images/badami-caves.jpg',
+    imageKey: 'badami-caves',
+    altText: 'Rock-cut sandstone sanctuaries at Badami Cave Temples in Bagalkot.',
   },
   {
     id: 'devarakadu-sacred-groves',
@@ -409,14 +415,14 @@ export const CULTURAL_SPOTLIGHTS: CulturalSpotlight[] = [
     district: 'Kodagu & Uttara Kannada',
     traditionType: 'Biocultural Sanctuary',
     preservationNote:
-      'Community forest committees map boundary markers and endangered tree species across 1,200+ traditional sacred groves.',
+      'Community forest committees and the Karnataka Forest Department map and protect sacred grove boundaries.',
     conservationLevel: 'Needs Documentation',
     summary:
       'Living forest sanctuaries guarded by ancestral village customs that protect Western Ghats watersheds and stone shrines together.',
     linkedDestinationSlug: 'malnad-sacred-groves',
-    image: cultureMalnadImg,
-    altText:
-      'Ancient moss-covered stone temple portal nestled inside a misty Western Ghats sacred grove.',
+    image: '/images/malnad-groves.jpg',
+    imageKey: 'malnad-groves',
+    altText: 'Forested Western Ghats hillside view around Talakaveri in Kodagu district.',
   },
   {
     id: 'hoysala-signature-guilds',
@@ -425,14 +431,14 @@ export const CULTURAL_SPOTLIGHTS: CulturalSpotlight[] = [
     district: 'Hassan (Belur & Halebidu)',
     traditionType: 'Soapstone Sculpture',
     preservationNote:
-      'High-resolution photogrammetry archives 12th-century Kannada epigraphs and individual sculptor signatures on temple friezes.',
+      'High-resolution documentation archives 12th-century Kannada epigraphs and individual sculptor signatures on temple friezes.',
     conservationLevel: 'Active Stewardship',
     summary:
-      'Master craftsmen such as Dasoja and Chavana left signed inscriptions beneath intricate chloritic schist friezes.',
+      'Master craftsmen left signed inscriptions beneath intricate chloritic schist friezes at Belur and Halebidu.',
     linkedDestinationSlug: 'chennakesava-belur',
-    image: destBelurImg,
-    altText:
-      'Detailed stone carvings and lathe-turned columns of Chennakesava Temple in Belur.',
+    image: '/images/halebidu-temple.jpg',
+    imageKey: 'halebidu-temple',
+    altText: 'Hoysaleswara Temple at Halebidu showing carved chloritic schist walls and entrance courtyard.',
   },
 ];
 

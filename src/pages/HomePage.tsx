@@ -4,6 +4,7 @@ import { IntroSection } from '../components/home/IntroSection';
 import { FeaturedCategories } from '../components/home/FeaturedCategories';
 import { FeaturedDestinations } from '../components/home/FeaturedDestinations';
 import { FestivalsAndArtsSection } from '../components/home/FestivalsAndArtsSection';
+import { CulinaryAndCraftsSection } from '../components/home/CulinaryAndCraftsSection';
 import { AboutTeaserSection } from '../components/home/AboutTeaserSection';
 
 export function HomePage() {
@@ -15,6 +16,7 @@ export function HomePage() {
       <FeaturedCategories />
       <FeaturedDestinations />
       <FestivalsAndArtsSection />
+      <CulinaryAndCraftsSection />
       <AboutTeaserSection />
     </>
   );

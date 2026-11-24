@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
+import { RevealSection, StaggerGrid, StaggerItem } from '../components/motion/MotionPrimitives';
 
 const OBJECTIVES = [
   {
@@ -64,7 +65,7 @@ export function AboutPage() {
       </section>
 
       {/* Objectives & Importance */}
-      <section className="py-16 lg:py-20 border-b border-[#EADEC8]">
+      <RevealSection className="py-16 lg:py-20 border-b border-[#EADEC8]">
         <div className="max-w-[1240px] mx-auto px-5 sm:px-8">
           <div className="max-w-2xl mb-12">
             <p className="text-xs font-semibold tracking-[0.18em] uppercase text-[#941D2A] mb-2">
@@ -75,37 +76,36 @@ export function AboutPage() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <StaggerGrid className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {OBJECTIVES.map((obj) => (
-              <div
-                key={obj.num}
-                className="bg-[#FFFFFF] border border-[#EADEC8] rounded-xl p-7 space-y-3 shadow-[0_4px_14px_rgba(32,28,27,0.03)]"
-              >
-                <p className="font-serif text-2xl font-semibold text-[#C92332] tabular-nums">
-                  {obj.num}
-                </p>
-                <h3 className="font-serif text-xl font-medium text-[#292522]">{obj.title}</h3>
-                <p className="text-sm text-[#77716B] leading-relaxed">{obj.body}</p>
-              </div>
+              <StaggerItem key={obj.num}>
+                <div className="h-full bg-[#FFFFFF] border border-[#EADEC8] rounded-xl p-7 space-y-3 shadow-[0_4px_14px_rgba(32,28,27,0.03)]">
+                  <p className="font-serif text-2xl font-semibold text-[#C92332] tabular-nums">
+                    {obj.num}
+                  </p>
+                  <h3 className="font-serif text-xl font-medium text-[#292522]">{obj.title}</h3>
+                  <p className="text-sm text-[#77716B] leading-relaxed">{obj.body}</p>
+                </div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerGrid>
         </div>
-      </section>
+      </RevealSection>
 
       {/* Platform Features & Future Scope */}
-      <section className="py-16 lg:py-20 border-b border-[#EADEC8] bg-[#FFFFFF]">
+      <RevealSection className="py-16 lg:py-20 border-b border-[#EADEC8] bg-[#FFFFFF]">
         <div className="max-w-[1240px] mx-auto px-5 sm:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12">
           <div className="lg:col-span-6 space-y-4">
             <p className="text-xs font-semibold tracking-[0.18em] uppercase text-[#941D2A]">
               Platform Architecture
             </p>
             <h2 className="font-serif text-3xl font-medium text-[#292522]">
-              Built with Java 21, Spring Boot &amp; Leaflet GeoJSON
+              Built with React, Express, SQLite &amp; Leaflet GeoJSON
             </h2>
             <p className="text-sm sm:text-base text-[#77716B] leading-relaxed">
-              HeritageHub separates verified cultural JSON records and genuine GeoJSON boundaries
-              from presentation layers—featuring a complete Java 21 Spring Boot + Thymeleaf
-              backend alongside reusable HTML5, CSS3, and Vanilla JavaScript Leaflet map modules.
+              HeritageHub combines a TypeScript React frontend and Tailwind design system with an
+              Express + SQLite archive API, role-based editorial workflows, and reusable Leaflet
+              GeoJSON district cartography anchored across all 31 Karnataka districts.
             </p>
           </div>
 
@@ -124,10 +124,10 @@ export function AboutPage() {
             </p>
           </div>
         </div>
-      </section>
+      </RevealSection>
 
       {/* Information Sources & Licenses */}
-      <section className="py-16 lg:py-20 bg-[#FBF6E8]">
+      <RevealSection className="py-16 lg:py-20 bg-[#FBF6E8]">
         <div className="max-w-[1240px] mx-auto px-5 sm:px-8">
           <div className="max-w-2xl mb-10">
             <p className="text-xs font-semibold tracking-[0.18em] uppercase text-[#941D2A] mb-2">
@@ -167,7 +167,7 @@ export function AboutPage() {
             </Link>
           </div>
         </div>
-      </section>
+      </RevealSection>
     </div>
   );
 }

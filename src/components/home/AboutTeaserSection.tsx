@@ -1,19 +1,15 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
-import { useRevealOnScroll } from '../../hooks/useRevealOnScroll';
 import { useI18n } from '../../i18n/I18nContext';
+import { RevealSection } from '../motion/MotionPrimitives';
 
 export function AboutTeaserSection() {
-  const { ref, visible } = useRevealOnScroll<HTMLElement>(0.1);
   const { t } = useI18n();
 
   return (
-    <section
-      ref={ref}
-      className={`bg-[#FFFFFF] py-20 lg:py-24 hh-reveal ${visible ? 'is-visible' : ''}`}
-    >
+    <RevealSection className="bg-[#FFFFFF] py-20 lg:py-24">
       <div className="max-w-[1240px] mx-auto px-5 sm:px-8">
-        <div className="border border-[#EADEC8] bg-[#201C1B] text-[#FFFDF7] rounded-xl p-8 sm:p-12 lg:p-14 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center relative overflow-hidden">
+        <div className="border border-[#EADEC8] bg-[#201C1B] text-[#FFFDF7] rounded-xl p-8 sm:p-12 lg:p-14 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center relative overflow-hidden shadow-[0_14px_36px_rgba(32,28,27,0.12)]">
           <div
             aria-hidden="true"
             className="absolute top-0 left-0 right-0 hh-karnataka-rule"
@@ -48,6 +44,6 @@ export function AboutTeaserSection() {
           </div>
         </div>
       </div>
-    </section>
+    </RevealSection>
   );
 }

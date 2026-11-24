@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
+import { RevealSection, StaggerGrid, StaggerItem } from '../components/motion/MotionPrimitives';
 
 const CHARTER_PILLARS = [
   {
@@ -46,7 +47,7 @@ export function PreservationPage() {
         </div>
       </section>
 
-      <section id="methodology" className="py-16 lg:py-24 border-b border-[#EADEC8]">
+      <RevealSection id="methodology" className="py-16 lg:py-24 border-b border-[#EADEC8]">
         <div className="max-w-[1240px] mx-auto px-5 sm:px-8">
           <div className="max-w-2xl mb-12">
             <p className="text-xs font-semibold tracking-[0.18em] uppercase text-[#941D2A] mb-2">
@@ -57,26 +58,25 @@ export function PreservationPage() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+          <StaggerGrid className="grid grid-cols-1 md:grid-cols-3 gap-10">
             {CHARTER_PILLARS.map((pillar) => (
-              <div
-                key={pillar.numeral}
-                className="border-t-2 border-[#C92332] pt-6 space-y-3"
-              >
-                <p className="font-serif text-2xl font-semibold text-[#C92332] tabular-nums">
-                  {pillar.numeral}
-                </p>
-                <h3 className="font-serif text-xl font-medium text-[#292522]">
-                  {pillar.title}
-                </h3>
-                <p className="text-sm text-[#77716B] leading-relaxed">{pillar.body}</p>
-              </div>
+              <StaggerItem key={pillar.numeral}>
+                <div className="border-t-2 border-[#C92332] pt-6 space-y-3">
+                  <p className="font-serif text-2xl font-semibold text-[#C92332] tabular-nums">
+                    {pillar.numeral}
+                  </p>
+                  <h3 className="font-serif text-xl font-medium text-[#292522]">
+                    {pillar.title}
+                  </h3>
+                  <p className="text-sm text-[#77716B] leading-relaxed">{pillar.body}</p>
+                </div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerGrid>
         </div>
-      </section>
+      </RevealSection>
 
-      <section id="etiquette" className="py-16 lg:py-24 bg-[#FBF6E8]">
+      <RevealSection id="etiquette" className="py-16 lg:py-24 bg-[#FBF6E8]">
         <div className="max-w-[1240px] mx-auto px-5 sm:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             <div className="lg:col-span-5">
@@ -123,7 +123,7 @@ export function PreservationPage() {
             </div>
           </div>
         </div>
-      </section>
+      </RevealSection>
     </div>
   );
 }

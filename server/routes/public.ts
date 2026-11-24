@@ -93,7 +93,7 @@ publicRouter.get('/categories', (_req, res) => {
 
 publicRouter.get('/records', (_req, res) => {
   const db = getDb();
-  const rows = db.prepare('SELECT * FROM cultural_records ORDER BY created_at ASC').all() as Array<
+  const rows = db.prepare('SELECT * FROM cultural_records ORDER BY created_at ASC, rowid ASC').all() as Array<
     Record<string, unknown>
   >;
   res.json(rows.map(mapRecordRow));

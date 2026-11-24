@@ -2,6 +2,7 @@ import { useEffect, type ReactNode } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Navbar } from './Navbar';
 import { Footer } from './Footer';
+import { PageTransition } from './motion/MotionPrimitives';
 
 interface LayoutProps {
   children: ReactNode;
@@ -31,7 +32,7 @@ export function Layout({ children }: LayoutProps) {
       </a>
       <Navbar />
       <main id="main-content" className="flex-1">
-        {children}
+        <PageTransition routeKey={pathname}>{children}</PageTransition>
       </main>
       <Footer />
     </div>

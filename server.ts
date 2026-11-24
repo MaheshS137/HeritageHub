@@ -93,7 +93,7 @@ async function startServer() {
   }
 
   app.listen(PORT, '0.0.0.0', () => {
-    console.log(`HeritageHub server listening on http://0.0.0.0:${PORT}`);
+    console.log(`HeritageHub server listening on http://localhost:${PORT}`);
   });
 }
 
